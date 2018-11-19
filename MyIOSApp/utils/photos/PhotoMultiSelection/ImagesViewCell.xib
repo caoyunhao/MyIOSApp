@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ImagesViewCell" customModule="MyIOSApp" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImagesViewCell" id="gTV-IL-0wX" customClass="ImagesViewCell" customModule="MyIOSApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="86" height="86"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="86" height="86"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Ob-4o-ice">
+                        <rect key="frame" x="0.0" y="0.0" width="86" height="86"/>
+                    </imageView>
+                    <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jX1-2v-Wap">
+                        <rect key="frame" x="33" y="2" width="51" height="31"/>
+                    </switch>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jzI-9P-oDP">
+                        <rect key="frame" x="0.0" y="56" width="30" height="30"/>
+                    </imageView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="4Ob-4o-ice" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="B3A-Zf-GtB"/>
+                <constraint firstAttribute="bottom" secondItem="jzI-9P-oDP" secondAttribute="bottom" id="Rdp-DV-yN5"/>
+                <constraint firstAttribute="trailing" secondItem="jX1-2v-Wap" secondAttribute="trailing" constant="4" id="WDL-rg-rzI"/>
+                <constraint firstItem="jX1-2v-Wap" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="X08-gL-PDd"/>
+                <constraint firstItem="4Ob-4o-ice" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="cjy-aG-xNi"/>
+                <constraint firstAttribute="bottom" secondItem="4Ob-4o-ice" secondAttribute="bottom" id="gZH-Nk-iFO"/>
+                <constraint firstAttribute="trailing" secondItem="4Ob-4o-ice" secondAttribute="trailing" id="maB-aA-iNk"/>
+                <constraint firstItem="jzI-9P-oDP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vC0-DT-JIw"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <size key="customSize" width="86" height="86"/>
+            <connections>
+                <outlet property="badgeImageView" destination="jzI-9P-oDP" id="eKW-bB-68S"/>
+                <outlet property="imageView" destination="4Ob-4o-ice" id="khx-MR-UXz"/>
+                <outlet property="selectionSwitch" destination="jX1-2v-Wap" id="4FD-va-nVo"/>
+            </connections>
+            <point key="canvasLocation" x="-193" y="38"/>
+        </collectionViewCell>
+    </objects>
+</document>
