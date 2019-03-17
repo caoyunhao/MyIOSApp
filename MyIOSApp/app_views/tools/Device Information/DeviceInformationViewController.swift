@@ -11,18 +11,37 @@ import AdSupport
 
 class DeviceInformationViewController: UITableViewController {
     
-    private var tableConfig: SimpleGroupTableConfig {
-        let ret = SimpleGroupTableConfig();
+    private var tableConfig: SimpleGroupTableConfig!
+    
+    func initData() {
+        tableConfig = SimpleGroupTableConfig();
         
-        ret.data.append(SimpleGroupTableConfigGroupConfig(header: "Some ID", content: [
+        SystemUtils.getWiFi()
+        
+        tableConfig.data.append(SimpleGroupTableConfigGroupConfig(header: "Some ID", content: [
             (label: "IDFA", detailLabel: ASIdentifierManager.shared().advertisingIdentifier.uuidString, style: .value1),
+            (label: "UDID", detailLabel: UIDevice.current.identifierForVendor?.uuidString ?? "nil", style: .value1),
             ], footer: nil))
         
-        return ret
+        tableConfig.data.append(SimpleGroupTableConfigGroupConfig(header: "System", content: [
+            (label: "iOS Version", detailLabel: UIDevice.current.systemVersion, style: .value1),
+            (label: "Model", detailLabel: UIDevice.current.model, style: .value1),
+            (label: "Localized Model", detailLabel: UIDevice.current.model, style: .value1),
+            (label: "Wi-Fi", detailLabel: UIDevice.current.model, style: .value1),
+            ], footer: nil))
+        
+        tableConfig.data.append(SimpleGroupTableConfigGroupConfig(header: "Storage", content: [
+            (label: "RAM Total Size", detailLabel: UIDevice.fileSizeString(fileSize: UIDevice.current.totalRAM) , style: .value1),
+            
+            (label: "Disk Available Size", detailLabel: UIDevice.fileSizeString(fileSize: UIDevice.current.availableDisk) , style: .value1),
+            (label: "Disk Total Size", detailLabel: UIDevice.fileSizeString(fileSize: UIDevice.current.totalDisk) , style: .value1),
+            ], footer: nil))
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initData()
         
         navigationItem.largeTitleDisplayMode = .never
         title = "Device Information"
@@ -39,12 +58,12 @@ class DeviceInformationViewController: UITableViewController {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return tableConfig.sectionCount
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 1
+        return tableConfig.rowsInSection(section)
     }
     
     
@@ -111,7 +130,7 @@ class DeviceInformationViewController: UITableViewController {
             if let cell = tableView.cellForRow(at: indexPath) {
                 if let msg = cell.detailTextLabel?.text {
                     UIPasteboard.general.string = msg
-                    AlertHelper.simpleAlert(vc: self, message: "Copied!")
+                    AlertUtils.simple(vc: self, message: "Copied!")
                 }
             }
         }

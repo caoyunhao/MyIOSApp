@@ -13,6 +13,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ResizingViewController" customModule="MyIOSApp" customModuleProvider="target">
             <connections>
                 <outlet property="editSwitch" destination="ZOU-1u-FPl" id="yf7-jh-KIr"/>
+                <outlet property="gifFramesCountPreSecondLabel" destination="bCs-W2-7Ac" id="CCt-qt-fmc"/>
+                <outlet property="gifOriginFramesCountPreSecondDisplay" destination="9oR-Kr-pjT" id="Zjb-yO-WiI"/>
+                <outlet property="gifTargetFramesCountPreSecondDisplay" destination="2Yl-lH-dcr" id="90B-ye-rLR"/>
                 <outlet property="imageConvertedDataSizeLabel" destination="xAp-Gb-NJU" id="OBH-qZ-l60"/>
                 <outlet property="imageConvertedSizeLabel" destination="5mH-bp-l51" id="oH7-mb-6rV"/>
                 <outlet property="imageConvertedTextLabel" destination="5a2-uT-18a" id="XwQ-YQ-cbV"/>
@@ -73,7 +76,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="选择时是否编辑:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vYg-63-kyp">
-                            <rect key="frame" x="20" y="273" width="126" height="21"/>
+                            <rect key="frame" x="65" y="357" width="126" height="21"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
@@ -184,6 +187,27 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="GIF时长:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bCs-W2-7Ac">
+                            <rect key="frame" x="11" y="268" width="66" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NaN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9oR-Kr-pjT">
+                            <rect key="frame" x="102" y="268" width="34" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="目标时长" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="2Yl-lH-dcr">
+                            <rect key="frame" x="144" y="263" width="97" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                        </textField>
                     </subviews>
                 </scrollView>
             </subviews>

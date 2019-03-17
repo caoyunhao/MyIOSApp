@@ -38,7 +38,11 @@ class ResizingViewController: UIViewController {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var openAlbumButton: UIButton!
     
-    private var gif: GifPhoto!
+    @IBOutlet weak var gifFramesCountPreSecondLabel: UILabel!
+    @IBOutlet weak var gifOriginFramesCountPreSecondDisplay: UILabel!
+    @IBOutlet weak var gifTargetFramesCountPreSecondDisplay: UITextField!
+    
+    fileprivate var _image: CYHImage!
     private var selectedImage: UIImage!
     private var imageOriginData: Data!
     private var originRatio: Float!
@@ -49,7 +53,9 @@ class ResizingViewController: UIViewController {
     private var picked: Bool =  false
     private var computed: Bool = false
     
-    private var photosHelper: PhotosPickerHelper!
+    fileprivate var rotateRate: Int = 0
+    
+    private var photosHelper: PhotosPickerUtils!
     
     private var targetSize: CGSize? {
         return CGSize(width: Int(targetWidthTextField.text!)!, height: Int(targetHeightTextField.text!)!)
@@ -69,39 +75,33 @@ class ResizingViewController: UIViewController {
         
         self.setUI()
         
-        photosHelper = PhotosPickerHelper(vc: self)
-        
-        //        NotificationHelper.newInstance(title: "Test", body: "test body", timeInterval: 5)
-        
-        // Do any additional setup after loading the view.
+        photosHelper = PhotosPickerUtils(vc: self)
     }
     
     @objc func tapClick(sender:UIView){
-        print("按钮被点击")
         self.scrollView.endEditing(true)
     }
     
     @IBAction func pickFromAlbum(_ sender: AnyObject) {
-        DLog(message: "selectFromAlbum")
-        photosHelper.pick {(gif) in
-            self.pickCallback(gif: gif)
+        photosHelper.pick {(image) in
+            self.pickCallback(image: image)
         }
     }
     
     @IBAction func save(_ sender: AnyObject) {
-//        self.compute()
-        if gif.isGif {
-            DLog(message: "save gif")
-            GifUtil.save(gif: self.gif, size: self.targetSize!)
-        } else {
-            AssetsUtils.save(image: self.imageView.animationImages![0].e_resize(size: self.targetSize!)) { (lid) in
-            }
+        var image = self._image.resize(self.targetSize!)
+        for _ in 0..<(self.rotateRate / 90) {
+            image = image.rotateLeft90();
         }
-//        alert(message: "保存成功～")
-        AlertHelper.actionAlert(vc: self, message: "保存成功", leftTitle: "转到相册", rightTitle: "OK", leftAction: {
-            DLog(message: "jump")
-            AppUtil.openPhotos();
-//            UIApplication.shared.open(URL(string: "prefs:root=Photos")!)
+        
+        let s = gifTargetFramesCountPreSecondDisplay.text
+        
+        let d = Double(s!)
+
+        ImageUtils.save(CYHImage(uiImages: image.images, duration: d ?? image.duration));
+        
+        AlertUtils.biAction(vc: self, message: "保存成功", leftTitle: "转到相册", rightTitle: "我知道了", leftAction: {
+            SystemUtils.openPhotos();
         }, rightAction: nil)
     }
     
@@ -110,13 +110,17 @@ class ResizingViewController: UIViewController {
     }
     
     @IBAction func rotateLeft90(_ sender: AnyObject) {
-
+        self.rotateRate = (self.rotateRate + 90) % 360
+        UIView.animate(withDuration: 0.3) {
+            self.imageView.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2 * Double(self.rotateRate / 90)))
+        }
+//        AlertUtils.simple(vc: self, message: "rotate left \(self.rotateRate)°")
     }
     
-    fileprivate func pickCallback (gif: GifPhoto) {
-        self.gif = gif
-        self.imageOriginSizeLabel.text = sizeToString(size: gif.size)
-        handleNew(image: gif)
+    fileprivate func pickCallback (image: CYHImage) {
+        self._image = image
+        self.imageOriginSizeLabel.text = format(size: image.size)
+        handleNew(image: image)
     }
     
     fileprivate func saveCallback (localId: String) {
@@ -124,14 +128,14 @@ class ResizingViewController: UIViewController {
         let assetResult = PHAsset.fetchAssets(withLocalIdentifiers: [localId], options: nil)
         let asset = assetResult[0]
         
-        AssetsUtils.dataFrom(imageAsset: asset) { (data) in
-            self.imageConvertedDataSizeLabel.text = self.dataSizeToString(size: data.count)
+        AssetsUtils.handleImageData(of: asset) { (data) in
+            self.imageConvertedDataSizeLabel.text = self.formatDataSize(size: data.count)
         }
     }
     
-    func handleNew(image: GifPhoto) {
-        DLog(message: "start")
-        setGif(gif: image)
+    func handleNew(image: CYHImage) {
+        DLog(message: "handleNew")
+        setImageView(image: image)
         
         let width = String(format: "%d", Int((image.size.width)))
         let height = String(format: "%d", Int((image.size.height)))
@@ -141,14 +145,12 @@ class ResizingViewController: UIViewController {
         self.setConvertPixel(width: width, height: height)
         
         self.originRatio = image.ratio
-        
-        DLog(message: image.ratio)
-        
         self.computed = false
+        
+        self.gifOriginFramesCountPreSecondDisplay.text = String(format: "%.2f", image.duration)
     }
     
     func compute() {
-        DLog(message: "start")
         if self.checkImageConvertedSize() {
             DLog(message: "Converted Size: \(self.imageConvertedSize.debugDescription)")
             self.convertedImage = self.selectedImage.e_resize(size: self.imageConvertedSize!)
@@ -170,14 +172,14 @@ class ResizingViewController: UIViewController {
         return "\(width)*\(height)"
     }
     
-    func sizeToString(size: CGSize?) -> String {
+    func format(size: CGSize?) -> String {
         guard let size = size else {
             return "-"
         }
         return String(format: "%d*%d", Int(size.width), Int(size.height))
     }
     
-    func dataSizeToString(size: Int) -> String {
+    func formatDataSize(size: Int) -> String {
         return String(format: "%d KB", size / 1024)
     }
     
@@ -196,11 +198,11 @@ class ResizingViewController: UIViewController {
         return false
     }
     
-    func setGif(gif: GifPhoto) {
-        DLog(message: "Set Gif")
+    func setImageView(image: CYHImage) {
+        DLog(message: "Set CYHImage")
         self.imageView.stopAnimating()
-        self.imageView.animationImages = gif.images
-        self.imageView.animationDuration = gif.duration
+        self.imageView.animationImages = image.images
+        self.imageView.animationDuration = image.duration
         self.imageView.animationRepeatCount = 0
         self.imageView.startAnimating()
     }
@@ -211,11 +213,11 @@ class ResizingViewController: UIViewController {
     
     @IBAction
     fileprivate func openPhotos() {
-        AppUtil.openPhotos()
+        SystemUtils.openPhotos()
     }
     
     fileprivate func alert(message: String) {
-        AlertHelper.simpleAlert(vc: self, message: message)
+        AlertUtils.simple(vc: self, message: message)
     }
     
     fileprivate func setUI() {
@@ -243,9 +245,21 @@ class ResizingViewController: UIViewController {
         
 //        ConstraintUtil.alignCenterY(editSwitch, to: whileOpenLabel, where: contentView)
 //        ConstraintUtil.alignRight(editSwitch, to: contentView, where: contentView, offset: 20)
+        // gif label
+        ConstraintUtil.align(gifFramesCountPreSecondLabel, below: imageView, where: contentView, offset: 20)
+        ConstraintUtil.alignLeft(gifFramesCountPreSecondLabel, to: contentView, offset: 20)
+        
+        // gif origin
+        ConstraintUtil.alignRight(gifOriginFramesCountPreSecondDisplay, at: gifFramesCountPreSecondLabel, where: contentView, offset: 20)
+        ConstraintUtil.alignCenterY(gifOriginFramesCountPreSecondDisplay, to: gifFramesCountPreSecondLabel, where: contentView)
+        
+        // gif target
+        ConstraintUtil.alignRight(gifTargetFramesCountPreSecondDisplay, at: gifOriginFramesCountPreSecondDisplay, where: contentView, offset: 20)
+        ConstraintUtil.alignCenterY(gifTargetFramesCountPreSecondDisplay, to: gifOriginFramesCountPreSecondDisplay, where: contentView)
+        ConstraintUtil.setWidth(gifTargetFramesCountPreSecondDisplay, 100)
         
         // selectImageButton
-        ConstraintUtil.align(selectImageButton, below: imageView, where: contentView, offset: 20)
+        ConstraintUtil.align(selectImageButton, below: gifFramesCountPreSecondLabel, where: contentView, offset: 20)
         ConstraintUtil.alignLeft(selectImageButton, to: contentView, offset: 20)
         
         // resetButton
@@ -284,7 +298,6 @@ class ResizingViewController: UIViewController {
         ConstraintUtil.setWidth(imageConvertedSizeLabel, labelWidth)
         
         let textFieldWidth = (contentView.frame.size.width - 120) / 2.0
-        DLog(message: labelWidth)
         
         ConstraintUtil.align(targetWidthTextField, below: imageConvertedTextLabel, where: contentView, offset: 20)
         ConstraintUtil.alignLeft(targetWidthTextField, to: contentView, offset: 20)

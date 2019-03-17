@@ -9,7 +9,5 @@
 import UIKit
 
 struct PhotoMultiSelectionItem {
-    var index: Int
-    var uiImage: UIImage?
-    var isLive: Bool
+    var image: CYHImage
 }

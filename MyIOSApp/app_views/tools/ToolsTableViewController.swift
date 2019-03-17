@@ -8,76 +8,115 @@
 
 import UIKit
 
+fileprivate struct ToolViewInfo {
+    var name: String
+    var viewControllerClass: UIViewController.Type
+    var description: String
+}
+
+fileprivate let phoneticViewInfo = ToolViewInfo(
+    name: "Phonetic",
+    viewControllerClass: PhoneticAdditionViewController.self,
+    description: "为联系人添加 Phonetic 字段（该字段用于联系人排序）"
+)
+
+fileprivate let ResizeViewInfo = ToolViewInfo(
+    name: "Resize",
+    viewControllerClass: ResizingViewController.self,
+    description: "重置一张图片（包括 Gif）的像素级大小、翻转"
+)
+
+fileprivate let moveAssetsViewInfo = ToolViewInfo(
+    name: "Move Assets",
+    viewControllerClass: AssetsMovementViewController.self,
+    description: "移动媒体到指定文件夹"
+)
+
+fileprivate let livePhotosViewInfo = ToolViewInfo(
+    name: "Live Photos",
+    viewControllerClass: LivePhotosConverterViewController.self,
+    description: "将 Live Photo 转换成视频"
+)
+
+fileprivate let gifPickerViewInfo = ToolViewInfo(
+    name: "Gif Picker",
+    viewControllerClass: GifPickerViewController.self,
+    description: "从 GIF 里提取照片"
+)
+
+fileprivate let convertVideoViewInfo = ToolViewInfo(
+    name: "Convert Video",
+    viewControllerClass: VideoConversionViewController.self,
+    description: "将视频转化为 GIF"
+)
+
+fileprivate let localStorageManagerViewInfo = ToolViewInfo(
+    name: "Local Storage Manager",
+    viewControllerClass: LocalStorageManagerViewController.self,
+    description: "此软件本地存储大小"
+)
+
+fileprivate let developerWebsiteViewInfo = ToolViewInfo(
+    name: "Developer Website",
+    viewControllerClass: DeveloperWebsiteViewController.self,
+    description: "开发者个人网站"
+)
+
+fileprivate let deviceInformationViewInfo = ToolViewInfo(
+    name: "Device Information",
+    viewControllerClass: DeviceInformationViewController.self,
+    description: "这台设备的一些基本信息"
+)
+
 class ToolsTableViewController: UITableViewController {
     
-    private var actionConfig: [String: UIViewController.Type] = [
-        "Phonetic": PhoneticAdditionViewController.self,
-        "Resize": ResizingViewController.self,
-        "Move Assets": AssetsMovementViewController.self,
-        "Convert Live Photos": LivePhotosConverterViewController.self,
-        "Convert Video": VideoConversionViewController.self,
-        "Local Storage manager": LocalStorageManagerViewController.self,
-        "Developer Website": DeveloperWebsiteViewController.self,
-        "Device Information": DeviceInformationViewController.self,
-    ]
-    
-//    private var actionNameConfig: [String: String] = [
-//        "Phonetic": "添加 Phonetic 字段",
-//        "Resize": "重置一张图片的大小",
-//        "Move Assets": "移动媒体到指定文件夹",
-//        "Convert Live Photos": "转换Live Photos视频",
-//        ]
-    
-    private var titleConfig: [[String: Any]] = [
+    fileprivate var titleConfig: [[String: Any]] = [
         [
             "title": "Contract",
             "items": [
-                "Phonetic",
+                phoneticViewInfo,
             ]
         ],
         [
             "title": "Image",
             "items": [
-                "Resize",
-                "Move Assets",
-                "Convert Live Photos",
+                ResizeViewInfo,
+                moveAssetsViewInfo,
+                livePhotosViewInfo,
+                gifPickerViewInfo,
             ]
         ],
         [
             "title": "Video",
             "items": [
-                "Convert Video",
+                convertVideoViewInfo,
             ]
         ],
         [
             "title": "Local Storage",
             "items": [
-                "Local Storage manager",
+                localStorageManagerViewInfo,
             ]
         ],
         [
             "title": "About",
             "items": [
-                "Device Information",
-                "Developer Website",
+                deviceInformationViewInfo,
+                developerWebsiteViewInfo,
             ]
         ],
     ]
     
-    func getTitle(_ section: Int) -> String {
+    fileprivate func getTitle(_ section: Int) -> String {
         return self.titleConfig[section]["title"]! as! String
     }
     
-    func getItems(_ section: Int) -> [String] {
-        return self.titleConfig[section]["items"]! as! [String]
+    fileprivate func getToolViewInfoItems(_ section: Int) -> [ToolViewInfo] {
+        return self.titleConfig[section]["items"]! as! [ToolViewInfo]
     }
     
-    func getStoryBoardName(_ section: Int, _ row: Int) -> AnyClass {
-        return self.actionConfig[self.getItems(section)[row]]!
-    }
-    
-    func getStoryBoardTypeName(_ section: Int, _ row: Int) -> String {
-        return CommonUtil.stringFrom(clazz: self.actionConfig[self.getItems(section)[row]]!)
+    fileprivate func getViewControllerClass(_ section: Int, _ row: Int) -> AnyClass {
+        return self.getToolViewInfoItems(section)[row].viewControllerClass
     }
 
     override func viewDidLoad() {
@@ -105,7 +144,7 @@ class ToolsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.getItems(section).count
+        return self.getToolViewInfoItems(section).count
     }
     
     // 设置 section 的 header 文字
@@ -122,7 +161,8 @@ class ToolsTableViewController: UITableViewController {
 //        let vc = (self.getStoryBoardName(indexPath.section, indexPath.row) as! UIViewController.Type)
 //            .init(nibName: self.getStoryBoardTypeName(indexPath.section, indexPath.row), bundle: Bundle.main)
         
-        let vc = CommonUtil.loadNib(ofViewControllerType: self.getStoryBoardName(indexPath.section, indexPath.row) as! UIViewController.Type)
+        let vc = CommonUtils.loadNib(ofViewControllerType: self.getViewControllerClass(indexPath.section, indexPath.row) as! UIViewController.Type)
+//        vc.title =
 
         self.navigationController?.pushViewController(vc, animated: true)
 //        self.present(vc!, animated: true)
@@ -134,11 +174,15 @@ class ToolsTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToolsTableViewCell", for: indexPath) as! ToolsTableViewCell
-        
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "ToolsTableViewCell", for: indexPath) as! ToolsTableViewCell
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "default");
         // Configure the cell...
         
-        cell.lable.text = getItems(indexPath.section)[indexPath.row]
+        let item = getToolViewInfoItems(indexPath.section)[indexPath.row]
+        
+        cell.textLabel?.text = item.name
+        cell.detailTextLabel?.text = item.description
+        cell.accessoryType = .disclosureIndicator
 
         return cell
     }

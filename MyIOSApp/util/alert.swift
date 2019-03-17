@@ -8,8 +8,8 @@
 
 import UIKit
 
-class AlertHelper: NSObject {
-    static func simpleAlert(vc: UIViewController, message: String) {
+class AlertUtils: NSObject {
+    static func simple(vc: UIViewController, message: String) {
         let alertController = UIAlertController(
             title: "Notice",
             message: message,
@@ -26,7 +26,7 @@ class AlertHelper: NSObject {
         vc.present(alertController, animated: true, completion: nil)
     }
     
-    static func actionAlert(
+    static func biAction(
         vc: UIViewController,
         message: String,
         leftTitle: String,

@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import NetworkExtension
 
-class AppUtil {
+class SystemUtils {
     
 //    static let PHOTOS_URL = "prefs:root=Photos"
     static let PHOTOS_URL = "photos-redirect://"
@@ -20,5 +21,11 @@ class AppUtil {
     
     static func openApplicationSetting() {
         UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!, options: [:], completionHandler: nil)
+    }
+    
+    static func getWiFi() {
+        let networkInterfaces = NEHotspotHelper.supportedNetworkInterfaces()
+        DLog(message: networkInterfaces)
+
     }
 }

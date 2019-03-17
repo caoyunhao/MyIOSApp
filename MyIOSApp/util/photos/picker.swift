@@ -10,8 +10,8 @@ import UIKit
 import Photos
 import MobileCoreServices
 
-class PhotosPickerHelper: NSObject {
-    var pickCallback: ((_ gifPhoto: GifPhoto) -> Void)?
+class PhotosPickerUtils: NSObject {
+    var pickCallback: ((_ image: CYHImage) -> Void)?
     
     var vc: UIViewController
     
@@ -20,27 +20,25 @@ class PhotosPickerHelper: NSObject {
     }
     
     static func albumsViewController(completeHandler: @escaping ([PHAsset]) -> Void) -> AlbumsViewController {
-        let vc = CommonUtil.loadNib(ofViewControllerType: AlbumsViewController.self) as! AlbumsViewController
+        let vc = CommonUtils.loadNib(ofViewControllerType: AlbumsViewController.self) as! AlbumsViewController
         
         vc.completeHandler = completeHandler
         return vc
     }
     
-    func pick(completion: @escaping (_ gifPhoto: GifPhoto) -> Void) {
+    func pick(completion: @escaping (_ image: CYHImage) -> Void) {
         PHPhotoLibrary.requestAuthorization({(status) in
             
         })
         self.pickCallback = completion
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            //初始化图片控制器
+ 
             let picker = UIImagePickerController()
-            //设置代理
+  
             picker.delegate = self
-            //指定图片控制器类型
             picker.sourceType = .photoLibrary
-            //设置是否允许编辑
             picker.allowsEditing = false
-            //弹出控制器，显示界面
+
             self.vc.present(picker, animated: true, completion: nil)
         }else{
             DLog(message: "读取相册错误")
@@ -48,7 +46,7 @@ class PhotosPickerHelper: NSObject {
     }
 }
 
-extension PhotosPickerHelper: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension PhotosPickerUtils: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     //选择图片成功后代理
     @objc internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         //查看info对象
@@ -74,13 +72,11 @@ extension PhotosPickerHelper: UIImagePickerControllerDelegate, UINavigationContr
         //图片控制器退出
         picker.dismiss(animated: true, completion: nil)
         
-        AssetsUtils.dataFrom(imageAsset: asset) { (data) in
+        AssetsUtils.handleImageData(of: asset) { (data) in
             DLog(message: "imageAsset size: \(data.count)")
-
-            GifUtil.gifFrom(data: data, handler: { (photo) in
-                self.pickCallback?(photo)
-            })
-
+            if let image = ImageUtils.buildImage(from: data) {
+                self.pickCallback?(image)
+            }
         }
     }
 }

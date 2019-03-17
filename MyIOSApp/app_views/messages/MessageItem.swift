@@ -13,7 +13,7 @@ class MessageItem: BaseStorage {
     var creationTime: Date = Date()
     var flag: Bool = false
     
-    struct PropertyKey {
+    fileprivate struct PropertyKey {
         static let text = "text"
         static let creationTime = "creationTime"
         static let flag = "flag"

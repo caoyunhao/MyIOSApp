@@ -26,6 +26,7 @@ class AlbumsViewController: UIViewController {
     private var tableView: UITableView!
     
     var maxSelected:Int = 4
+    var autoClose: Bool = false
     var completeHandler:((_ assets:[PHAsset])->())?
     var type: PHAssetMediaType = .image
     var subTypes: [PHAssetMediaSubtype] = []
@@ -33,17 +34,14 @@ class AlbumsViewController: UIViewController {
     override func awakeFromNib() {
         DLog(message: "11111111")
         super.awakeFromNib()
-        
+    
     }
     
     override func viewDidLoad() {
-        DLog(message: "2222222")
         super.viewDidLoad()
         
         self.title = "Albums"
-        DLog(message: self.view.frame)
         self.tableView = UITableView(frame: self.view.frame, style: .plain)
-        DLog(message: self.tableView.frame)
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
@@ -60,11 +58,11 @@ class AlbumsViewController: UIViewController {
         //申请权限
         PHPhotoLibrary.requestAuthorization({ (status) in
             if status != .authorized {
-                AlertHelper.actionAlert(vc: self, message: "请允许我访问您的图库", leftTitle: "算了", rightTitle: "允许", leftAction: {
+                AlertUtils.biAction(vc: self, message: "请允许我访问您的图库", leftTitle: "算了", rightTitle: "允许", leftAction: {
                     self.dismiss(animated: true, completion: nil)
                 }, rightAction: {
                     self.dismiss(animated: true, completion: nil)
-                    AppUtil.openApplicationSetting()
+                    SystemUtils.openApplicationSetting()
                 })
                 return
             }
@@ -267,10 +265,11 @@ extension AlbumsViewController: UITableViewDelegate, UITableViewDataSource {
         
         
         
-        let vc = CommonUtil.loadNib(ofViewControllerType: ImagesViewController.self) as! ImagesViewController
+        let vc = CommonUtils.loadNib(ofViewControllerType: ImagesViewController.self) as! ImagesViewController
         
         vc.title = cell.nameLabel.text
         vc.maxSelected = self.maxSelected
+        vc.autoClose = self.autoClose
         
         vc.completeHandler =  {indexes in
             self.completeHandler?(self.items[indexPath.row].fetchResult.objects(at: IndexSet(indexes)))

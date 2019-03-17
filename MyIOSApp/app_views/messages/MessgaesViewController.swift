@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 
-class MessagesViewController: UITableViewController {
+class MessagesViewController: UITableViewController, UIViewControllerPreviewingDelegate {
     let cellIdentifier = "MessagesViewCell"
     
     let keyOfStorage = "messages"
@@ -29,7 +29,7 @@ class MessagesViewController: UITableViewController {
     }
     
     @objc func left() {
-        let vc = CommonUtil.loadNib(ofViewControllerType: CameraScanViewController.self) as! CameraScanViewController
+        let vc = CommonUtils.loadNib(ofViewControllerType: CameraScanViewController.self) as! CameraScanViewController
         let nvc = UINavigationController(rootViewController: vc)
         self.present(nvc, animated: true, completion: nil)
     }
@@ -91,7 +91,9 @@ class MessagesViewController: UITableViewController {
     
         cell.message = messgaes[indexPath.row] as MessageItem
         
-        
+        //注册3D Touch
+        registerForPreviewing(with: self, sourceView: cell.contentView)
+
         
         return cell
     }
@@ -189,7 +191,7 @@ class MessagesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc = CommonUtil.loadNib(ofViewControllerType: MessageViewController.self) as! MessageViewController
+        let vc = CommonUtils.loadNib(ofViewControllerType: MessageViewController.self) as! MessageViewController
         let cell = tableView.cellForRow(at: indexPath) as! MessagesViewCell
         vc.message = cell.message
         self.navigationController?.pushViewController(vc, animated: true)
@@ -210,5 +212,17 @@ class MessagesViewController: UITableViewController {
         
 //        let secondView = DetailViewController()
 //        self.navigationController?.pushViewController(secondView , animated: true)
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        let indexPath = self.tableView?.indexPath(for: previewingContext.sourceView.superview as! UITableViewCell)
+        let vc = CommonUtils.loadNib(ofViewControllerType: MessageViewController.self) as! MessageViewController
+        let cell = tableView.cellForRow(at: indexPath!) as! MessagesViewCell
+        vc.message = cell.message
+        return vc
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 }

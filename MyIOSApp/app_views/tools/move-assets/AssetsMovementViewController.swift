@@ -46,7 +46,7 @@ class AssetsMovementViewController: UIViewController {
     @IBAction
     func action() {
 //        let vc = UIStoryboard(name: "AlbumsView", bundle: nil).instantiateInitialViewController() as? AlbumsViewController
-        let vc = PhotosPickerHelper.albumsViewController {
+        let vc = PhotosPickerUtils.albumsViewController {
             (assets) in
             self.handler(assets: assets)
         }

@@ -18,6 +18,14 @@ class SimpleGroupTableConfig {
     
     var data: [SimpleGroupTableConfigGroupConfig] = []
     
+    var sectionCount: Int {
+        return data.count
+    }
+    
+    func rowsInSection(_ i: Int) -> Int {
+        return data[i].content.count
+    }
+    
     func getGroupHeader(section: Int) -> String {
         return data[section].header
     }

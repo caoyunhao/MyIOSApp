@@ -112,7 +112,7 @@ extension UIImage {
         return img
     }
     
-    func rotateLeft90() -> UIImage {
+    func e_rotateLeft90() -> UIImage {
         let image = self.fixOrientation()
         
         let targetSize = CGSize(width: image.size.height, height: image.size.width)

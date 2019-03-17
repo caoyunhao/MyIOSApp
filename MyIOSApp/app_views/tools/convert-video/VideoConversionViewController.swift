@@ -51,7 +51,7 @@ class VideoConversionViewController: UIViewController {
     @IBAction
     func toGifAction() {
         
-        let vc = PhotosPickerHelper.albumsViewController {
+        let vc = PhotosPickerUtils.albumsViewController {
             (assets) in
             self.handler(assets: assets)
         }
@@ -80,7 +80,7 @@ class VideoConversionViewController: UIViewController {
                     }
                 }) { (url) in
                     AssetsUtils.saveImage(atFileURL: url) { (success, error) in
-                        AlertHelper.simpleAlert(vc: self, message: "完成 \(count)/\(total)")
+                        AlertUtils.simple(vc: self, message: "完成 \(count)/\(total)")
                     }
                 }
             })

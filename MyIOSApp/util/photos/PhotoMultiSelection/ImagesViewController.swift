@@ -34,6 +34,7 @@ class ImagesViewController: UIViewController {
     
     //每次最多可选择的照片数量
     var maxSelected: Int = 4
+    var autoClose: Bool = false
     
     //照片选择完毕后的回调
     var completeHandler:((_ indexes:[Int])->())?
@@ -131,7 +132,12 @@ class ImagesViewController: UIViewController {
                 targetSize: self.assetGridThumbnailSize,
                 contentMode: .aspectFill,
                 options: nil) { (image, nfo) in
-                    self.items.append(PhotoMultiSelectionItem(index: index, uiImage: image, isLive: asset.mediaSubtypes.contains(.photoLive)))
+                    if let image = image {
+                        let type: CYHImageType = asset.mediaSubtypes.contains(.photoLive) ? .live : .general
+                        self.items.append(PhotoMultiSelectionItem(image: CYHImage(type: type, uiImages: [image])))
+                    } else {
+                        self.items.append(PhotoMultiSelectionItem(image: CYHImage(type: .general, uiImages: [UIImage(color: UIColor.white)!])))
+                    }
             }
         }
     }
@@ -143,7 +149,6 @@ class ImagesViewController: UIViewController {
     
     //取消按钮点击
     @objc func cancel() {
-        //退出当前视图控制器
         self.navigationController?.dismiss(animated: true, completion: nil)
     }
     
@@ -156,17 +161,19 @@ class ImagesViewController: UIViewController {
     @IBAction
     func finishSelect() {
         //取出已选择的图片资源
-        var indexes:[Int] = []
-        if let indexPaths = self.collectionView?.indexPathsForSelectedItems{
+        if let indexPaths = self.collectionView?.indexPathsForSelectedItems {
             DLog(message: "已选择的: \(indexPaths)")
-            for indexPath in indexPaths{
-                indexes.append(items[indexPath.row].index)
-            }
+            //调用回调函数
+            self.navigationController?.dismiss(animated: true, completion: {
+                self.completeHandler?(indexPaths.map({ (indexPath) -> Int in
+                    return indexPath.row
+                }))
+            })
+        } else {
+            self.navigationController?.dismiss(animated: true, completion: {
+                self.completeHandler?([])
+            })
         }
-        //调用回调函数
-        self.navigationController?.dismiss(animated: true, completion: {
-            self.completeHandler?(indexes)
-        })
     }
     
     @objc
@@ -198,7 +205,7 @@ extension ImagesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         // Configure the cell
         let item = self.items[indexPath.row]
         
-        if item.isLive {
+        if item.image.type == .live {
             cell.badgeImageView.image = PHLivePhotoView.livePhotoBadgeImage(options: .overContent)
         } else {
             cell.badgeImageView.image = nil
@@ -211,7 +218,7 @@ extension ImagesViewController: UICollectionViewDelegate, UICollectionViewDataSo
 //
 //        }
         
-        cell.imageView.image = item.uiImage
+        cell.imageView.image = item.image.first
         
         return cell
     }
@@ -221,11 +228,16 @@ extension ImagesViewController: UICollectionViewDelegate, UICollectionViewDataSo
                                  didSelectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath)
             as? ImagesViewCell{
+            
             if (selectedCount() > maxSelected) {
                 collectionView.deselectItem(at: indexPath, animated: true)
-                AlertHelper.simpleAlert(vc: self, message: "最多选择\(maxSelected)个~")
+                AlertUtils.simple(vc: self, message: "最多选择\(maxSelected)个~")
             } else {
                 cell.select()
+            }
+            
+            if (self.autoClose && selectedCount() >= maxSelected) {
+                finishSelect();
             }
         }
     }
@@ -237,5 +249,9 @@ extension ImagesViewController: UICollectionViewDelegate, UICollectionViewDataSo
             as? ImagesViewCell{
             cell.deselect()
         }
+    }
+    
+    static func new() {
+        
     }
 }

@@ -197,7 +197,7 @@ class AssetsUtils {
         
         if let ret = collection.firstObject{
             callback(ret)
-        }else{
+        } else {
             var assetCollectionPlaceholder:PHObjectPlaceholder!
             PHPhotoLibrary.shared().performChanges({
                 let creatAlbumRequest:PHAssetCollectionChangeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: title)
@@ -212,12 +212,11 @@ class AssetsUtils {
         }
     }
     
-    static func dataFrom(imageAsset asset: PHAsset, handler: @escaping (_ data: Data) -> Void) {
+    static func handleImageData(of asset: PHAsset, handler: @escaping (_ data: Data) -> Void) {
         let options = PHImageRequestOptions()
         options.version = .current
         PHImageManager.default().requestImageData(for: asset, options: options) {
             data, uti, orientation, info in
-            //            self.imageView.image = image
             guard let data = data else {
                 return
             }

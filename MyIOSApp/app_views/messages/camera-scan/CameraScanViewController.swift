@@ -19,9 +19,11 @@ class CameraScanViewController: UIViewController {
     //    @IBOutlet weak var cjbTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var infomationTextView: UITextView!
-    let layer = CAShapeLayer()
+    private let layer = CAShapeLayer()
     private lazy var input : AVCaptureDeviceInput? = nil
     private lazy var session : AVCaptureSession = AVCaptureSession()
+    
+    var callback: ((String) -> Void)?
     //  展示界面
     //    var previewLayer: AVCaptureVideoPreviewLayer!
     //  HeaderView
@@ -65,43 +67,23 @@ class CameraScanViewController: UIViewController {
         self.title = "Scan"
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(self.close(sender:)))
         
-        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-        self.navigationController?.navigationBar.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
+//        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
+//        self.navigationController?.navigationBar.tintColor = UIColor.white
+        self.navigationController?.navigationBar.barStyle = .black
+//        self.navigationController?.navigationBar.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-        
-        
-        //self.view.bringSubview(toFront: self.cjbImageview)
-        //self.view.bringSubview(toFront: self.infomationLabel)
-        //开始扫描二维码
+        self.navigationController?.navigationBar.shadowImage = UIImage()
+//        let statusBar = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//        statusBar.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
         scanQRCode()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let statusBar = UIApplication.shared.value(forKey: "statusBar") as! UIView
-        statusBar.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
-        //        1.开启动画
-        //        startAnimation()
+//        let statusBar = UIApplication.shared.value(forKey: "statusBar") as! UIView
+//        statusBar.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
     }
     
-    
-    // MARK:  抽取的方法
-    
-    // 开启动画
-    func startAnimation() {
-        
-        //        self.cjbTopConstraint.constant = -self.borderHeight.constant
-        //        self.view.layoutIfNeeded()
-        //        UIView.animate(withDuration: 2.0, animations: { () -> Void in
-        //
-        //            UIView.setAnimationRepeatCount(Float(uint.max))
-        //            self.cjbTopConstraint.constant = self.borderHeight.constant
-        //            self.view.layoutIfNeeded()
-        //
-        //        })
-    }
     //    扫描二维码
     func scanQRCode() {
         
@@ -138,22 +120,12 @@ class CameraScanViewController: UIViewController {
         DLog(message: "session.startRunning()")
         session.startRunning()
     }
-    // MARK:  内部控制事件
-    //    跳转到相册
-    @IBAction func photoes(_ sender: Any) {
-        
-        guard UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) else {
-            return
-        }
-        
-        let imageVC = UIImagePickerController()
-        imageVC.delegate = self
-        self.present(imageVC, animated: true, completion: nil)
-    }
+    
     //    清除layer的子视图
     func clearLayers() -> () {
         layer.removeFromSuperlayer()
     }
+    
     //    对二维码进行描边
     func drawLines(object : AVMetadataMachineReadableCodeObject) -> () {
         //   1.进行安全校验，看是否有数据
@@ -161,37 +133,8 @@ class CameraScanViewController: UIViewController {
         if array.count == 0 {
             return
         }
-        //   2.创建保存视图的图层
-        layer.frame = UIScreen.main.bounds
-        layer.borderWidth = 2
-        layer.fillColor = UIColor.clear.cgColor
-        layer.strokeColor = UIColor.red.cgColor
-        
-        //        3.创建UIBezierPath绘制矩形
-        let linePath = UIBezierPath()
-        linePath.lineWidth = 2
-        var point = CGPoint()
-        var index = 0
-        
-        //        point = CGPoint(dictionaryRepresentation: array[index] as! CFDictionary)!
-        point = array[index]
-        
-        index += 1
-        //        4.连接线段到某个点
-        linePath.move(to: point)
-        //        5.连接其他的点
-        while index < array.count {
-            DLog(message: index)
-            point = array[index]
-            DLog(message: point)
-            index += 1
-            linePath.addLine(to: point)
-        }
-        //        6.关闭路径，并添加图层
-        linePath.close()
-        layer.path = linePath.cgPath
+        drawOutlines(in: layer, object: object)
         previewLayer.addSublayer(layer)
-        
     }
     
     @IBAction private func close(sender: AnyObject) {
@@ -201,61 +144,20 @@ class CameraScanViewController: UIViewController {
     }
 }
 
-extension CameraScanViewController : UIImagePickerControllerDelegate , UINavigationControllerDelegate
-{
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        //        1.判断是否能取到图片
-        guard let image = info[UIImagePickerControllerOriginalImage] as? UIImage else {
-            return
-        }
-        //        2.转成ciimage
-        guard let ciimage = CIImage(image: image) else {
-            return
-        }
-        //        3.从选中的图片中读取二维码
-        //        3.1创建探测器
-        let detector = CIDetector(ofType: CIDetectorTypeQRCode, context: nil, options: [CIDetectorAccuracy : CIDetectorAccuracyLow])
-        let resoult = (detector?.features(in: ciimage))!
-        
-        
-        for result in resoult
-        {
-            guard (result as! CIQRCodeFeature).messageString != nil else {
-                return
-            }
-            DLog(message: (result as! CIQRCodeFeature).messageString!)
-            infomationTextView.text = (result as! CIQRCodeFeature).messageString!
-        }
-        
-        picker.dismiss(animated: true, completion: nil)
-        
-    }
-}
-
 extension CameraScanViewController : AVCaptureMetadataOutputObjectsDelegate
 {
     func metadataOutput(_ output: AVCaptureMetadataOutput, didOutput metadataObjects: [AVMetadataObject], from connection: AVCaptureConnection)
     {
-        //        1.获取到文字信息
+        clearLayers()
         if let o = metadataObjects.first {
             DLog(message: "检测到二维码")
-            
             let text:String = (o as AnyObject).stringValue
             infomationTextView.text = text
-            //        2.清除之前画的图层
-            //            clearLayers()
-            //            session.stopRunning()
-            
-            // NSString str = @"weixin://qr/JnXv90fE6hqVrQOU9yA0";
-            
-            //            UIApplication.shared.open(URL(string: "weixin://dl/profile")!)
-            
-            //            guard let metadata = metadataObjects.last else {
-            //                return
-            //            }
             let object = previewLayer.transformedMetadataObject(for: o) as! AVMetadataMachineReadableCodeObject
-            //        3.对扫描到的二维码进行描边
+            // 3.对扫描到的二维码进行描边
             drawLines(object:object)
+            
+            callback?(text)
         }
     }
 }
