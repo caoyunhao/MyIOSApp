@@ -8,32 +8,39 @@
 
 import UIKit
 import WebKit
+import SafariServices
 
-class DeveloperWebsiteViewController: UIViewController {
+class DeveloperWebsiteViewController: SFSafariViewController {
     
-    var contentView: WKWebView!
+//    var contentView: WKWebView!
     
     override func loadView() {
-        let webConfiguration = WKWebViewConfiguration()
-        contentView = WKWebView(frame: .zero, configuration: webConfiguration)
-        contentView.uiDelegate = self
-        contentView.navigationDelegate = self
+        super.loadView()
+//        let webConfiguration = WKWebViewConfiguration()
+//        contentView = WKWebView(frame: .zero, configuration: webConfiguration)
+//        contentView.uiDelegate = self
+//        contentView.navigationDelegate = self
 //        view.addSubview(contentView)
-        view = contentView
+//        view = contentView
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 //        contentView.uiDelegate = self
         navigationItem.largeTitleDisplayMode = .never
+        dismissButtonStyle = .close
         
-        let url = NSURL(string: "https://caoyunhao.com")
+//        navigationItem.rightBarButtonItems = [
+//            UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.action, target: self, action: #selector(self.action))
+//        ]
+        
+//        let url = NSURL(string: "https://caoyunhao.com")
         /// 根据URL创建请求
-        let requst = NSURLRequest(url: url! as URL)
+//        let requst = NSURLRequest(url: url! as URL)
         /// 设置代理
 //        contentView.navigationDelegate = self
         /// WKWebView加载请求
-        contentView.load(requst as URLRequest)
+//        contentView.load(requst as URLRequest)
         
 //        view = contentView
 
@@ -54,12 +61,16 @@ class DeveloperWebsiteViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
-}
-
-extension DeveloperWebsiteViewController: WKUIDelegate, WKNavigationDelegate {
-    func webView(_ webView: WKWebView,
-                          didFinish navigation: WKNavigation!) {
-        title = webView.title;
+    
+    @objc func action() {
+    
     }
+
 }
+
+//extension DeveloperWebsiteViewController: WKUIDelegate, WKNavigationDelegate {
+//    func webView(_ webView: WKWebView,
+//                          didFinish navigation: WKNavigation!) {
+//        title = webView.title;
+//    }
+//}

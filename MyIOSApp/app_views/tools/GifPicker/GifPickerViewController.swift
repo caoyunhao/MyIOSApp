@@ -58,7 +58,9 @@ class GifPickerViewController: ScrollViewController {
         vc.completeHandler = self.handler;
         
         AssetsUtils.handleImageData(of: assets.first!) { (data) in
+            DLog(message: data)
             if let image = ImageUtils.buildImage(from: data) {
+                DLog(message: image.description)
                 self.items.append(contentsOf: image.images.map({ (uiImage) -> PhotoMultiSelectionItem in
                     return PhotoMultiSelectionItem(image: CYHImage(uiImage: uiImage))
                 }))
@@ -72,10 +74,12 @@ class GifPickerViewController: ScrollViewController {
     
     @objc
     func handler(indexes: [Int]) {
-        indexes.forEach { (index) in
-            ImageUtils.saveAsSimple(self.items[index].image)
+        if indexes.count > 0 {
+            indexes.forEach { (index) in
+                ImageUtils.saveAsSimple(self.items[index].image)
+            }
+            AlertUtils.simple(vc: self, message: "Save \(indexes.count) image(s) successfully~")
         }
-        AlertUtils.simple(vc: self, message: "Save \(indexes.count) image(s) successfully~")
     }
 
 

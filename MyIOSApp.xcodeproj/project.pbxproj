@@ -19,6 +19,8 @@
 		A21DE1BE212C731C00FCD407 /* MessagesViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A21DE1BC212C731C00FCD407 /* MessagesViewCell.xib */; };
 		A21DE1C0212C738E00FCD407 /* MessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21DE1BF212C738E00FCD407 /* MessageItem.swift */; };
 		A22435EC21D8EAF30065927E /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22435EB21D8EAF30065927E /* UIDevice+.swift */; };
+		A2249255223FB397009ACD15 /* TextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2249253223FB397009ACD15 /* TextFieldViewController.swift */; };
+		A2249256223FB397009ACD15 /* TextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2249254223FB397009ACD15 /* TextFieldViewController.xib */; };
 		A2288830212DC32A0099F1CF /* MessagesStorageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A228882F212DC32A0099F1CF /* MessagesStorageUtil.swift */; };
 		A2417AD921D7A4730034EFF2 /* GifPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2417AD721D7A4730034EFF2 /* GifPickerViewController.swift */; };
 		A2417ADA21D7A4730034EFF2 /* GifPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2417AD821D7A4730034EFF2 /* GifPickerViewController.xib */; };
@@ -125,6 +127,8 @@
 		A21DE1BC212C731C00FCD407 /* MessagesViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagesViewCell.xib; sourceTree = "<group>"; };
 		A21DE1BF212C738E00FCD407 /* MessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItem.swift; sourceTree = "<group>"; };
 		A22435EB21D8EAF30065927E /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
+		A2249253223FB397009ACD15 /* TextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewController.swift; sourceTree = "<group>"; };
+		A2249254223FB397009ACD15 /* TextFieldViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldViewController.xib; sourceTree = "<group>"; };
 		A228882F212DC32A0099F1CF /* MessagesStorageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesStorageUtil.swift; sourceTree = "<group>"; };
 		A2417AD721D7A4730034EFF2 /* GifPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifPickerViewController.swift; sourceTree = "<group>"; };
 		A2417AD821D7A4730034EFF2 /* GifPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GifPickerViewController.xib; sourceTree = "<group>"; };
@@ -242,6 +246,15 @@
 				A2C29A4C22254E6A003772AD /* view-utils.swift */,
 			);
 			path = Layout;
+			sourceTree = "<group>";
+		};
+		A2249252223FB36B009ACD15 /* text-field-view */ = {
+			isa = PBXGroup;
+			children = (
+				A2249253223FB397009ACD15 /* TextFieldViewController.swift */,
+				A2249254223FB397009ACD15 /* TextFieldViewController.xib */,
+			);
+			path = "text-field-view";
 			sourceTree = "<group>";
 		};
 		A228882E212DC3110099F1CF /* storage */ = {
@@ -608,6 +621,7 @@
 		A2DD54572192B289000C6A0F /* view */ = {
 			isa = PBXGroup;
 			children = (
+				A2249252223FB36B009ACD15 /* text-field-view */,
 				A2DD54582192B293000C6A0F /* progress-view */,
 			);
 			path = view;
@@ -726,7 +740,6 @@
 					A2B79C902035733800C50054 = {
 						CreatedOnToolsVersion = 9.2;
 						LastSwiftMigration = 0940;
-						ProvisioningStyle = Automatic;
 					};
 					A2B79CA62035733800C50054 = {
 						CreatedOnToolsVersion = 9.2;
@@ -773,6 +786,7 @@
 				A2E062922140347E00E488CA /* MessageViewController.xib in Resources */,
 				A24E7F4120D283A0004CE308 /* qrcode_border@2x.png in Resources */,
 				A2080B632129DB78001C039A /* ImagesViewCell.xib in Resources */,
+				A2249256223FB397009ACD15 /* TextFieldViewController.xib in Resources */,
 				A279CD9D213AC2D300C5EE51 /* DeveloperWebsiteViewController.xib in Resources */,
 				A2A733C421272A3C0030EF27 /* AssetsMovementViewController.xib in Resources */,
 				A21DE1BE212C731C00FCD407 /* MessagesViewCell.xib in Resources */,
@@ -855,6 +869,7 @@
 				A201FF8120E68DFB007116A0 /* LayoutUtil.swift in Sources */,
 				A2A733C0212722020030EF27 /* common-utils.swift in Sources */,
 				A279CD96213AB95D00C5EE51 /* LocalStorageManagerViewController.swift in Sources */,
+				A2249255223FB397009ACD15 /* TextFieldViewController.swift in Sources */,
 				A2417AE321D89C870034EFF2 /* view-controller.swift in Sources */,
 				A2B54E01211EBCAC00FFD2ED /* AssetsUtils.swift in Sources */,
 				A279A84B20E21C740058985C /* ToolsTableViewController.swift in Sources */,
@@ -1045,6 +1060,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LMJK2Q96M9;
 				INFOPLIST_FILE = MyIOSApp/Info.plist;
@@ -1055,6 +1071,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunhao.MyIOSApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyIOSApp/oc/MyIOSApp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
@@ -1068,6 +1085,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = LMJK2Q96M9;
 				INFOPLIST_FILE = MyIOSApp/Info.plist;
@@ -1078,6 +1096,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunhao.MyIOSApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "MyIOSApp/oc/MyIOSApp-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

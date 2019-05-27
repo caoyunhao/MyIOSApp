@@ -40,43 +40,8 @@ class ImageUtils {
         guard let imageSource = CGImageSourceCreateWithData(data as CFData, options) else {
             return nil
         }
-        
-        return buildImage(from: imageSource)
-    }
-    
-    static func buildImage(from source: CGImageSource) -> CYHImage {
-        let frameCount = CGImageSourceGetCount(source)
-        
-        var images: [CGImage] = []
-        var duration = frameCount > 1 ? 0 : Double.infinity
-        
-        DLog(message: frameCount)
-        
-        for i in 0 ..< frameCount {
-            // 获取对应帧的 CGImage
-            guard let imageRef = CGImageSourceCreateImageAtIndex(source, i, nil) else {
-                continue
-            }
-            // gif 动画
-            // 获取到 gif每帧时间间隔
-            guard
-                let properties = CGImageSourceCopyPropertiesAtIndex(source, i, nil),
-                let gifInfo = (properties as NSDictionary)[kCGImagePropertyGIFDictionary as String] as? NSDictionary,
-                let frameDuration = (gifInfo[kCGImagePropertyGIFDelayTime as String] as? NSNumber) else {
-                    // 不是Gif
-                    images.append(imageRef)
-                    continue
-            }
-            
-            if frameCount > 1 {
-                duration += frameDuration.doubleValue
-            }
-            // 获取帧的img
-            images.append(imageRef)
-        }
-        DLog(message: images.count)
-        DLog(message: duration)
-        return CYHImage(cgImages: images, duration: duration)
+
+        return CYHImage(source: imageSource)
     }
     
     static func save(_ image: CYHImage) {

@@ -19,6 +19,7 @@
                 <outlet property="imageConvertedDataSizeLabel" destination="xAp-Gb-NJU" id="OBH-qZ-l60"/>
                 <outlet property="imageConvertedSizeLabel" destination="5mH-bp-l51" id="oH7-mb-6rV"/>
                 <outlet property="imageConvertedTextLabel" destination="5a2-uT-18a" id="XwQ-YQ-cbV"/>
+                <outlet property="imageInfoButton" destination="aF4-9I-vWh" id="JTZ-o2-M5J"/>
                 <outlet property="imageOriginDataSizeLabel" destination="qbk-mQ-xde" id="fZm-Uj-P0q"/>
                 <outlet property="imageOriginSizeLabel" destination="Y7d-Fx-lhf" id="dVn-TY-6cx"/>
                 <outlet property="imageOriginTextLabel" destination="NCK-jr-2o3" id="lS7-hm-Fxl"/>
@@ -51,7 +52,7 @@
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" title="选择"/>
                             <connections>
-                                <action selector="pickFromAlbum:" destination="-1" eventType="primaryActionTriggered" id="0fa-Qg-YCi"/>
+                                <action selector="pickFromAlbum" destination="-1" eventType="primaryActionTriggered" id="NGo-GO-E0G"/>
                             </connections>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="输出的高" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oEt-ZK-HsI">
@@ -208,6 +209,14 @@
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aF4-9I-vWh">
+                            <rect key="frame" x="28" y="565" width="30" height="30"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Info"/>
+                            <connections>
+                                <action selector="popImageInfo" destination="-1" eventType="primaryActionTriggered" id="SM8-Je-gVU"/>
+                            </connections>
+                        </button>
                     </subviews>
                 </scrollView>
             </subviews>

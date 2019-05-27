@@ -217,6 +217,7 @@ class AssetsUtils {
         options.version = .current
         PHImageManager.default().requestImageData(for: asset, options: options) {
             data, uti, orientation, info in
+            DLog(message: info)
             guard let data = data else {
                 return
             }

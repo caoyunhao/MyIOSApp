@@ -42,6 +42,8 @@ class ResizingViewController: UIViewController {
     @IBOutlet weak var gifOriginFramesCountPreSecondDisplay: UILabel!
     @IBOutlet weak var gifTargetFramesCountPreSecondDisplay: UITextField!
     
+    @IBOutlet weak var imageInfoButton: UIButton!
+    
     fileprivate var _image: CYHImage!
     private var selectedImage: UIImage!
     private var imageOriginData: Data!
@@ -82,7 +84,7 @@ class ResizingViewController: UIViewController {
         self.scrollView.endEditing(true)
     }
     
-    @IBAction func pickFromAlbum(_ sender: AnyObject) {
+    @IBAction func pickFromAlbum() {
         photosHelper.pick {(image) in
             self.pickCallback(image: image)
         }
@@ -216,6 +218,24 @@ class ResizingViewController: UIViewController {
         SystemUtils.openPhotos()
     }
     
+    @IBAction
+    fileprivate func popImageInfo() {
+        guard _image != nil else {
+            pickFromAlbum()
+            return
+        }
+        
+        let vc = CommonUtils.loadNib(ofViewControllerType: TextFieldViewController.self) as! TextFieldViewController
+        
+        vc.text = _image.description
+        vc.isPop = true
+        vc.title = "Info"
+        
+        let nav = UINavigationController(rootViewController: vc);
+        
+        self.present(nav, animated: true)
+    }
+    
     fileprivate func alert(message: String) {
         AlertUtils.simple(vc: self, message: message)
     }
@@ -317,7 +337,10 @@ class ResizingViewController: UIViewController {
         ConstraintUtil.align(openAlbumButton, below: keepRatioSwitch, where: contentView, offset: 20)
         ConstraintUtil.alignRight(openAlbumButton, to: contentView, offset: 20)
         
+        ConstraintUtil.align(imageInfoButton, below: keepOriginRatioLabel, where: contentView, offset: 20)
+        ConstraintUtil.alignLeft(imageInfoButton, to: contentView, offset: 20)
         // save button
+        
         ConstraintUtil.alignLeft(saveButton, at: openAlbumButton, where: contentView, offset: 20)
         ConstraintUtil.alignCenterY(saveButton, to: openAlbumButton, where: contentView)
         

@@ -7,65 +7,93 @@
 //
 
 import UIKit
+import SafariServices
 
-fileprivate struct ToolViewInfo {
+fileprivate enum ViewControllerOpenStyle {
+    case push
+    case pop
+}
+
+fileprivate struct RowInfo {
     var name: String
     var viewControllerClass: UIViewController.Type
     var description: String
+    var viewControllerClassSupplier: (() -> UIViewController)?
+    var openStyle: ViewControllerOpenStyle = .push
 }
 
-fileprivate let phoneticViewInfo = ToolViewInfo(
+fileprivate let phoneticViewInfo = RowInfo(
     name: "Phonetic",
     viewControllerClass: PhoneticAdditionViewController.self,
-    description: "为联系人添加 Phonetic 字段（该字段用于联系人排序）"
+    description: "为联系人添加 Phonetic 字段（该字段用于联系人排序）",
+    viewControllerClassSupplier: nil,
+    openStyle: .push
 )
 
-fileprivate let ResizeViewInfo = ToolViewInfo(
+fileprivate let ResizeViewInfo = RowInfo(
     name: "Resize",
     viewControllerClass: ResizingViewController.self,
-    description: "重置一张图片（包括 Gif）的像素级大小、翻转"
+    description: "重置一张图片（包括 Gif）的像素级大小、翻转",
+    viewControllerClassSupplier: nil,
+    openStyle: .push
 )
 
-fileprivate let moveAssetsViewInfo = ToolViewInfo(
+fileprivate let moveAssetsViewInfo = RowInfo(
     name: "Move Assets",
     viewControllerClass: AssetsMovementViewController.self,
-    description: "移动媒体到指定文件夹"
+    description: "移动媒体到指定文件夹",
+    viewControllerClassSupplier: nil,
+    openStyle: .push
 )
 
-fileprivate let livePhotosViewInfo = ToolViewInfo(
+fileprivate let livePhotosViewInfo = RowInfo(
     name: "Live Photos",
     viewControllerClass: LivePhotosConverterViewController.self,
-    description: "将 Live Photo 转换成视频"
+    description: "将 Live Photo 转换成视频",
+    viewControllerClassSupplier: nil,
+    openStyle: .push
 )
 
-fileprivate let gifPickerViewInfo = ToolViewInfo(
+fileprivate let gifPickerViewInfo = RowInfo(
     name: "Gif Picker",
     viewControllerClass: GifPickerViewController.self,
-    description: "从 GIF 里提取照片"
+    description: "从 GIF 里提取照片",
+    viewControllerClassSupplier: nil,
+    openStyle: .push
 )
 
-fileprivate let convertVideoViewInfo = ToolViewInfo(
+fileprivate let convertVideoViewInfo = RowInfo(
     name: "Convert Video",
     viewControllerClass: VideoConversionViewController.self,
-    description: "将视频转化为 GIF"
+    description: "将视频转化为 GIF",
+    viewControllerClassSupplier: nil,
+    openStyle: .push
 )
 
-fileprivate let localStorageManagerViewInfo = ToolViewInfo(
+fileprivate let localStorageManagerViewInfo = RowInfo(
     name: "Local Storage Manager",
     viewControllerClass: LocalStorageManagerViewController.self,
-    description: "此软件本地存储大小"
+    description: "此软件本地存储大小",
+    viewControllerClassSupplier: nil,
+    openStyle: .push
 )
 
-fileprivate let developerWebsiteViewInfo = ToolViewInfo(
+fileprivate let developerWebsiteViewInfo = RowInfo(
     name: "Developer Website",
     viewControllerClass: DeveloperWebsiteViewController.self,
-    description: "开发者个人网站"
+    description: "开发者个人网站",
+    viewControllerClassSupplier: {
+        return DeveloperWebsiteViewController(url: URL(string: "https://caoyunhao.com")!)
+    },
+    openStyle: .pop
 )
 
-fileprivate let deviceInformationViewInfo = ToolViewInfo(
+fileprivate let deviceInformationViewInfo = RowInfo(
     name: "Device Information",
     viewControllerClass: DeviceInformationViewController.self,
-    description: "这台设备的一些基本信息"
+    description: "这台设备的一些基本信息",
+    viewControllerClassSupplier: nil,
+    openStyle: .push
 )
 
 class ToolsTableViewController: UITableViewController {
@@ -111,8 +139,12 @@ class ToolsTableViewController: UITableViewController {
         return self.titleConfig[section]["title"]! as! String
     }
     
-    fileprivate func getToolViewInfoItems(_ section: Int) -> [ToolViewInfo] {
-        return self.titleConfig[section]["items"]! as! [ToolViewInfo]
+    fileprivate func getToolViewInfoItems(_ section: Int) -> [RowInfo] {
+        return self.titleConfig[section]["items"]! as! [RowInfo]
+    }
+    
+    fileprivate func getRowInfo(_ section: Int, _ row: Int) -> RowInfo {
+        return self.getToolViewInfoItems(section)[row]
     }
     
     fileprivate func getViewControllerClass(_ section: Int, _ row: Int) -> AnyClass {
@@ -160,11 +192,23 @@ class ToolsTableViewController: UITableViewController {
         
 //        let vc = (self.getStoryBoardName(indexPath.section, indexPath.row) as! UIViewController.Type)
 //            .init(nibName: self.getStoryBoardTypeName(indexPath.section, indexPath.row), bundle: Bundle.main)
-        
-        let vc = CommonUtils.loadNib(ofViewControllerType: self.getViewControllerClass(indexPath.section, indexPath.row) as! UIViewController.Type)
+        let rowInfo = getRowInfo(indexPath.section, indexPath.row)
+        let vc: UIViewController
+        if let supplier = rowInfo.viewControllerClassSupplier {
+            vc = supplier()
+        } else {
+            vc = CommonUtils.loadNib(ofViewControllerType: rowInfo.viewControllerClass )
+        }
 //        vc.title =
+        
+        switch rowInfo.openStyle {
+        case .pop:
+            self.present(vc, animated: true)
+        default:
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
 
-        self.navigationController?.pushViewController(vc, animated: true)
+        
 //        self.present(vc!, animated: true)
         //        self.present(alertController,animated: true,completion: nil)
         

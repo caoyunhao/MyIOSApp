@@ -87,7 +87,7 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MessagesViewCell
+         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MessagesViewCell
     
         cell.message = messgaes[indexPath.row] as MessageItem
         
@@ -191,9 +191,10 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let vc = CommonUtils.loadNib(ofViewControllerType: MessageViewController.self) as! MessageViewController
+        let vc = CommonUtils.loadNib(ofViewControllerType: TextFieldViewController.self) as! TextFieldViewController
         let cell = tableView.cellForRow(at: indexPath) as! MessagesViewCell
-        vc.message = cell.message
+        vc.text = cell.message.text
+        vc.title = DateUtils.stringWithType1(date: cell.message.creationTime)
         self.navigationController?.pushViewController(vc, animated: true)
 //        NSLog("选中了第\(indexPath.row)个cell")
 //        let alertController = UIAlertController(
