@@ -8,11 +8,14 @@
 
 import UIKit
 import Photos
+import MobileCoreServices
 
 class LivePhotosConverterViewController: UIViewController {
 
     @IBOutlet weak var contentView: UIScrollView!
     @IBOutlet weak var actionButton: UIButton!
+    
+    @IBOutlet weak var toLivePhotoButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +24,7 @@ class LivePhotosConverterViewController: UIViewController {
 
         ConstraintUtil.alignCompletely(view, child: contentView)
         
-        LayoutUtil.verticalCenterView(subViews: [actionButton], at: contentView, offset: 20)
+        LayoutUtil.verticalCenterView(subViews: [actionButton, toLivePhotoButton], at: contentView, offset: 20)
         
         navigationItem.largeTitleDisplayMode = .never
         title = "Convert Live Photos"
@@ -72,5 +75,43 @@ class LivePhotosConverterViewController: UIViewController {
         }
 
         AlertUtils.simple(vc: self, message: "完成 \(liveCnt)/\(total)")
+    }
+    
+    @IBAction
+    func toLivePhotoAction() {
+        let vc = PhotosPickerUtils.albumsViewController {
+            (assets) in
+            self.toLivePhotoHandler(assets: assets)
+        }
+        
+        vc.type = .video
+        vc.maxSelected = 1
+        
+        let navVC = UINavigationController(rootViewController: vc)
+        
+        self.present(navVC, animated: true)
+    }
+    
+    func toLivePhotoHandler(assets: [PHAsset]) {
+        assets.forEach { (asset) in
+            let options = PHVideoRequestOptions()
+            
+            options.version = .current
+            
+            PHImageManager.default().requestAVAsset(forVideo: asset, options: options, resultHandler: { (avAsset, audioMix, info) in
+                if let avAsset = avAsset {
+                    DLog(message: "读取视频成功")
+                    SaveLivePhotosToLibary(avAsset: avAsset) { (success, error) in
+                        if success {
+                            AlertUtils.simple(vc: self, message: "完成")
+                        } else{
+                            AlertUtils.simple(vc: self, message: "失败：\(String(describing: error))")
+                        }
+                    }
+                } else {
+                    AlertUtils.simple(vc: self, message: "读取视频失败")
+                }
+            })
+        }
     }
 }

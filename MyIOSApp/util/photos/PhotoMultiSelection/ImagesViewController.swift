@@ -58,7 +58,8 @@ class ImagesViewController: UIViewController {
     }
     
     fileprivate func setupLayout() {
-        self.collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
+        let collectionView = CYHCollectionView(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
+        self.collectionView = collectionView
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         self.view.addSubview(collectionView)
@@ -71,44 +72,46 @@ class ImagesViewController: UIViewController {
         //背景色设置为白色（默认是黑色）
         self.collectionView?.backgroundColor = UIColor.white
         
-        //设置单元格尺寸
-        let layout = (self.collectionView!.collectionViewLayout as!
-            UICollectionViewFlowLayout)
-        //        layout.itemSize = CGSize(width: UIScreen.main.bounds.size.width/4 - 1,
-        //                                 height: UIScreen.main.bounds.size.width/4 - 1)
-        layout.minimumInteritemSpacing = cellSpace
-        //垂直行间距
-        layout.minimumLineSpacing = cellSpace
+        collectionView.setup()
         
-        //整个view的宽度
-        let collectionViewWidth = self.collectionView!.bounds.width
-        //整个view横向除去间距后，剩余的像素个数
-        let pxWidth = collectionViewWidth * UIScreen.main.scale - CGFloat(columnsNum - 1)
-        
-        //单元格宽度（像素）
-        let itemWidthPx = CGFloat(Int(pxWidth / CGFloat(columnsNum)))
-        //单元格宽度（点）
-        let itemWidth = itemWidthPx / UIScreen.main.scale
-        
-        //设置单元格宽度和高度
-        layout.itemSize = CGSize(width:itemWidth, height:itemWidth)
-        
-        //剩余像素（作为左右内边距）
-        let remainderPx = pxWidth - itemWidthPx * CGFloat(columnsNum)
-        
-        //左内边距
-        let paddingLeftPx = CGFloat(Int(remainderPx/2))
-        let paddingLeft = paddingLeftPx / UIScreen.main.scale
-        
-        //右内边距
-        let paddingRightPx = remainderPx - paddingLeftPx
-        //右内边距做-0.001特殊处理，否则在plus设备下可能摆不下
-        let paddingRight = paddingRightPx / UIScreen.main.scale - 0.001
-        
-        //设置内边距
-        layout.sectionInset = UIEdgeInsets(top: 0, left: paddingLeft,
-                                           bottom: 0, right: paddingRight)
-        
+//        //设置单元格尺寸
+//        let layout = (self.collectionView!.collectionViewLayout as!
+//            UICollectionViewFlowLayout)
+//        //        layout.itemSize = CGSize(width: UIScreen.main.bounds.size.width/4 - 1,
+//        //                                 height: UIScreen.main.bounds.size.width/4 - 1)
+//        layout.minimumInteritemSpacing = cellSpace
+//        //垂直行间距
+//        layout.minimumLineSpacing = cellSpace
+//
+//        //整个view的宽度
+//        let collectionViewWidth = self.collectionView!.bounds.width
+//        //整个view横向除去间距后，剩余的像素个数
+//        let pxWidth = collectionViewWidth * UIScreen.main.scale - CGFloat(columnsNum - 1)
+//
+//        //单元格宽度（像素）
+//        let itemWidthPx = CGFloat(Int(pxWidth / CGFloat(columnsNum)))
+//        //单元格宽度（点）
+//        let itemWidth = itemWidthPx / UIScreen.main.scale
+//
+//        //设置单元格宽度和高度
+//        layout.itemSize = CGSize(width:itemWidth, height:itemWidth)
+//
+//        //剩余像素（作为左右内边距）
+//        let remainderPx = pxWidth - itemWidthPx * CGFloat(columnsNum)
+//
+//        //左内边距
+//        let paddingLeftPx = CGFloat(Int(remainderPx/2))
+//        let paddingLeft = paddingLeftPx / UIScreen.main.scale
+//
+//        //右内边距
+//        let paddingRightPx = remainderPx - paddingLeftPx
+//        //右内边距做-0.001特殊处理，否则在plus设备下可能摆不下
+//        let paddingRight = paddingRightPx / UIScreen.main.scale - 0.001
+//
+//        //设置内边距
+//        layout.sectionInset = UIEdgeInsets(top: 0, left: paddingLeft,
+//                                           bottom: 0, right: paddingRight)
+        let layout = (self.collectionView!.collectionViewLayout as! UICollectionViewFlowLayout)
         assetGridThumbnailSize = CGSize(
             width: layout.itemSize.width * UIScreen.main.scale,
             height: layout.itemSize.height * UIScreen.main.scale)

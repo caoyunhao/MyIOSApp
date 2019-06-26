@@ -11,9 +11,8 @@ import Photos
 import CoreImage
 import MobileCoreServices
 
-class ResizingViewController: UIViewController {
-    
-    @IBOutlet weak var scrollView: UIScrollView!
+class ResizingViewController: ScrollViewController {
+    @IBOutlet weak var containerView: UIView!
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var editSwitch: UISwitch!
@@ -71,17 +70,32 @@ class ResizingViewController: UIViewController {
         
         self.targetWidthTextField.delegate = self
         self.targetHeightTextField.delegate = self
-        self.scrollView.delegate = self
+        self.contentView.delegate = self
         
-        self.scrollView.addOnClickListener(target: self, action: #selector(self.tapClick(sender:)))
+        self.contentView.addOnClickListener(target: self, action: #selector(self.tapClick(sender:)))
         
-        self.setUI()
+        
+//        self.setUI()
+        
+        
+        
+        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        ConstraintUtil.alignCompletely(self.view, child: contentView)
+        
+        self.contentView.addSubview(containerView)
+        self.containerView.translatesAutoresizingMaskIntoConstraints = false
+        ConstraintUtil.alignCompletely(self.contentView, child: containerView)
+        
         
         photosHelper = PhotosPickerUtils(vc: self)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+    }
+    
     @objc func tapClick(sender:UIView){
-        self.scrollView.endEditing(true)
+        self.contentView.endEditing(true)
     }
     
     @IBAction func pickFromAlbum() {
@@ -91,6 +105,10 @@ class ResizingViewController: UIViewController {
     }
     
     @IBAction func save(_ sender: AnyObject) {
+        if self._image == nil {
+            pickFromAlbum();
+            return
+        }
         var image = self._image.resize(self.targetSize!)
         for _ in 0..<(self.rotateRate / 90) {
             image = image.rotateLeft90();
@@ -241,18 +259,18 @@ class ResizingViewController: UIViewController {
     }
     
     fileprivate func setUI() {
-        self.scrollView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.translatesAutoresizingMaskIntoConstraints = false
         //        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        for subview in self.scrollView.subviews {
+        for subview in self.contentView.subviews {
             subview.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        scrollView.alwaysBounceVertical = true
+        contentView.alwaysBounceVertical = true
         
-        ConstraintUtil.alignCompletely(self.view, child: scrollView)
+        ConstraintUtil.alignCompletely(self.view, child: contentView)
         //        ConstraintUtil.alignCompletely(scrollView, child: contentView)
         
-        let contentView = scrollView!
+//        let contentView = contentView!
         
         ConstraintUtil.alignTop(imageView, to: contentView)
         ConstraintUtil.alignLeft(imageView, to: contentView)
@@ -346,11 +364,11 @@ class ResizingViewController: UIViewController {
         
         ConstraintUtil.alignBottom(openAlbumButton, to: contentView, offset: 20)
         
-        scrollView.canCancelContentTouches = true
-        scrollView.delaysContentTouches = false
+        contentView.canCancelContentTouches = true
+        contentView.delaysContentTouches = false
         
-        DLog(message: "scrollView.frame.size  \(scrollView.frame.size)")
-        DLog(message: "scrollView.contentSize \(scrollView.contentSize)")
+        DLog(message: "scrollView.frame.size  \(contentView.frame.size)")
+        DLog(message: "scrollView.contentSize \(contentView.contentSize)")
         DLog(message: "contentView.frame.size \(contentView.frame.size)")
     }
 

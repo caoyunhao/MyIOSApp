@@ -29,4 +29,10 @@ extension UIView {
         isUserInteractionEnabled = true
         self.addGestureRecognizer(gr)
     }
+    
+    func cornersRadius(byRoundingCorners: UIRectCorner, cornerRadii: CGSize) {
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = UIBezierPath(roundedRect: bounds, byRoundingCorners: byRoundingCorners, cornerRadii: cornerRadii).cgPath
+        layer.mask = maskLayer
+    }
 }

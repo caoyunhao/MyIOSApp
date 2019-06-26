@@ -132,4 +132,38 @@ class CYHImage: NSObject {
         newImage.sourceType = self.sourceType
         return newImage
     }
+    
+    func save() {
+        if (type == .gif) {
+            saveAsGif()
+        } else {
+            saveAsSimple()
+        }
+    }
+    
+    func saveAsGif() {
+        DLog(message: "save as gif")
+        flush() { (fileUrl) in
+            if let data = try? Data(contentsOf: fileUrl) {
+                PHPhotoLibrary.shared().performChanges({
+                    PHAssetCreationRequest.forAsset().addResource(with: .photo, data: data, options: nil)
+                }, completionHandler: {success, error in
+                    DLog(message: "success: \(success), error: \(error.debugDescription)")
+                })
+            }
+        }
+    }
+    
+    func saveAsSimple() {
+        DLog(message: "save as simple")
+        PHPhotoLibrary.shared().performChanges({
+            PHAssetChangeRequest.creationRequestForAsset(from: self.first)
+        }, completionHandler: {success, error in
+            DLog(message: "success: \(success), error: \(error.debugDescription)")
+        })
+    }
+    
+    func flush(completion: (URL) -> Void) {
+        ImageUtils.flush(images: self.images, duration: self.duration, completion: completion)
+    }
 }

@@ -15,8 +15,8 @@ class ScrollViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView.alwaysBounceVertical = true
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        ConstraintUtil.alignCompletely(view, child: contentView)
+//        contentView.translatesAutoresizingMaskIntoConstraints = false
+//        ConstraintUtil.alignCompletely(view, child: contentView)
         // Do any additional setup after loading the view.
     }
     

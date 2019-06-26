@@ -9,36 +9,31 @@
 import UIKit
 import Photos
 
-class VideoConversionViewController: UIViewController {
+class VideoConversionViewController: ScrollViewController {
     @IBOutlet weak var nFramesPerSecTextField: UITextField!
-    @IBOutlet weak var contentView: UIScrollView!
     @IBOutlet weak var toGifButton: UIButton!
     @IBOutlet weak var progressBarView: UIProgressView!
 
     override func viewDidLoad() {
-        contentView.alwaysBounceVertical = true
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        
-        ConstraintUtil.alignCompletely(view, child: contentView)
-        
+        super.viewDidLoad()
 //        progressBarView = UIProgressView(progressViewStyle: UIProgressViewStyle.default)
 //        //        progressView.center = self.view.center;
         
-        progressBarView.frame = CGRect(origin: CGPoint(x: 10, y: 590), size: CGSize(width: 200, height: 30))
-        progressBarView.progress = 0.0
-
-        LayoutUtil.verticalCenterView(subViews: [
-            nFramesPerSecTextField,
-            toGifButton,
-            progressBarView,
-        ], at: contentView, offset: 20)
-        
-        ConstraintUtil.setWidth(progressBarView, 200, where: contentView)
+//        progressBarView.frame = CGRect(origin: CGPoint(x: 10, y: 590), size: CGSize(width: 200, height: 30))
+//        progressBarView.progress = 0.0
+//
+//        LayoutUtil.verticalCenterView(subViews: [
+//            nFramesPerSecTextField,
+//            toGifButton,
+//            progressBarView,
+//        ], at: contentView, offset: 20)
+//        
+//        ConstraintUtil.setWidth(progressBarView, 200, where: contentView)
         
         navigationItem.largeTitleDisplayMode = .never
         title = "Convert Video"
         
-        super.viewDidLoad()
+        
  
         // Do any additional setup after loading the view.
     }

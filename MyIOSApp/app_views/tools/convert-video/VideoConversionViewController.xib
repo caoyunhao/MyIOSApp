@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -24,33 +24,60 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EIj-h2-VMg">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EIj-h2-VMg">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nb2-XV-wFN">
-                            <rect key="frame" x="98" y="149" width="178" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nb2-XV-wFN">
+                            <rect key="frame" x="98" y="121" width="178" height="30"/>
                             <state key="normal" title="Convert video to Gif now !"/>
                             <connections>
                                 <action selector="toGifAction" destination="-1" eventType="primaryActionTriggered" id="yOT-v8-H1F"/>
                             </connections>
                         </button>
-                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jfs-tN-S0s">
-                            <rect key="frame" x="112" y="258" width="150" height="2"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </progressView>
-                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10" borderStyle="roundedRect" placeholder="帧数" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1PQ-FN-0S7">
-                            <rect key="frame" x="139" y="87" width="97" height="30"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="10" borderStyle="roundedRect" placeholder="帧数" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1PQ-FN-0S7">
+                            <rect key="frame" x="190" y="45.5" width="50" height="30"/>
                             <nil key="textColor"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                         </textField>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="输出GIF的帧数：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FSV-GT-a9v">
+                            <rect key="frame" x="50" y="50" width="130" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="进度条：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3mU-cl-ckn">
+                            <rect key="frame" x="50" y="201" width="70" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jfs-tN-S0s">
+                            <rect key="frame" x="126" y="210.5" width="150" height="2"/>
+                        </progressView>
                     </subviews>
+                    <constraints>
+                        <constraint firstItem="jfs-tN-S0s" firstAttribute="leading" secondItem="EIj-h2-VMg" secondAttribute="leading" constant="126" id="0cE-B7-nde"/>
+                        <constraint firstAttribute="bottom" secondItem="3mU-cl-ckn" secondAttribute="bottom" constant="10" id="5FF-OJ-KjR"/>
+                        <constraint firstItem="1PQ-FN-0S7" firstAttribute="leading" secondItem="FSV-GT-a9v" secondAttribute="trailing" constant="10" id="Jl0-vL-hhg"/>
+                        <constraint firstItem="FSV-GT-a9v" firstAttribute="leading" secondItem="EIj-h2-VMg" secondAttribute="leading" constant="50" id="KAT-0a-Exg"/>
+                        <constraint firstItem="Nb2-XV-wFN" firstAttribute="top" secondItem="FSV-GT-a9v" secondAttribute="bottom" constant="50" id="L0x-jd-giz"/>
+                        <constraint firstItem="FSV-GT-a9v" firstAttribute="top" secondItem="EIj-h2-VMg" secondAttribute="top" constant="50" id="Qqs-fs-fFJ"/>
+                        <constraint firstItem="3mU-cl-ckn" firstAttribute="leading" secondItem="FSV-GT-a9v" secondAttribute="leading" id="VkX-ra-JJu"/>
+                        <constraint firstAttribute="trailing" secondItem="1PQ-FN-0S7" secondAttribute="trailing" constant="50" id="fKU-qQ-4Pg"/>
+                        <constraint firstItem="3mU-cl-ckn" firstAttribute="top" secondItem="Nb2-XV-wFN" secondAttribute="bottom" constant="50" id="hBB-ij-AZv"/>
+                        <constraint firstItem="jfs-tN-S0s" firstAttribute="centerY" secondItem="3mU-cl-ckn" secondAttribute="centerY" id="ldz-0m-3Sn"/>
+                        <constraint firstItem="1PQ-FN-0S7" firstAttribute="centerY" secondItem="FSV-GT-a9v" secondAttribute="centerY" id="xF8-92-o1B"/>
+                    </constraints>
                 </scrollView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="EIj-h2-VMg" secondAttribute="trailing" id="F90-pz-LTX"/>
+                <constraint firstItem="EIj-h2-VMg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ibk-jA-qQh"/>
+                <constraint firstAttribute="bottom" secondItem="EIj-h2-VMg" secondAttribute="bottom" id="RsV-iR-ya3"/>
+                <constraint firstItem="EIj-h2-VMg" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="XRX-SM-rlD"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="24.5" y="51.5"/>
         </view>

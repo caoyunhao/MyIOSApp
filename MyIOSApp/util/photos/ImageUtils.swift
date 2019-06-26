@@ -15,6 +15,17 @@ struct FlushResult {
     var fileUrl: URL
 }
 
+//class JPEG {
+//    var data: Data?
+//    init(cgImage: CGImage) {
+//        data = UIImageJPEGRepresentation(UIImage(cgImage: cgImage), 1.0)
+//    }
+//
+//    func write(path: String) {
+//
+//    }
+//}
+
 extension UIImage {
     public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
         let rect = CGRect(origin: .zero, size: size)
@@ -74,11 +85,11 @@ class ImageUtils {
         })
     }
     
-    fileprivate static func flush(image: CYHImage, completion: (URL) -> Void) {
+    static func flush(image: CYHImage, completion: (URL) -> Void) {
         flush(images: image.images, duration: image.duration, completion: completion)
     }
     
-    fileprivate static func flush(images: [UIImage], duration: Double, completion: (URL) -> Void) {
+    static func flush(images: [UIImage], duration: Double, completion: (URL) -> Void) {
         
         let path = AssetsUtils.generateTemporaryFile()
         

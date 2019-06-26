@@ -1,9 +1,9 @@
 //
-//  TableViewController.swift
+//  ToolsViewController.swift
 //  MyIOSApp
 //
-//  Created by Yunhao on 2018/6/26.
-//  Copyright © 2018 Yunhao. All rights reserved.
+//  Created by Yunhao on 2019/6/10.
+//  Copyright © 2019 Yunhao. All rights reserved.
 //
 
 import UIKit
@@ -47,9 +47,9 @@ fileprivate let moveAssetsViewInfo = RowInfo(
 )
 
 fileprivate let livePhotosViewInfo = RowInfo(
-    name: "Live Photos",
+    name: "Live Photos 工具",
     viewControllerClass: LivePhotosConverterViewController.self,
-    description: "将 Live Photo 转换成视频",
+    description: "Live Photos 和 视频 相互转换",
     viewControllerClassSupplier: nil,
     openStyle: .push
 )
@@ -84,7 +84,7 @@ fileprivate let developerWebsiteViewInfo = RowInfo(
     description: "开发者个人网站",
     viewControllerClassSupplier: {
         return DeveloperWebsiteViewController(url: URL(string: "https://caoyunhao.com")!)
-    },
+},
     openStyle: .pop
 )
 
@@ -96,7 +96,7 @@ fileprivate let deviceInformationViewInfo = RowInfo(
     openStyle: .push
 )
 
-class ToolsTableViewController: UITableViewController {
+class ToolsViewController: UITableViewController {
     
     fileprivate var titleConfig: [[String: Any]] = [
         [
@@ -150,30 +150,42 @@ class ToolsTableViewController: UITableViewController {
     fileprivate func getViewControllerClass(_ section: Int, _ row: Int) -> AnyClass {
         return self.getToolViewInfoItems(section)[row].viewControllerClass
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        DLog(message: "viewDidLoad")
         
-
+        self.title = "Utilities"
+        self.navigationItem.largeTitleDisplayMode = .automatic
+        self.tableView = UITableView(frame: view.frame, style: .grouped)
+        self.tableView.alwaysBounceVertical = true
+//        self.tableView.can
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
+        
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
-
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        DLog(message: "awakeFromNib")
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return self.titleConfig.count
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return self.getToolViewInfoItems(section).count
@@ -185,13 +197,13 @@ class ToolsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let vc = LivePhotosConverterViewController(nibName: "LivePhotosConverterViewController", bundle: Bundle.main)
-//        let vc = ResizingViewController(nibName: CommonUtil.stringFrom(clazz: ResizingViewController.self), bundle: Bundle.main)
-//        let vc = CommonUtil.getFromNib(clazz: ResizingViewController.self)
-//        let vc = UIStoryboard(name: self.getStoryBoardName(indexPath.section, indexPath.row), bundle: nil).instantiateInitialViewController()!
+        //        let vc = LivePhotosConverterViewController(nibName: "LivePhotosConverterViewController", bundle: Bundle.main)
+        //        let vc = ResizingViewController(nibName: CommonUtil.stringFrom(clazz: ResizingViewController.self), bundle: Bundle.main)
+        //        let vc = CommonUtil.getFromNib(clazz: ResizingViewController.self)
+        //        let vc = UIStoryboard(name: self.getStoryBoardName(indexPath.section, indexPath.row), bundle: nil).instantiateInitialViewController()!
         
-//        let vc = (self.getStoryBoardName(indexPath.section, indexPath.row) as! UIViewController.Type)
-//            .init(nibName: self.getStoryBoardTypeName(indexPath.section, indexPath.row), bundle: Bundle.main)
+        //        let vc = (self.getStoryBoardName(indexPath.section, indexPath.row) as! UIViewController.Type)
+        //            .init(nibName: self.getStoryBoardTypeName(indexPath.section, indexPath.row), bundle: Bundle.main)
         let rowInfo = getRowInfo(indexPath.section, indexPath.row)
         let vc: UIViewController
         if let supplier = rowInfo.viewControllerClassSupplier {
@@ -199,7 +211,7 @@ class ToolsTableViewController: UITableViewController {
         } else {
             vc = CommonUtils.loadNib(ofViewControllerType: rowInfo.viewControllerClass )
         }
-//        vc.title =
+        //        vc.title =
         
         switch rowInfo.openStyle {
         case .pop:
@@ -207,18 +219,18 @@ class ToolsTableViewController: UITableViewController {
         default:
             self.navigationController?.pushViewController(vc, animated: true)
         }
-
         
-//        self.present(vc!, animated: true)
+        
+        //        self.present(vc!, animated: true)
         //        self.present(alertController,animated: true,completion: nil)
         
         //        let secondView = DetailViewController()
         //        self.navigationController?.pushViewController(secondView , animated: true)
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "ToolsTableViewCell", for: indexPath) as! ToolsTableViewCell
+        //        let cell = tableView.dequeueReusableCell(withIdentifier: "ToolsTableViewCell", for: indexPath) as! ToolsTableViewCell
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "default");
         // Configure the cell...
         
@@ -227,54 +239,54 @@ class ToolsTableViewController: UITableViewController {
         cell.textLabel?.text = item.name
         cell.detailTextLabel?.text = item.description
         cell.accessoryType = .disclosureIndicator
-
+        
         return cell
     }
- 
-
+    
+    
     /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
+     // Override to support conditional editing of the table view.
+     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the specified item to be editable.
+     return true
+     }
+     */
+    
     /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
+     // Override to support editing the table view.
+     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+     if editingStyle == .delete {
+     // Delete the row from the data source
+     tableView.deleteRows(at: [indexPath], with: .fade)
+     } else if editingStyle == .insert {
+     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+     }
+     }
+     */
+    
     /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
+     // Override to support rearranging the table view.
+     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+     
+     }
+     */
+    
     /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
+     // Override to support conditional rearranging of the table view.
+     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+     // Return false if you do not want the item to be re-orderable.
+     return true
+     }
+     */
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }

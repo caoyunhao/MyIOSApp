@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,25 +19,25 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNJ-7A-Nmc">
-                        <rect key="frame" x="16" y="11" width="175" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dNJ-7A-Nmc">
+                        <rect key="frame" x="21" y="11.5" width="258" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SUV-p6-0r1">
-                        <rect key="frame" x="240" y="11" width="80" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="80" id="YiH-bh-zLM"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="1000" verticalHuggingPriority="1000" horizontalCompressionResistancePriority="1000" verticalCompressionResistancePriority="1000" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SUV-p6-0r1">
+                        <rect key="frame" x="284" y="15" width="31" height="14"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" red="0.4756349325" green="0.47564673419999998" blue="0.47564041610000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="SUV-p6-0r1" secondAttribute="trailing" id="RNy-O3-971"/>
+                    <constraint firstItem="SUV-p6-0r1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="Hta-Oa-p4M"/>
+                    <constraint firstItem="dNJ-7A-Nmc" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LWY-xw-NGX"/>
+                    <constraint firstAttribute="trailing" secondItem="SUV-p6-0r1" secondAttribute="trailing" constant="5" id="Nfy-yj-Ap2"/>
+                    <constraint firstItem="dNJ-7A-Nmc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="Qmz-Ff-sKG"/>
+                    <constraint firstItem="SUV-p6-0r1" firstAttribute="leading" secondItem="dNJ-7A-Nmc" secondAttribute="trailing" constant="5" id="pqd-tI-0eg"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
@@ -45,7 +45,7 @@
                 <outlet property="messageLabel" destination="dNJ-7A-Nmc" id="INZ-4U-qwe"/>
                 <outlet property="timeLabel" destination="SUV-p6-0r1" id="IGJ-a5-ovJ"/>
             </connections>
-            <point key="canvasLocation" x="11" y="59"/>
+            <point key="canvasLocation" x="9.5999999999999996" y="58.47076461769116"/>
         </tableViewCell>
     </objects>
 </document>
