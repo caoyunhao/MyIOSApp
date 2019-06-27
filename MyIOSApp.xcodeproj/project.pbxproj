@@ -53,6 +53,7 @@
 		A279CD9C213AC2D300C5EE51 /* DeveloperWebsiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A279CD9A213AC2D300C5EE51 /* DeveloperWebsiteViewController.swift */; };
 		A279CD9D213AC2D300C5EE51 /* DeveloperWebsiteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A279CD9B213AC2D300C5EE51 /* DeveloperWebsiteViewController.xib */; };
 		A27AC326219186F200BAF33C /* VideoUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AC325219186F200BAF33C /* VideoUtil.swift */; };
+		A27C0E4C22C4A9AB0065F00A /* CYHImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27C0E4B22C4A9AB0065F00A /* CYHImageView.swift */; };
 		A28B883720CD65460012BC19 /* AutoPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28B883620CD65460012BC19 /* AutoPhoto.swift */; };
 		A28B883B20CD7A720012BC19 /* AutoRecording.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28B883A20CD7A720012BC19 /* AutoRecording.swift */; };
 		A28D3CF122B75BFB00092F85 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28D3CEF22B75BFB00092F85 /* TodoListViewController.swift */; };
@@ -178,6 +179,7 @@
 		A279CD9A213AC2D300C5EE51 /* DeveloperWebsiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperWebsiteViewController.swift; sourceTree = "<group>"; };
 		A279CD9B213AC2D300C5EE51 /* DeveloperWebsiteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeveloperWebsiteViewController.xib; sourceTree = "<group>"; };
 		A27AC325219186F200BAF33C /* VideoUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUtil.swift; sourceTree = "<group>"; };
+		A27C0E4B22C4A9AB0065F00A /* CYHImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYHImageView.swift; sourceTree = "<group>"; };
 		A28B883620CD65460012BC19 /* AutoPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoPhoto.swift; sourceTree = "<group>"; };
 		A28B883A20CD7A720012BC19 /* AutoRecording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRecording.swift; sourceTree = "<group>"; };
 		A28D3CEF22B75BFB00092F85 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
@@ -704,10 +706,10 @@
 		A2DD54572192B289000C6A0F /* view */ = {
 			isa = PBXGroup;
 			children = (
-				A2FE93A622AE74F200C5821D /* New Group */,
 				A2249252223FB36B009ACD15 /* text-field-view */,
 				A2DD54582192B293000C6A0F /* progress-view */,
 				A272BF2D22BA40DA0068CE84 /* CYHCollectionView.swift */,
+				A27C0E4B22C4A9AB0065F00A /* CYHImageView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -750,13 +752,6 @@
 				A2FE93A422AE639700C5821D /* MainTabBarController.swift */,
 			);
 			path = nav;
-			sourceTree = "<group>";
-		};
-		A2FE93A622AE74F200C5821D /* New Group */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "New Group";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -980,6 +975,7 @@
 				A2417AE321D89C870034EFF2 /* view-controller.swift in Sources */,
 				A2B54E01211EBCAC00FFD2ED /* AssetsUtils.swift in Sources */,
 				A2CAE1D021280BC90076C2F5 /* LivePhotoUtil.swift in Sources */,
+				A27C0E4C22C4A9AB0065F00A /* CYHImageView.swift in Sources */,
 				A2B689EC22C38BB500BFF3C7 /* TodoesViewController.swift in Sources */,
 				A2B79C952035733800C50054 /* AppDelegate.swift in Sources */,
 				A2E06297214036C900E488CA /* SwiftCommonCrypto.m in Sources */,
