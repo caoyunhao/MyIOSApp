@@ -27,7 +27,7 @@ class ImagesViewController: UIViewController {
     var items: [PhotoMultiSelectionItem] = []
     
     //带缓存的图片管理对象
-    var imageManager: PHCachingImageManager!
+    static var imageManager: PHCachingImageManager = PHCachingImageManager()
     
     //缩略图大小
     var assetGridThumbnailSize: CGSize!
@@ -71,46 +71,10 @@ class ImagesViewController: UIViewController {
         
         //背景色设置为白色（默认是黑色）
         self.collectionView?.backgroundColor = UIColor.white
-        
+        collectionView.cellSpace = cellSpace
+        collectionView.columnsNum = columnsNum
         collectionView.setup()
         
-//        //设置单元格尺寸
-//        let layout = (self.collectionView!.collectionViewLayout as!
-//            UICollectionViewFlowLayout)
-//        //        layout.itemSize = CGSize(width: UIScreen.main.bounds.size.width/4 - 1,
-//        //                                 height: UIScreen.main.bounds.size.width/4 - 1)
-//        layout.minimumInteritemSpacing = cellSpace
-//        //垂直行间距
-//        layout.minimumLineSpacing = cellSpace
-//
-//        //整个view的宽度
-//        let collectionViewWidth = self.collectionView!.bounds.width
-//        //整个view横向除去间距后，剩余的像素个数
-//        let pxWidth = collectionViewWidth * UIScreen.main.scale - CGFloat(columnsNum - 1)
-//
-//        //单元格宽度（像素）
-//        let itemWidthPx = CGFloat(Int(pxWidth / CGFloat(columnsNum)))
-//        //单元格宽度（点）
-//        let itemWidth = itemWidthPx / UIScreen.main.scale
-//
-//        //设置单元格宽度和高度
-//        layout.itemSize = CGSize(width:itemWidth, height:itemWidth)
-//
-//        //剩余像素（作为左右内边距）
-//        let remainderPx = pxWidth - itemWidthPx * CGFloat(columnsNum)
-//
-//        //左内边距
-//        let paddingLeftPx = CGFloat(Int(remainderPx/2))
-//        let paddingLeft = paddingLeftPx / UIScreen.main.scale
-//
-//        //右内边距
-//        let paddingRightPx = remainderPx - paddingLeftPx
-//        //右内边距做-0.001特殊处理，否则在plus设备下可能摆不下
-//        let paddingRight = paddingRightPx / UIScreen.main.scale - 0.001
-//
-//        //设置内边距
-//        layout.sectionInset = UIEdgeInsets(top: 0, left: paddingLeft,
-//                                           bottom: 0, right: paddingRight)
         let layout = (self.collectionView!.collectionViewLayout as! UICollectionViewFlowLayout)
         assetGridThumbnailSize = CGSize(
             width: layout.itemSize.width * UIScreen.main.scale,
@@ -126,11 +90,11 @@ class ImagesViewController: UIViewController {
     }
     
     fileprivate func setupData() {
-        self.imageManager = PHCachingImageManager()
+        let imageManager = ImagesViewController.imageManager
         //初始化和重置缓存
-        self.imageManager.stopCachingImagesForAllAssets()
+//        ImagesViewController.imageManager.stopCachingImagesForAllAssets()
         self.assetsFetchResults?.enumerateObjects { (asset, index, _) in
-            PHCachingImageManager().requestImage(
+            imageManager.requestImage(
                 for: asset,
                 targetSize: self.assetGridThumbnailSize,
                 contentMode: .aspectFill,
@@ -183,8 +147,8 @@ class ImagesViewController: UIViewController {
     fileprivate func handlePan(pan: UIPanGestureRecognizer) {
         DLog(message: pan)
         self.collectionView.visibleCells.forEach { (cell) in
-            let point = pan.accessibilityActivationPoint
-            DLog(message: point)
+//            let point = pan.accessibilityActivationPoint
+//            DLog(message: point)
         }
     }
     
@@ -206,22 +170,8 @@ extension ImagesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
                                                       for: indexPath) as! ImagesViewCell
         // Configure the cell
-        let item = self.items[indexPath.row]
-        
-        if item.image.type == .live {
-            cell.badgeImageView.image = PHLivePhotoView.livePhotoBadgeImage(options: .overContent)
-        } else {
-            cell.badgeImageView.image = nil
-        }
-        
-        //获取缩略图
-//        self.imageManager.requestImage(for: asset,targetSize: assetGridThumbnailSize,contentMode: .aspectFill,options: nil) {
-//            (image, nfo) in
-//            cell.imageView.image = image
-//
-//        }
-        
-        cell.imageView.image = item.image.first
+        cell.data = self.items[indexPath.row]
+        registerForPreviewing(with: self, sourceView: cell.contentView)
         
         return cell
     }
@@ -254,7 +204,45 @@ extension ImagesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         }
     }
     
+    
+    
     static func new() {
         
     }
+}
+
+extension ImagesViewController: UIViewControllerPreviewingDelegate {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+    
+        let cell = previewingContext.sourceView.superview as! ImagesViewCell
+        let indexPath = collectionView.indexPath(for: cell)!
+        
+        let vc = CommonUtils.loadNib(ofViewControllerType: ImagePreviewViewController.self) as! ImagePreviewViewController
+        
+        if let asset = assetsFetchResults?.object(at: indexPath.row) {
+            DLog(message: 3344)
+            AssetsUtils.handleImageData(of: asset) { (data) in
+                DLog(message: 444)
+                if let image = ImageUtils.buildImage(from: data) {
+                    vc.image = image.first
+                    DLog(message: 555)
+                }
+            }
+        } else {
+            let image = cell.imageView.image
+            DLog(message: 333)
+            vc.image = image
+            
+            DLog(message: 666)
+        }
+        DLog(message: 100000)
+        
+        return vc
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        
+    }
+    
+    
 }

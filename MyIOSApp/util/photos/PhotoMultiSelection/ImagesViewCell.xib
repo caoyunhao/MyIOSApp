@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,30 +22,48 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4Ob-4o-ice">
                         <rect key="frame" x="0.0" y="0.0" width="86" height="86"/>
                     </imageView>
-                    <switch opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="jX1-2v-Wap">
-                        <rect key="frame" x="33" y="2" width="51" height="31"/>
-                    </switch>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jzI-9P-oDP">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jzI-9P-oDP">
                         <rect key="frame" x="0.0" y="56" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="DAM-0t-pKu"/>
+                            <constraint firstAttribute="height" constant="30" id="GXy-CS-1md"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bNW-Nk-LyV">
+                        <rect key="frame" x="0.0" y="0.0" width="86" height="86"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aif-gx-3Qz">
+                        <rect key="frame" x="61" y="61" width="20" height="20"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="Osl-ZY-H3A"/>
+                            <constraint firstAttribute="height" constant="20" id="SPH-t5-wpu"/>
+                        </constraints>
                     </imageView>
                 </subviews>
             </view>
             <constraints>
+                <constraint firstItem="bNW-Nk-LyV" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="2cW-CH-qf3"/>
                 <constraint firstItem="4Ob-4o-ice" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="B3A-Zf-GtB"/>
+                <constraint firstItem="bNW-Nk-LyV" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="IZ1-sL-ODS"/>
+                <constraint firstAttribute="trailing" secondItem="bNW-Nk-LyV" secondAttribute="trailing" id="Jw8-xG-3aY"/>
                 <constraint firstAttribute="bottom" secondItem="jzI-9P-oDP" secondAttribute="bottom" id="Rdp-DV-yN5"/>
-                <constraint firstAttribute="trailing" secondItem="jX1-2v-Wap" secondAttribute="trailing" constant="4" id="WDL-rg-rzI"/>
-                <constraint firstItem="jX1-2v-Wap" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="2" id="X08-gL-PDd"/>
                 <constraint firstItem="4Ob-4o-ice" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="cjy-aG-xNi"/>
+                <constraint firstAttribute="bottom" secondItem="aif-gx-3Qz" secondAttribute="bottom" constant="5" id="f59-nc-WF2"/>
                 <constraint firstAttribute="bottom" secondItem="4Ob-4o-ice" secondAttribute="bottom" id="gZH-Nk-iFO"/>
                 <constraint firstAttribute="trailing" secondItem="4Ob-4o-ice" secondAttribute="trailing" id="maB-aA-iNk"/>
+                <constraint firstAttribute="bottom" secondItem="bNW-Nk-LyV" secondAttribute="bottom" id="n9X-BE-Us8"/>
                 <constraint firstItem="jzI-9P-oDP" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="vC0-DT-JIw"/>
+                <constraint firstAttribute="trailing" secondItem="aif-gx-3Qz" secondAttribute="trailing" constant="5" id="ykI-TY-Ya7"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="86" height="86"/>
             <connections>
                 <outlet property="badgeImageView" destination="jzI-9P-oDP" id="eKW-bB-68S"/>
                 <outlet property="imageView" destination="4Ob-4o-ice" id="khx-MR-UXz"/>
-                <outlet property="selectionSwitch" destination="jX1-2v-Wap" id="4FD-va-nVo"/>
+                <outlet property="selectionFlagImage" destination="aif-gx-3Qz" id="fOm-Zd-XBu"/>
+                <outlet property="selectionViewHolder" destination="bNW-Nk-LyV" id="k9r-EH-DHZ"/>
             </connections>
             <point key="canvasLocation" x="-193" y="38"/>
         </collectionViewCell>

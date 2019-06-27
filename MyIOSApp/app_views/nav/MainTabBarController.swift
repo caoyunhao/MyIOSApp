@@ -13,18 +13,26 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.largeTitleDisplayMode = .always
+        
+        let todoesVC = UINavigationController(rootViewController: CommonUtils.loadNib(ofViewControllerType: TodoesViewController.self))
+        todoesVC.navigationBar.prefersLargeTitles = true
+        todoesVC.tabBarItem = UITabBarItem(title: "Todoes", image: UIImage(named: "task_list"), tag: 0)
+        
         let todoListVC = UINavigationController(rootViewController: CommonUtils.loadNib(ofViewControllerType: TodoListViewController.self))
+        todoListVC.navigationBar.prefersLargeTitles = true
         todoListVC.tabBarItem = UITabBarItem(title: "Todo", image: UIImage(named: "task_list"), tag: 0)
         
         let tasksVC = UINavigationController(rootViewController: CommonUtils.loadNib(ofViewControllerType: MessagesViewController.self))
-        let image = UIImage(named: "task_list")
-        tasksVC.tabBarItem = UITabBarItem(title: "History", image: image, selectedImage: nil)
+        tasksVC.navigationBar.prefersLargeTitles = true
+        tasksVC.tabBarItem = UITabBarItem(title: "History", image: UIImage(named: "task_list"), selectedImage: nil)
         
         let moreVC = UINavigationController(rootViewController: CommonUtils.loadNib(ofViewControllerType: ToolsViewController.self))
-        moreVC.navigationItem.largeTitleDisplayMode = .always
+        moreVC.navigationBar.prefersLargeTitles = true
         moreVC.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 0)
         
         self.viewControllers = [
+            todoesVC,
             todoListVC,
             tasksVC,
             moreVC

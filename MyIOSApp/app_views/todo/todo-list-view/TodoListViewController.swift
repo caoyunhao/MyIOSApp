@@ -66,6 +66,9 @@ class TodoListViewController: UITableViewController {
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
         
+        DLog(message: "frame=\(view.frame)")
+        DLog(message: "tableView.frame=\(tableView.frame)")
+        
         config.leftConfigs.append(SwipeItemConfig(title: "Flag", style: .normal))
         config.rightConfigs.append(SwipeItemConfig(title: "Delete", style: .destructive))
     }

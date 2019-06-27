@@ -8,8 +8,14 @@
 
 import Foundation
 
-func DLog<T> (message : T, method : String = #function, line : Int = #line)->(){
+func DLog<T> (message : T, fileName : String = #file, method : String = #function, line : Int = #line)->(){
     #if DEBUG
-    print("[DEBUG] >>> \(method) -- \(line): \(message)")
+    print("[DEBUG]\(NSString(string: fileName).lastPathComponent):\(method):\(line): \(message)")
     #endif
 }
+
+//func DLog<T> (_ message : T, fileName : String = #file, method : String = #function, line : Int = #line)->(){
+//    #if DEBUG
+//    print("[DEBUG]\(NSString(string: fileName).lastPathComponent):\(method):\(line): \(message)")
+//    #endif
+//}

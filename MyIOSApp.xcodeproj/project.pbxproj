@@ -43,6 +43,8 @@
 		A272BF2B22BA3E5D0068CE84 /* TodoCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A272BF2922BA3E5D0068CE84 /* TodoCollectionViewController.swift */; };
 		A272BF2C22BA3E5D0068CE84 /* TodoCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A272BF2A22BA3E5D0068CE84 /* TodoCollectionViewController.xib */; };
 		A272BF2E22BA40DA0068CE84 /* CYHCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A272BF2D22BA40DA0068CE84 /* CYHCollectionView.swift */; };
+		A27906A522C48BA0007C3E14 /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27906A322C48BA0007C3E14 /* ImagePreviewViewController.swift */; };
+		A27906A622C48BA0007C3E14 /* ImagePreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27906A422C48BA0007C3E14 /* ImagePreviewViewController.xib */; };
 		A279A84E20E225F40058985C /* ToolsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A279A84D20E225F40058985C /* ToolsTableViewCell.swift */; };
 		A279A85120E22F5B0058985C /* ContactsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A279A85020E22F5B0058985C /* ContactsUtil.swift */; };
 		A279CD92213A4F8900C5EE51 /* BaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A279CD91213A4F8900C5EE51 /* BaseStorage.swift */; };
@@ -71,6 +73,11 @@
 		A2B54DF6211EAC8000FFD2ED /* AlbumsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B54DF4211EAC8000FFD2ED /* AlbumsViewCell.swift */; };
 		A2B54DF7211EAC8000FFD2ED /* AlbumsViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2B54DF5211EAC8000FFD2ED /* AlbumsViewCell.xib */; };
 		A2B54E01211EBCAC00FFD2ED /* AssetsUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B54E00211EBCAC00FFD2ED /* AssetsUtils.swift */; };
+		A2B689E822C386A500BFF3C7 /* TodoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B689E622C386A500BFF3C7 /* TodoCollectionViewCell.swift */; };
+		A2B689E922C386A500BFF3C7 /* TodoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2B689E722C386A500BFF3C7 /* TodoCollectionViewCell.xib */; };
+		A2B689EC22C38BB500BFF3C7 /* TodoesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B689EA22C38BB500BFF3C7 /* TodoesViewController.swift */; };
+		A2B689ED22C38BB500BFF3C7 /* TodoesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2B689EB22C38BB500BFF3C7 /* TodoesViewController.xib */; };
+		A2B689EF22C3A98B00BFF3C7 /* QuickActions_Confirmation.png in Resources */ = {isa = PBXBuildFile; fileRef = A2B689EE22C3A98B00BFF3C7 /* QuickActions_Confirmation.png */; };
 		A2B79C952035733800C50054 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2B79C942035733800C50054 /* AppDelegate.swift */; };
 		A2B79C9C2035733800C50054 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2B79C9A2035733800C50054 /* Main.storyboard */; };
 		A2B79C9E2035733800C50054 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2B79C9D2035733800C50054 /* Assets.xcassets */; };
@@ -161,6 +168,8 @@
 		A272BF2922BA3E5D0068CE84 /* TodoCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCollectionViewController.swift; sourceTree = "<group>"; };
 		A272BF2A22BA3E5D0068CE84 /* TodoCollectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoCollectionViewController.xib; sourceTree = "<group>"; };
 		A272BF2D22BA40DA0068CE84 /* CYHCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYHCollectionView.swift; sourceTree = "<group>"; };
+		A27906A322C48BA0007C3E14 /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
+		A27906A422C48BA0007C3E14 /* ImagePreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePreviewViewController.xib; sourceTree = "<group>"; };
 		A279A84D20E225F40058985C /* ToolsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewCell.swift; sourceTree = "<group>"; };
 		A279A85020E22F5B0058985C /* ContactsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUtil.swift; sourceTree = "<group>"; };
 		A279CD91213A4F8900C5EE51 /* BaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStorage.swift; sourceTree = "<group>"; };
@@ -189,6 +198,11 @@
 		A2B54DF4211EAC8000FFD2ED /* AlbumsViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlbumsViewCell.swift; sourceTree = "<group>"; };
 		A2B54DF5211EAC8000FFD2ED /* AlbumsViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlbumsViewCell.xib; sourceTree = "<group>"; };
 		A2B54E00211EBCAC00FFD2ED /* AssetsUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetsUtils.swift; sourceTree = "<group>"; };
+		A2B689E622C386A500BFF3C7 /* TodoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCollectionViewCell.swift; sourceTree = "<group>"; };
+		A2B689E722C386A500BFF3C7 /* TodoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoCollectionViewCell.xib; sourceTree = "<group>"; };
+		A2B689EA22C38BB500BFF3C7 /* TodoesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoesViewController.swift; sourceTree = "<group>"; };
+		A2B689EB22C38BB500BFF3C7 /* TodoesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoesViewController.xib; sourceTree = "<group>"; };
+		A2B689EE22C3A98B00BFF3C7 /* QuickActions_Confirmation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = QuickActions_Confirmation.png; sourceTree = "<group>"; };
 		A2B79C912035733800C50054 /* MyIOSApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyIOSApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A2B79C942035733800C50054 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A2B79C9B2035733800C50054 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -311,6 +325,7 @@
 		A24E7F4220D285AE004CE308 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				A2B689EE22C3A98B00BFF3C7 /* QuickActions_Confirmation.png */,
 				A2FE93B122AE90A900C5821D /* task_list@2x.png */,
 				A24E7F4020D283A0004CE308 /* qrcode_border@2x.png */,
 			);
@@ -341,8 +356,21 @@
 			children = (
 				A272BF2922BA3E5D0068CE84 /* TodoCollectionViewController.swift */,
 				A272BF2A22BA3E5D0068CE84 /* TodoCollectionViewController.xib */,
+				A2B689E622C386A500BFF3C7 /* TodoCollectionViewCell.swift */,
+				A2B689E722C386A500BFF3C7 /* TodoCollectionViewCell.xib */,
+				A2B689EA22C38BB500BFF3C7 /* TodoesViewController.swift */,
+				A2B689EB22C38BB500BFF3C7 /* TodoesViewController.xib */,
 			);
 			path = "todo-collection-view";
+			sourceTree = "<group>";
+		};
+		A27906A222C48B4D007C3E14 /* preview-controller */ = {
+			isa = PBXGroup;
+			children = (
+				A27906A322C48BA0007C3E14 /* ImagePreviewViewController.swift */,
+				A27906A422C48BA0007C3E14 /* ImagePreviewViewController.xib */,
+			);
+			path = "preview-controller";
 			sourceTree = "<group>";
 		};
 		A279A84520E21B7F0058985C /* app_views */ = {
@@ -475,6 +503,7 @@
 		A2B54DF3211E89D200FFD2ED /* PhotoMultiSelection */ = {
 			isa = PBXGroup;
 			children = (
+				A27906A222C48B4D007C3E14 /* preview-controller */,
 				A2F547932197F52B00182A9F /* PhotoMultiSelectionItem.swift */,
 				A2080B5C2129D17F001C039A /* ImagesViewController.swift */,
 				A2080B602129D495001C039A /* ImagesViewController.xib */,
@@ -842,9 +871,11 @@
 			files = (
 				A28D3CF222B75BFB00092F85 /* TodoListViewController.xib in Resources */,
 				A2FE93AE22AE7A1A00C5821D /* ToolsViewController.xib in Resources */,
+				A2B689ED22C38BB500BFF3C7 /* TodoesViewController.xib in Resources */,
 				A271C21C20EB15B2003B4CEC /* README.md in Resources */,
 				A2CAE1D921286CDF0076C2F5 /* VideoConversionViewController.xib in Resources */,
 				A26FD3FB21418AE500C4D302 /* CameraScanViewController.xib in Resources */,
+				A2B689E922C386A500BFF3C7 /* TodoCollectionViewCell.xib in Resources */,
 				A2CAE1E221287CB30076C2F5 /* AlbumsViewController.xib in Resources */,
 				A2A733BE21271C060030EF27 /* ResizingViewController.xib in Resources */,
 				A24E7F4120D283A0004CE308 /* qrcode_border@2x.png in Resources */,
@@ -854,8 +885,10 @@
 				A2249256223FB397009ACD15 /* TextFieldViewController.xib in Resources */,
 				A2FE93B222AE90A900C5821D /* task_list@2x.png in Resources */,
 				A279CD9D213AC2D300C5EE51 /* DeveloperWebsiteViewController.xib in Resources */,
+				A2B689EF22C3A98B00BFF3C7 /* QuickActions_Confirmation.png in Resources */,
 				A2A733C421272A3C0030EF27 /* AssetsMovementViewController.xib in Resources */,
 				A21DE1BE212C731C00FCD407 /* MessagesViewCell.xib in Resources */,
+				A27906A622C48BA0007C3E14 /* ImagePreviewViewController.xib in Resources */,
 				A2C5C73D21905AD100EE0F75 /* components in Resources */,
 				A2A733C9212734C50030EF27 /* PhoneticAdditionViewController.xib in Resources */,
 				A2CAA52E2125DDE400342F36 /* LivePhotosConverterViewController.xib in Resources */,
@@ -911,12 +944,14 @@
 				A26FD3FA21418AE500C4D302 /* CameraScanViewController.swift in Sources */,
 				A26FD3F62140D94900C4D302 /* date.swift in Sources */,
 				A279CD92213A4F8900C5EE51 /* BaseStorage.swift in Sources */,
+				A27906A522C48BA0007C3E14 /* ImagePreviewViewController.swift in Sources */,
 				A2CAE1D821286CDF0076C2F5 /* VideoConversionViewController.swift in Sources */,
 				A2D50AF421030640009EF79C /* NotificationHelper.swift in Sources */,
 				A2B54DF1211E0C6500FFD2ED /* ImagesViewCell.swift in Sources */,
 				A299D57920D5015000804371 /* QRCodeViewController.swift in Sources */,
 				A246525E20E325FE008E65D9 /* UIImage.swift in Sources */,
 				A2B54DE82115561800FFD2ED /* AlbumsViewController.swift in Sources */,
+				A2B689E822C386A500BFF3C7 /* TodoCollectionViewCell.swift in Sources */,
 				A2417AD921D7A4730034EFF2 /* GifPickerViewController.swift in Sources */,
 				A28B883B20CD7A720012BC19 /* AutoRecording.swift in Sources */,
 				A272BF2E22BA40DA0068CE84 /* CYHCollectionView.swift in Sources */,
@@ -945,6 +980,7 @@
 				A2417AE321D89C870034EFF2 /* view-controller.swift in Sources */,
 				A2B54E01211EBCAC00FFD2ED /* AssetsUtils.swift in Sources */,
 				A2CAE1D021280BC90076C2F5 /* LivePhotoUtil.swift in Sources */,
+				A2B689EC22C38BB500BFF3C7 /* TodoesViewController.swift in Sources */,
 				A2B79C952035733800C50054 /* AppDelegate.swift in Sources */,
 				A2E06297214036C900E488CA /* SwiftCommonCrypto.m in Sources */,
 				A22435EC21D8EAF30065927E /* UIDevice+.swift in Sources */,

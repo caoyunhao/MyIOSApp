@@ -35,4 +35,12 @@ extension UIView {
         maskLayer.path = UIBezierPath(roundedRect: bounds, byRoundingCorners: byRoundingCorners, cornerRadii: cornerRadii).cgPath
         layer.mask = maskLayer
     }
+    
+    var safeAreaFrame: CGRect {
+        let insets = safeAreaInsets
+        
+        let rect = CGRect(x: frame.origin.x + insets.left, y: frame.origin.y + insets.top, width: frame.size.width - insets.left - insets.right, height: frame.size.height - insets.top - insets.bottom)
+        
+        return rect
+    }
 }

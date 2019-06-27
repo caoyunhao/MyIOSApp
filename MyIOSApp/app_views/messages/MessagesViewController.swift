@@ -86,6 +86,8 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
         
         messgaes = MessagesStorageUtil.data()
         
+        DLog(message: "frame=\(view.frame)")
+        
         //tableView.addSubview(m_RefreshControl) // not required when using UITableViewController
         
         // Uncomment the following line to preserve selection between presentations

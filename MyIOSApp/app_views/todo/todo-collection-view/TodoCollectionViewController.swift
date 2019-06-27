@@ -8,18 +8,28 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
+private let reuseIdentifier = "TodoCollectionViewCell"
 
-class TodoCollectionViewController: UICollectionViewController {
+class TodoCollectionViewController: UIViewController {
+    
+    private var collectionView: CYHCollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        collectionView = CYHCollectionView(frame: self.view.frame, collectionViewLayout: UICollectionViewFlowLayout())
+        collectionView.columnsNum = 2
+        collectionView.cellSpace = 1
+        collectionView.setup()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        ConstraintUtil.alignCompletely(self.view, child: collectionView)
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        self.collectionView!.register(UINib(nibName: reuseIdentifier, bundle: Bundle.main), forCellWithReuseIdentifier: reuseIdentifier)
 
         // Do any additional setup after loading the view.
     }
@@ -36,24 +46,7 @@ class TodoCollectionViewController: UICollectionViewController {
 
     // MARK: UICollectionViewDataSource
 
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
 
-
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 0
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
-    
-        return cell
-    }
 
     // MARK: UICollectionViewDelegate
 
@@ -86,4 +79,38 @@ class TodoCollectionViewController: UICollectionViewController {
     }
     */
     
+}
+
+extension TodoCollectionViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of items
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! TodoCollectionViewCell
+        
+        cell.titleTextField.text = "DMP 相关"
+        let text: String;
+        if indexPath.row % 2 == 0 {
+            
+            text = "broker 发版旧节点下掉时的报错问题发版旧节点下掉时的报错问题。broker 凌晨切换数据报错排查"
+            //            cell.detailTextField.attributedText = NSAttributedString(string: "broker 发版旧节点下掉时的报错问题\nbroker 凌晨切换数据报错排查")
+        } else {
+            text = "prophet-dispatcher、luwin-api 升级 jackson。luwin 排除 rec-ups-query 依赖。Java ForkedTransactionCommand。prophet-dispatcher、luwin-api 升级 jackson。luwin 排除 rec-ups-query 依赖。Java ForkedTransactionCommand"
+            //            cell.detailTextField.attributedText = NSAttributedString(string: "")
+        }
+        
+        cell.detailTextField.text = text
+        
+        // Configure the cell
+        
+        return cell
+    }
 }

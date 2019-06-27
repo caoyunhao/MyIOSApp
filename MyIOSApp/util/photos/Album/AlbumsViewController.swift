@@ -21,7 +21,7 @@ struct ImageAlbumItem {
 class AlbumsViewController: UIViewController {
     let cellIdentifier = "AlbumsViewCell"
     
-    private var items:[ImageAlbumItem] = []
+    private var albums:[ImageAlbumItem] = []
     
     private var tableView: UITableView!
     
@@ -79,13 +79,13 @@ class AlbumsViewController: UIViewController {
             self.convertCollection(collection: userCollections as! PHFetchResult<PHAssetCollection>)
             
             //相册按包含的照片数量排序（降序）
-            self.items.sort { (item1, item2) -> Bool in
+            self.albums.sort { (item1, item2) -> Bool in
                 return item1.fetchResult.count > item2.fetchResult.count
             }
             
             //异步加载表格数据,需要在主线程中调用reloadData() 方法
             DispatchQueue.main.async{
-                DLog(message: self.items.count)
+                DLog(message: self.albums.count)
                 self.tableView.reloadData()
                 
                 //                //首次进来后直接进入第一个相册图片展示页面（相机胶卷）
@@ -176,13 +176,13 @@ class AlbumsViewController: UIViewController {
             resultsOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
             resultsOptions.predicate = self.generateMediaPredicate(type: type, subTypes: subTypes)
             
-            let c = collection[i]
-            let assetsFetchResult = PHAsset.fetchAssets(in: c , options: resultsOptions)
+            let photoAlbum = collection[i]
+            let assetsFetchResult = PHAsset.fetchAssets(in: photoAlbum , options: resultsOptions)
             //没有图片的空相簿不显示
             if assetsFetchResult.count > 0 {
-                let title = titleOfAlbumForChinse(title: c.localizedTitle)
+                let title = titleOfAlbumForChinse(title: photoAlbum.localizedTitle)
                 DLog(message: title)
-                items.append(ImageAlbumItem(title: title, fetchResult: assetsFetchResult))
+                albums.append(ImageAlbumItem(title: title, fetchResult: assetsFetchResult))
             }
         }
     }
@@ -244,13 +244,13 @@ extension AlbumsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.items.count
+        return self.albums.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! AlbumsViewCell
         
-        let item = self.items[indexPath.row]
+        let item = self.albums[indexPath.row]
         cell.nameLabel.text = "\(item.title ?? "") "
         //        cell.countLabel.text = "（\(item.fetchResult.count)）"
         cell.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
@@ -263,7 +263,7 @@ extension AlbumsViewController: UITableViewDelegate, UITableViewDataSource {
         
         DLog(message: cell.nameLabel.text)
         
-        
+        let album = self.albums[indexPath.row]
         
         let vc = CommonUtils.loadNib(ofViewControllerType: ImagesViewController.self) as! ImagesViewController
         
@@ -272,9 +272,9 @@ extension AlbumsViewController: UITableViewDelegate, UITableViewDataSource {
         vc.autoClose = self.autoClose
         
         vc.completeHandler =  {indexes in
-            self.completeHandler?(self.items[indexPath.row].fetchResult.objects(at: IndexSet(indexes)))
+            self.completeHandler?(album.fetchResult.objects(at: IndexSet(indexes)))
         }
-        vc.assetsFetchResults = self.items[indexPath.row].fetchResult
+        vc.assetsFetchResults = album.fetchResult
         
         self.navigationController?.pushViewController(vc, animated: true)
         
