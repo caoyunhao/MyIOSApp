@@ -8,6 +8,7 @@
 
 import UIKit
 import NetworkExtension
+import MapKit
 
 class SystemUtils {
     
@@ -27,5 +28,11 @@ class SystemUtils {
         let networkInterfaces = NEHotspotHelper.supportedNetworkInterfaces()
         DLog(message: networkInterfaces)
 
+    }
+    
+    static func openMap(targetLat:Double, targetLon:Double) {
+        DLog(message: "openMap")
+        let mapItem = MKMapItem(placemark: MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: CLLocationDegrees(floatLiteral: targetLat), longitude: CLLocationDegrees(floatLiteral: targetLon))))
+        MKMapItem.openMaps(with: [mapItem], launchOptions: nil)
     }
 }

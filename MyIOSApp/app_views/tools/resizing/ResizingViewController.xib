@@ -199,6 +199,13 @@
                         <constraint firstAttribute="height" constant="300" id="CfY-HB-gG7"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xuJ-3i-R62">
+                    <rect key="frame" x="213" y="391" width="67" height="30"/>
+                    <state key="normal" title="OpenMap"/>
+                    <connections>
+                        <action selector="openMap" destination="-1" eventType="primaryActionTriggered" id="d6b-Gr-5it"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
@@ -206,6 +213,7 @@
                 <constraint firstItem="9mV-Vy-ENg" firstAttribute="top" secondItem="ik7-II-oUG" secondAttribute="bottom" constant="20" id="1p4-FF-Kb4"/>
                 <constraint firstItem="y8A-7c-LQM" firstAttribute="centerY" secondItem="2xD-C3-0kd" secondAttribute="centerY" id="3pP-9L-z50"/>
                 <constraint firstItem="PW1-sP-Nhv" firstAttribute="centerY" secondItem="vzZ-VV-OpF" secondAttribute="centerY" id="3uz-ZQ-O4J"/>
+                <constraint firstItem="xuJ-3i-R62" firstAttribute="leading" secondItem="aad-Qf-LsS" secondAttribute="trailing" constant="20" id="7O3-g7-vFL"/>
                 <constraint firstItem="ik7-II-oUG" firstAttribute="leading" secondItem="y8e-BJ-wyv" secondAttribute="leading" id="7vA-iR-Myg"/>
                 <constraint firstItem="yi1-hp-KdN" firstAttribute="trailing" secondItem="9cV-kg-w0c" secondAttribute="trailing" id="9rT-yL-gAJ"/>
                 <constraint firstItem="PwR-s0-ONi" firstAttribute="top" secondItem="y8e-BJ-wyv" secondAttribute="bottom" constant="20" id="AZ0-3W-0oj"/>
@@ -253,6 +261,7 @@
                 <constraint firstItem="X7Z-df-vDL" firstAttribute="top" secondItem="9mV-Vy-ENg" secondAttribute="bottom" constant="20" id="ukd-vK-u1h"/>
                 <constraint firstItem="EDq-Cn-j9Y" firstAttribute="leading" secondItem="r4N-l5-h8s" secondAttribute="leading" id="uod-0y-4tm"/>
                 <constraint firstItem="9cV-kg-w0c" firstAttribute="centerY" secondItem="y8e-BJ-wyv" secondAttribute="centerY" id="v6k-4D-MNV"/>
+                <constraint firstItem="xuJ-3i-R62" firstAttribute="centerY" secondItem="PwR-s0-ONi" secondAttribute="centerY" id="vvP-du-cnf"/>
                 <constraint firstItem="vzZ-VV-OpF" firstAttribute="leading" secondItem="y8e-BJ-wyv" secondAttribute="leading" id="yuF-gT-yb2"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="r4N-l5-h8s"/>

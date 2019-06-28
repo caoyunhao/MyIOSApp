@@ -14,8 +14,8 @@ extension PHAsset {
     }
     
     var cyhDescriptionFormatted: String {
-        return """
         
+        return """
         PHAsset.descriptionFormatted:
             playbackStyle       =   \(playbackStyle.cyhDescription),
             mediaType           =   \(mediaType.cyhDescription),
@@ -26,7 +26,16 @@ extension PHAsset {
             duration            =   \(duration),
             isHidden            =   \(isHidden),
             isFavorite          =   \(isFavorite),
-            location            =   \(location?.description ?? "nil"),
+            location
+                coordinate
+                    latitude            = \(location?.coordinate.latitude.description ?? "nil")
+                    longitude           = \(location?.coordinate.longitude.description ?? "nil")
+                altitude            = \(location?.altitude.description ?? "nil")
+                speed               = \(location?.speed.description ?? "nil")
+                horizontalAccuracy  = \(location?.horizontalAccuracy.description ?? "nil")
+                verticalAccuracy    = \(location?.verticalAccuracy.description ?? "nil")
+                timestamp           = \(location?.timestamp.description ?? "nil")
+                floor.level         = \(location?.floor?.level.description ?? "nil"),
             burstIdentifier     =   \(String(describing: burstIdentifier)),
             burstSelectionTypes =   \(burstSelectionTypes.rawValue),
             representsBurst     =   \(representsBurst),
@@ -124,5 +133,20 @@ extension PHAsset.PlaybackStyle {
         default:
             return "nil"
         }
+    }
+}
+
+extension CLLocation {
+    var cyhDescriptionFormatted: String {
+        return """
+        CLLocation
+                coordinate          = \(coordinate)
+                altitude            = \(altitude)
+                speed               = \(speed)
+                horizontalAccuracy  = \(horizontalAccuracy)
+                verticalAccuracy    = \(verticalAccuracy)
+                timestamp           = \(timestamp)
+                floor.level         = \(floor?.level)
+        """
     }
 }

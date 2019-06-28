@@ -76,6 +76,7 @@ extension PhotosPickerUtils: UIImagePickerControllerDelegate, UINavigationContro
         AssetsUtils.handleImageData(of: asset) { (data) in
             DLog(message: "imageAsset size: \(data.count)")
             if let image = CYHImage(data: data) {
+                image.asset = asset
                 self.pickCallback?(image)
             }
         }

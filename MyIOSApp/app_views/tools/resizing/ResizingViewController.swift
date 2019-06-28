@@ -233,6 +233,19 @@ class ResizingViewController: ScrollViewController {
     }
     
     @IBAction
+    fileprivate func openMap() {
+        guard _image != nil else {
+            pickFromAlbum()
+            return
+        }
+        if let location = _image.asset?.location {
+            SystemUtils.openMap(targetLat: location.coordinate.latitude, targetLon: location.coordinate.longitude)
+        } else {
+            AlertUtils.simple(vc: self, message: "No location")
+        }
+    }
+    
+    @IBAction
     fileprivate func openPhotos() {
         SystemUtils.openPhotos()
     }

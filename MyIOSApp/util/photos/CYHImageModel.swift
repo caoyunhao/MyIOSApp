@@ -17,7 +17,7 @@ enum CYHImageType {
 }
 
 class CYHImage: NSObject {
-    private(set) var asset: PHAsset?
+    var asset: PHAsset?
     private(set) var images: [UIImage]
     private(set) var duration: Double = Double.infinity
     private(set) var type: CYHImageType = .general
@@ -33,6 +33,7 @@ class CYHImage: NSObject {
         localIdentifier: \(String(describing: localIdentifier))
         properties: \(String(describing: properties))
         sourceType: \(String(describing: sourceType))
+        asset: \(asset?.cyhDescriptionFormatted ?? "nil")
         """
     }
     
