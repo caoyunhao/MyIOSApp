@@ -215,9 +215,27 @@ class AssetsUtils {
     static func handleImageData(of asset: PHAsset, handler: @escaping (_ data: Data) -> Void) {
         let options = PHImageRequestOptions()
         options.version = .current
+        DLog(message: "asset: \(asset.cyhDescriptionFormatted)")
         PHImageManager.default().requestImageData(for: asset, options: options) {
             data, uti, orientation, info in
             DLog(message: info)
+            DLog(message: "asset.location \(String(describing: asset.location))")
+            guard let data = data else {
+                return
+            }
+            handler(data)
+        }
+    }
+    
+    static func handleImageDataSynchronous(of asset: PHAsset, handler: @escaping (_ data: Data) -> Void) {
+        let options = PHImageRequestOptions()
+        options.isSynchronous = true
+        options.version = .current
+        DLog(message: "asset: \(asset.cyhDescriptionFormatted)")
+        PHImageManager.default().requestImageData(for: asset, options: options) {
+            data, uti, orientation, info in
+            DLog(message: info)
+            DLog(message: "asset.location \(String(describing: asset.location))")
             guard let data = data else {
                 return
             }

@@ -101,9 +101,9 @@ class ImagesViewController: UIViewController {
                 options: nil) { (image, nfo) in
                     if let image = image {
                         let type: CYHImageType = asset.mediaSubtypes.contains(.photoLive) ? .live : .general
-                        self.items.append(PhotoMultiSelectionItem(image: CYHImage(type: type, uiImages: [image])))
+                        self.items.append(PhotoMultiSelectionItem(image: CYHImage(type: type, uiImages: [image], asset: asset)))
                     } else {
-                        self.items.append(PhotoMultiSelectionItem(image: CYHImage(type: .general, uiImages: [UIImage(color: UIColor.white)!])))
+                        self.items.append(PhotoMultiSelectionItem(image: CYHImage(type: .general, uiImages: [UIImage(color: UIColor.white)!], asset: asset)))
                     }
             }
         }
@@ -221,17 +221,20 @@ extension ImagesViewController: UIViewControllerPreviewingDelegate {
         
         if let asset = assetsFetchResults?.object(at: indexPath.row) {
             DLog(message: 3344)
-            AssetsUtils.handleImageData(of: asset) { (data) in
+            AssetsUtils.handleImageDataSynchronous(of: asset) { (data) in
                 DLog(message: 444)
-                if let image = ImageUtils.buildImage(from: data) {
-                    vc.image = image.first
+                if let image = CYHImage(data: data) {
+                    vc.image = image
                     DLog(message: 555)
                 }
             }
         } else {
-            let image = cell.imageView.image
-            DLog(message: 333)
-            vc.image = image
+            if let image = cell.imageView.image {
+                DLog(message: 333)
+                vc.image = CYHImage(uiImage: image)
+            } else {
+                AlertUtils.simple(vc: self, message: "error")
+            }
             
             DLog(message: 666)
         }

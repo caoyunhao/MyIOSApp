@@ -53,7 +53,8 @@
 		A279CD9C213AC2D300C5EE51 /* DeveloperWebsiteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A279CD9A213AC2D300C5EE51 /* DeveloperWebsiteViewController.swift */; };
 		A279CD9D213AC2D300C5EE51 /* DeveloperWebsiteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A279CD9B213AC2D300C5EE51 /* DeveloperWebsiteViewController.xib */; };
 		A27AC326219186F200BAF33C /* VideoUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27AC325219186F200BAF33C /* VideoUtil.swift */; };
-		A27C0E4C22C4A9AB0065F00A /* CYHImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27C0E4B22C4A9AB0065F00A /* CYHImageView.swift */; };
+		A27C0E4C22C4A9AB0065F00A /* CYHImageHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27C0E4B22C4A9AB0065F00A /* CYHImageHolderView.swift */; };
+		A27C0E4E22C5D4510065F00A /* phasset+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27C0E4D22C5D4510065F00A /* phasset+.swift */; };
 		A28B883720CD65460012BC19 /* AutoPhoto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28B883620CD65460012BC19 /* AutoPhoto.swift */; };
 		A28B883B20CD7A720012BC19 /* AutoRecording.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28B883A20CD7A720012BC19 /* AutoRecording.swift */; };
 		A28D3CF122B75BFB00092F85 /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28D3CEF22B75BFB00092F85 /* TodoListViewController.swift */; };
@@ -179,7 +180,8 @@
 		A279CD9A213AC2D300C5EE51 /* DeveloperWebsiteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeveloperWebsiteViewController.swift; sourceTree = "<group>"; };
 		A279CD9B213AC2D300C5EE51 /* DeveloperWebsiteViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeveloperWebsiteViewController.xib; sourceTree = "<group>"; };
 		A27AC325219186F200BAF33C /* VideoUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoUtil.swift; sourceTree = "<group>"; };
-		A27C0E4B22C4A9AB0065F00A /* CYHImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYHImageView.swift; sourceTree = "<group>"; };
+		A27C0E4B22C4A9AB0065F00A /* CYHImageHolderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CYHImageHolderView.swift; sourceTree = "<group>"; };
+		A27C0E4D22C5D4510065F00A /* phasset+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "phasset+.swift"; sourceTree = "<group>"; };
 		A28B883620CD65460012BC19 /* AutoPhoto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoPhoto.swift; sourceTree = "<group>"; };
 		A28B883A20CD7A720012BC19 /* AutoRecording.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoRecording.swift; sourceTree = "<group>"; };
 		A28D3CEF22B75BFB00092F85 /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
@@ -320,6 +322,7 @@
 				A246525D20E325FE008E65D9 /* UIImage.swift */,
 				A2E062982140380E00E488CA /* String+.swift */,
 				A22435EB21D8EAF30065927E /* UIDevice+.swift */,
+				A27C0E4D22C5D4510065F00A /* phasset+.swift */,
 			);
 			path = built_in_extension;
 			sourceTree = "<group>";
@@ -494,7 +497,6 @@
 			isa = PBXGroup;
 			children = (
 				A2CAE1CB2127C1890076C2F5 /* CYHImageModel.swift */,
-				A2417AE021D870780034EFF2 /* ImageUtils.swift */,
 				A2CAE1CD2127F7140076C2F5 /* picker.swift */,
 				A2B54DFA211EB3D400FFD2ED /* Album */,
 				A2B54DF3211E89D200FFD2ED /* PhotoMultiSelection */,
@@ -661,6 +663,7 @@
 				A2B54E00211EBCAC00FFD2ED /* AssetsUtils.swift */,
 				A2CA237E20E78F42002DA0DD /* Image.swift */,
 				A2CAE1CF21280BC90076C2F5 /* LivePhotoUtil.swift */,
+				A2417AE021D870780034EFF2 /* ImageUtils.swift */,
 				A27AC325219186F200BAF33C /* VideoUtil.swift */,
 			);
 			path = asset;
@@ -709,7 +712,7 @@
 				A2249252223FB36B009ACD15 /* text-field-view */,
 				A2DD54582192B293000C6A0F /* progress-view */,
 				A272BF2D22BA40DA0068CE84 /* CYHCollectionView.swift */,
-				A27C0E4B22C4A9AB0065F00A /* CYHImageView.swift */,
+				A27C0E4B22C4A9AB0065F00A /* CYHImageHolderView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -975,7 +978,7 @@
 				A2417AE321D89C870034EFF2 /* view-controller.swift in Sources */,
 				A2B54E01211EBCAC00FFD2ED /* AssetsUtils.swift in Sources */,
 				A2CAE1D021280BC90076C2F5 /* LivePhotoUtil.swift in Sources */,
-				A27C0E4C22C4A9AB0065F00A /* CYHImageView.swift in Sources */,
+				A27C0E4C22C4A9AB0065F00A /* CYHImageHolderView.swift in Sources */,
 				A2B689EC22C38BB500BFF3C7 /* TodoesViewController.swift in Sources */,
 				A2B79C952035733800C50054 /* AppDelegate.swift in Sources */,
 				A2E06297214036C900E488CA /* SwiftCommonCrypto.m in Sources */,
@@ -990,6 +993,7 @@
 				A2E7EE9620CECACE005D2C6A /* ContactsViewController.swift in Sources */,
 				A272BF2B22BA3E5D0068CE84 /* TodoCollectionViewController.swift in Sources */,
 				A2F547942197F52B00182A9F /* PhotoMultiSelectionItem.swift in Sources */,
+				A27C0E4E22C5D4510065F00A /* phasset+.swift in Sources */,
 				A2C29A4D22254E6A003772AD /* view-utils.swift in Sources */,
 				A201FF7D20E64F88007116A0 /* LayoutGroup.swift in Sources */,
 			);

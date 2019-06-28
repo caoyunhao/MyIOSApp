@@ -12,11 +12,9 @@ class ImagePreviewViewController: UIViewController {
     
     private var imageScale: CGFloat = -1
     
-    var image: UIImage? {
+    var image: CYHImage! {
         didSet {
-            if let image = image {
-                imageScale = image.size.width / image.size.height
-            }
+            imageScale = image.size.width / image.size.height
         }
     }
     
@@ -24,21 +22,10 @@ class ImagePreviewViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        DLog(message: view.frame)
-        DLog(message: imageView.frame)
-        imageView.image = image
         
-        if imageScale >= 1 {
-            view.frame.size.height = view.frame.size.width / imageScale
-        }
+        preferredContentSize = CYHImageHolderView.fitParentSize(parentMaxSize: view.frame.size, imageScale: imageScale)
         
-        if 0.0 < imageScale && imageScale < 1.0 {
-            view.frame.size.width = view.frame.size.height * imageScale
-        }
-        DLog(message: view.frame)
-        DLog(message: imageView.frame)
-        
-        preferredContentSize = view.frame.size
+        imageView.image = image?.first
 
         // Do any additional setup after loading the view.
     }

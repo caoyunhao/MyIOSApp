@@ -8,10 +8,19 @@
 
 import UIKit
 
-class CYHImageView: UIView {
+class CYHImageHolderView: UIView {
     
-    @IBOutlet weak var imageView: UIImageView!
+    fileprivate var imageView: UIImageView!
     fileprivate var rotateRate_ : Int = 0
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        if imageView == nil {
+            imageView = UIImageView(frame: frame)
+            imageView.backgroundColor = .orange
+            addSubview(imageView)
+        }
+    }
     
     var rotateRate: Int {
         set {
@@ -79,6 +88,34 @@ class CYHImageView: UIView {
         }
 
         DLog(message: "imageView.frame=\(imageView.frame)")
+    }
+    
+    static func fitParentSize(parentMaxSize: CGSize, imageScale: CGFloat) -> CGSize {
+        DLog(message: "parentMaxSize: \(parentMaxSize)")
+        DLog(message: "imageScale: \(imageScale)")
+
+        let maxHeight = parentMaxSize.height
+        let maxWidth = parentMaxSize.width
+        
+        let viewScale = maxWidth / maxHeight // > 1
+        
+        var imageViewFrame = CGSize(width: maxWidth, height: maxHeight)
+        
+        if imageScale > viewScale {
+            // 更宽，需要减少高度，高度=最大宽度 / 图片比例
+            imageViewFrame.height = min(maxWidth / imageScale, maxHeight)
+//            imageViewY = (maxHeight - imageViewFrame.height) / 2
+        }
+        
+        if 0.0 < imageScale && imageScale <= viewScale {
+            // 更高，需要减少k宽度，宽度=最大高度*图片比例
+            imageViewFrame.width = min(maxHeight * imageScale, maxWidth)
+//            imageViewX = (maxWidth - imageViewFrame.width) / 2
+        }
+        
+        DLog(message: "imageViewFrame=\(imageViewFrame)")
+        
+        return imageViewFrame;
     }
     
     func rotateLeft90() {

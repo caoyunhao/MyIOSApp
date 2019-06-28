@@ -50,7 +50,8 @@ extension PhotosPickerUtils: UIImagePickerControllerDelegate, UINavigationContro
     //选择图片成功后代理
     @objc internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         //查看info对象
-        // DLog(message: "info: \(info)")
+        DLog(message: "info: \(info)")
+        DLog(message: "info.metadata: \(info[UIImagePickerControllerMediaMetadata])")
 //        if self.canEdit {
 //            //获取编辑后的图片
 //            pickedSelectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
@@ -74,7 +75,7 @@ extension PhotosPickerUtils: UIImagePickerControllerDelegate, UINavigationContro
         
         AssetsUtils.handleImageData(of: asset) { (data) in
             DLog(message: "imageAsset size: \(data.count)")
-            if let image = ImageUtils.buildImage(from: data) {
+            if let image = CYHImage(data: data) {
                 self.pickCallback?(image)
             }
         }

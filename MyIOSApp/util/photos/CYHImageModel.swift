@@ -36,13 +36,17 @@ class CYHImage: NSObject {
         """
     }
     
+    convenience init(type: CYHImageType, uiImages: [UIImage], asset: PHAsset? = nil) {
+        self.init(type: type, uiImages: uiImages, duration: Double.infinity, asset: asset)
+    }
+    
     init(type: CYHImageType, uiImages: [UIImage], duration: Double = Double.infinity, asset: PHAsset? = nil) {
         self.images = uiImages
         self.type = type
         self.duration = duration
         self.asset = asset
     }
-    
+
     init(uiImages: [UIImage], duration: Double) {
         self.images = uiImages
         if uiImages.count > 1 {
@@ -60,6 +64,23 @@ class CYHImage: NSObject {
             return UIImage(cgImage: cgImage)
         }
         self.init(uiImages: uiImages, duration: duration)
+    }
+    
+    convenience init?(data: Data) {
+        self.init(cfData: data as CFData)
+    }
+    
+    convenience init?(cfData: CFData) {
+        let options: NSDictionary = [
+            kCGImageSourceShouldCache as String: NSNumber(value: true),
+            kCGImageSourceTypeIdentifierHint as String: kUTTypeGIF
+        ]
+        
+        guard let imageSource = CGImageSourceCreateWithData(cfData, options) else {
+            return nil
+        }
+        
+        self.init(source: imageSource)
     }
     
     convenience init(source: CGImageSource) {
@@ -143,7 +164,7 @@ class CYHImage: NSObject {
     
     func saveAsGif() {
         DLog(message: "save as gif")
-        flush() { (fileUrl) in
+        flushAsTemporaryFile() { (fileUrl) in
             if let data = try? Data(contentsOf: fileUrl) {
                 PHPhotoLibrary.shared().performChanges({
                     PHAssetCreationRequest.forAsset().addResource(with: .photo, data: data, options: nil)
@@ -163,7 +184,7 @@ class CYHImage: NSObject {
         })
     }
     
-    func flush(completion: (URL) -> Void) {
-        ImageUtils.flush(images: self.images, duration: self.duration, completion: completion)
+    func flushAsTemporaryFile(completion: (URL) -> Void) {
+        ImageUtils.flushAsTemporaryFile(images: self.images, duration: self.duration, completion: completion)
     }
 }

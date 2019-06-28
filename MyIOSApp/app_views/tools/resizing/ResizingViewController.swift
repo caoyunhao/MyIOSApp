@@ -14,7 +14,7 @@ import MobileCoreServices
 class ResizingViewController: ScrollViewController {
     @IBOutlet weak var containerView: UIView!
     
-    @IBOutlet weak var imageHolderView: CYHImageView!
+    @IBOutlet weak var imageHolderView: CYHImageHolderView!
     @IBOutlet weak var editSwitch: UISwitch!
     
     @IBOutlet weak var targetWidthTextField: UITextField!
@@ -117,8 +117,8 @@ class ResizingViewController: ScrollViewController {
         let s = gifTargetFramesCountPreSecondDisplay.text
         
         let d = Double(s!)
-
-        ImageUtils.save(CYHImage(uiImages: image.images, duration: d ?? image.duration));
+        
+        CYHImage(uiImages: image.images, duration: d ?? image.duration).save()
         
         AlertUtils.biAction(vc: self, message: "保存成功", leftTitle: "转到相册", rightTitle: "我知道了", leftAction: {
             SystemUtils.openPhotos();
