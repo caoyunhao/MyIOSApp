@@ -46,15 +46,20 @@ class AssetsMovementViewController: UIViewController {
     @IBAction
     func action() {
 //        let vc = UIStoryboard(name: "AlbumsView", bundle: nil).instantiateInitialViewController() as? AlbumsViewController
-        let vc = PhotosPickerUtils.albumsViewController {
-            (assets) in
-            self.handler(assets: assets)
-        }
+//        let vc = PhotosPickerUtils.albumsViewController {
+//            (assets) in
+//            self.handler(assets: assets)
+//        }
 //        vc?.completeHandler = self.handler;
         
-        let navVC = UINavigationController(rootViewController: vc)
+//        let navVC = UINavigationController(rootViewController: vc)
         
-        self.present(navVC, animated: true)
+//        self.present(navVC, animated: true)
+        let options = NoticeHUD.Options()
+        options.autoCleanTimeInterval = 0.5
+        
+        let notice = NoticeHUD(text: "123123123", options: options)
+        notice.show()
     }
     
     @objc

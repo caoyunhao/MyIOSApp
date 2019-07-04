@@ -32,6 +32,7 @@
 		A24E7F4120D283A0004CE308 /* qrcode_border@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A24E7F4020D283A0004CE308 /* qrcode_border@2x.png */; };
 		A2533C3021330B5E00D84B55 /* security.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2533C2F21330B5E00D84B55 /* security.swift */; };
 		A259FE4120CEC2670051429C /* AutoProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A259FE4020CEC2670051429C /* AutoProtocol.swift */; };
+		A264E83922CDEFC9002998AA /* notice-HUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = A264E83822CDEFC9002998AA /* notice-HUD.swift */; };
 		A26F00AC22BA984E00AEF5E1 /* JPEG.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F00AB22BA984E00AEF5E1 /* JPEG.swift */; };
 		A26F00AE22BA98E500AEF5E1 /* QuickTimeMov.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26F00AD22BA98E500AEF5E1 /* QuickTimeMov.swift */; };
 		A26FD3F62140D94900C4D302 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = A26FD3F52140D94900C4D302 /* date.swift */; };
@@ -46,7 +47,7 @@
 		A27906A522C48BA0007C3E14 /* ImagePreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A27906A322C48BA0007C3E14 /* ImagePreviewViewController.swift */; };
 		A27906A622C48BA0007C3E14 /* ImagePreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A27906A422C48BA0007C3E14 /* ImagePreviewViewController.xib */; };
 		A279A84E20E225F40058985C /* ToolsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A279A84D20E225F40058985C /* ToolsTableViewCell.swift */; };
-		A279A85120E22F5B0058985C /* ContactsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A279A85020E22F5B0058985C /* ContactsUtil.swift */; };
+		A279A85120E22F5B0058985C /* ContactsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A279A85020E22F5B0058985C /* ContactsHelper.swift */; };
 		A279CD92213A4F8900C5EE51 /* BaseStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A279CD91213A4F8900C5EE51 /* BaseStorage.swift */; };
 		A279CD96213AB95D00C5EE51 /* LocalStorageManagerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A279CD94213AB95D00C5EE51 /* LocalStorageManagerViewController.swift */; };
 		A279CD97213AB95D00C5EE51 /* LocalStorageManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A279CD95213AB95D00C5EE51 /* LocalStorageManagerViewController.xib */; };
@@ -159,6 +160,7 @@
 		A24E7F4020D283A0004CE308 /* qrcode_border@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "qrcode_border@2x.png"; sourceTree = "<group>"; };
 		A2533C2F21330B5E00D84B55 /* security.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = security.swift; sourceTree = "<group>"; };
 		A259FE4020CEC2670051429C /* AutoProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoProtocol.swift; sourceTree = "<group>"; };
+		A264E83822CDEFC9002998AA /* notice-HUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "notice-HUD.swift"; sourceTree = "<group>"; };
 		A26F00AB22BA984E00AEF5E1 /* JPEG.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JPEG.swift; sourceTree = "<group>"; };
 		A26F00AD22BA98E500AEF5E1 /* QuickTimeMov.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickTimeMov.swift; sourceTree = "<group>"; };
 		A26FD3F52140D94900C4D302 /* date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
@@ -173,7 +175,7 @@
 		A27906A322C48BA0007C3E14 /* ImagePreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePreviewViewController.swift; sourceTree = "<group>"; };
 		A27906A422C48BA0007C3E14 /* ImagePreviewViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ImagePreviewViewController.xib; sourceTree = "<group>"; };
 		A279A84D20E225F40058985C /* ToolsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolsTableViewCell.swift; sourceTree = "<group>"; };
-		A279A85020E22F5B0058985C /* ContactsUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsUtil.swift; sourceTree = "<group>"; };
+		A279A85020E22F5B0058985C /* ContactsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsHelper.swift; sourceTree = "<group>"; };
 		A279CD91213A4F8900C5EE51 /* BaseStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseStorage.swift; sourceTree = "<group>"; };
 		A279CD94213AB95D00C5EE51 /* LocalStorageManagerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorageManagerViewController.swift; sourceTree = "<group>"; };
 		A279CD95213AB95D00C5EE51 /* LocalStorageManagerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LocalStorageManagerViewController.xib; sourceTree = "<group>"; };
@@ -584,7 +586,7 @@
 				A26FD3F52140D94900C4D302 /* date.swift */,
 				A21299732199718B007E4129 /* system.swift */,
 				A2533C2F21330B5E00D84B55 /* security.swift */,
-				A279A85020E22F5B0058985C /* ContactsUtil.swift */,
+				A279A85020E22F5B0058985C /* ContactsHelper.swift */,
 				A271C22620EB56A5003B4CEC /* alert.swift */,
 				A271C22820EB5DC7003B4CEC /* log-util.swift */,
 				A2B54DED211DFDAF00FFD2ED /* ViewControllerHelper.swift */,
@@ -694,6 +696,7 @@
 				A2B54DDD2115484000FFD2ED /* photos */,
 				A201FF7920E64DA4007116A0 /* Layout */,
 				A2D50AF02102D88E009EF79C /* notification */,
+				A264E83822CDEFC9002998AA /* notice-HUD.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -968,7 +971,7 @@
 				A2A733C321272A3C0030EF27 /* AssetsMovementViewController.swift in Sources */,
 				A2CAA52D2125DDE400342F36 /* LivePhotosConverterViewController.swift in Sources */,
 				A2E062992140380E00E488CA /* String+.swift in Sources */,
-				A279A85120E22F5B0058985C /* ContactsUtil.swift in Sources */,
+				A279A85120E22F5B0058985C /* ContactsHelper.swift in Sources */,
 				A2CAE1CC2127C1890076C2F5 /* CYHImageModel.swift in Sources */,
 				A2CA237F20E78F42002DA0DD /* Image.swift in Sources */,
 				A201FF8120E68DFB007116A0 /* LayoutUtil.swift in Sources */,
@@ -976,6 +979,7 @@
 				A279CD96213AB95D00C5EE51 /* LocalStorageManagerViewController.swift in Sources */,
 				A2249255223FB397009ACD15 /* TextFieldViewController.swift in Sources */,
 				A2417AE321D89C870034EFF2 /* view-controller.swift in Sources */,
+				A264E83922CDEFC9002998AA /* notice-HUD.swift in Sources */,
 				A2B54E01211EBCAC00FFD2ED /* AssetsUtils.swift in Sources */,
 				A2CAE1D021280BC90076C2F5 /* LivePhotoUtil.swift in Sources */,
 				A27C0E4C22C4A9AB0065F00A /* CYHImageHolderView.swift in Sources */,

@@ -9,7 +9,11 @@
 import Foundation
 import Contacts
 
-class ContactsUtil: NSObject {
+
+
+class ContactsHelper: NSObject {
+    static let shared: ContactsHelper = ContactsHelper()
+    
     var keysToFetch: [String] {
         let keys = [CNContactGivenNameKey, CNContactFamilyNameKey, CNContactPhoneticGivenNameKey, CNContactPhoneticFamilyNameKey]
         return keys
@@ -45,31 +49,33 @@ class ContactsUtil: NSObject {
         }
     }
     
-    
-    func enumerateContacts(_ handleOneContrct: @escaping (CNMutableContact) -> ()) {
+    func enumerateContacts(processing: ((CNMutableContact, Int, Int) -> ())? = nil, completeHandler: (() -> ())? = nil) {
+        checkContactStoreAuth()
         guard CNContactStore.authorizationStatus(for: .contacts) == .authorized else {
             return
         }
-        // CNContactPhoneNumbersKey
-        let keys = [CNContactFamilyNameKey, CNContactGivenNameKey, CNContactPhoneticFamilyNameKey, CNContactPhoneticGivenNameKey, CNContactPhoneNumbersKey]
         
-        let fetch = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
-        do {
-            try self.contactStore.enumerateContacts(with: fetch, usingBlock: { (contact, stop) in
+        guard let contactList = contactList() else {
+            return
+        }
+        DispatchQueue.global().async {
+            let count = contactList.count
+            for (index, contact) in contactList.enumerated() {
                 if !contact.familyName.isEmpty || !contact.givenName.isEmpty {
                     
-                    let mutableContact: CNMutableContact = contact.mutableCopy() as! CNMutableContact
-                    handleOneContrct(mutableContact)
- 
+                    let mutableContact = contact.mutableCopy() as! CNMutableContact
+                    processing?(mutableContact, index, count)
+                    
                     self.saveContact(mutableContact)
                 }
-            })
-        } catch let error as NSError {
-            DLog(message: error)
+            }
+            DispatchQueue.main.async {
+                completeHandler?()
+            }
         }
     }
 
-    private func phonetic_one(_ mutableContact: CNMutableContact) {
+    func addPhoneticAndSave(_ mutableContact: CNMutableContact) {
         var phoneticFamilyResult = ""
         var phoneticGivenResult  = ""
         // var phoneticFamilyBrief  = ""
@@ -100,36 +106,26 @@ class ContactsUtil: NSObject {
         mutableContact.setValue(phoneticGivenResult, forKey: CNContactPhoneticGivenNameKey)
     }
 
-    private func callerloc_one(_ mutableContact: CNMutableContact) {
-        var newElements: [CNLabeledValue<CNPhoneNumber>] = []
-        for labeledValue in mutableContact.phoneNumbers {
-            let originPhoneNumber = (labeledValue.value as CNPhoneNumber).stringValue
-            let phoneNumber = originPhoneNumber
-                .replacingOccurrences(of: " ", with: "")
-                .replacingOccurrences(of: "-", with: "")
-                .replacingOccurrences(of: "\u{00A0}", with: "")
-            
-            if let item = self.locationInfo[phoneNumber.prefix(7).description] {
-                let province_city = item.split(separator: "-")
-                let province = province_city[0].description
-                let city = province_city[1].description
-                DLog(message:  (province, city))
-                newElements.append(labeledValue.settingLabel("\(province) - \(city)"))
-            } else {
-                newElements.append(labeledValue)
-            }
-        }
-        mutableContact.setValue(newElements, forKey: CNContactPhoneNumbersKey)
-    }
-
-    func phonetic(){
-        self.requestContactStoreAuthorization()
-        enumerateContacts(phonetic_one)
-    }
-
-    func callerloc(){
-        self.requestContactStoreAuthorization()
-        enumerateContacts(callerloc_one)
+    func addCallerlocAndSave(_ mutableContact: CNMutableContact) {
+//        var newElements: [CNLabeledValue<CNPhoneNumber>] = []
+//        for labeledValue in mutableContact.phoneNumbers {
+//            let originPhoneNumber = (labeledValue.value as CNPhoneNumber).stringValue
+//            let phoneNumber = originPhoneNumber
+//                .replacingOccurrences(of: " ", with: "")
+//                .replacingOccurrences(of: "-", with: "")
+//                .replacingOccurrences(of: "\u{00A0}", with: "")
+//
+//            if let item = self.locationInfo[phoneNumber.prefix(7).description] {
+//                let province_city = item.split(separator: "-")
+//                let province = province_city[0].description
+//                let city = province_city[1].description
+//                DLog(message:  (province, city))
+//                newElements.append(labeledValue.settingLabel("\(province) - \(city)"))
+//            } else {
+//                newElements.append(labeledValue)
+//            }
+//        }
+//        mutableContact.setValue(newElements, forKey: CNContactPhoneNumbersKey)
     }
     
     private func antiPhonetic(_ str: String) -> Bool {
@@ -151,5 +147,29 @@ class ContactsUtil: NSObject {
         } catch {
             DLog(message: "saving Contact failed ! - \(error)")
         }
+    }
+    
+    private func contactList() -> [CNContact]? {
+        var ret = [CNContact]()
+        DLog(message: "start")
+        requestContactStoreAuthorization()
+        guard CNContactStore.authorizationStatus(for: .contacts) == .authorized else {
+            return ret
+        }
+        
+        // CNContactPhoneNumbersKey
+        let keys = [CNContactFamilyNameKey, CNContactGivenNameKey, CNContactPhoneticFamilyNameKey, CNContactPhoneticGivenNameKey, CNContactPhoneNumbersKey]
+        
+        let fetch = CNContactFetchRequest(keysToFetch: keys as [CNKeyDescriptor])
+        
+        do {
+            try CNContactStore().enumerateContacts(with: fetch, usingBlock: { (contact, stop) in
+                ret.append(contact)
+            })
+        } catch let error as NSError {
+            DLog(message: error)
+        }
+        DLog(message: "end(\(ret.count))")
+        return ret
     }
 }

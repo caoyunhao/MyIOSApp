@@ -16,84 +16,91 @@ fileprivate enum ViewControllerOpenStyle {
 
 fileprivate struct RowInfo {
     var name: String
-    var viewControllerClass: UIViewController.Type
     var description: String
-    var viewControllerClassSupplier: (() -> UIViewController)?
-    var openStyle: ViewControllerOpenStyle = .push
+    var action: (UIViewController) -> ()
 }
 
 fileprivate let phoneticViewInfo = RowInfo(
-    name: "Phonetic",
-    viewControllerClass: PhoneticAdditionViewController.self,
-    description: "为联系人添加 Phonetic 字段（该字段用于联系人排序）",
-    viewControllerClassSupplier: nil,
-    openStyle: .push
+    name: "添加 Phonetic 字段",
+    description: "该字段用于联系人排序",
+    action: { (currentViewController) in
+        let vc = CommonUtils.loadNib(ofViewControllerType: PhoneticAdditionViewController.self)
+        currentViewController.navigationController?.pushViewController(vc, animated: true)
+    }
 )
 
 fileprivate let ResizeViewInfo = RowInfo(
-    name: "Resize",
-    viewControllerClass: ResizingViewController.self,
-    description: "重置一张图片（包括 Gif）的像素级大小、翻转",
-    viewControllerClassSupplier: nil,
-    openStyle: .push
+    name: "查看、编辑",
+    description: "修改像素大小、翻转、查看详细信息",
+    action: { (currentViewController) in
+        let vc = CommonUtils.loadNib(ofViewControllerType: ResizingViewController.self)
+        currentViewController.navigationController?.pushViewController(vc, animated: true)
+    }
 )
 
 fileprivate let moveAssetsViewInfo = RowInfo(
     name: "Move Assets",
-    viewControllerClass: AssetsMovementViewController.self,
     description: "移动媒体到指定文件夹",
-    viewControllerClassSupplier: nil,
-    openStyle: .push
+    action: { (currentViewController) in
+        let vc = CommonUtils.loadNib(ofViewControllerType: AssetsMovementViewController.self)
+        currentViewController.navigationController?.pushViewController(vc, animated: true)
+    }
 )
 
 fileprivate let livePhotosViewInfo = RowInfo(
     name: "Live Photos 工具",
-    viewControllerClass: LivePhotosConverterViewController.self,
-    description: "Live Photos 和 视频 相互转换",
-    viewControllerClassSupplier: nil,
-    openStyle: .push
+    description: "Live Photos 和 视频 的相互转换",
+    action: { (currentViewController) in
+        let vc = CommonUtils.loadNib(ofViewControllerType: LivePhotosConverterViewController.self)
+        currentViewController.navigationController?.pushViewController(vc, animated: true)
+    }
 )
 
 fileprivate let gifPickerViewInfo = RowInfo(
-    name: "Gif Picker",
-    viewControllerClass: GifPickerViewController.self,
+    name: "提取 Gif",
     description: "从 GIF 里提取照片",
-    viewControllerClassSupplier: nil,
-    openStyle: .push
+    action: { (currentViewController) in
+        let vc = CommonUtils.loadNib(ofViewControllerType: GifPickerViewController.self)
+        currentViewController.navigationController?.pushViewController(vc, animated: true)
+    }
 )
 
 fileprivate let convertVideoViewInfo = RowInfo(
-    name: "Convert Video",
-    viewControllerClass: VideoConversionViewController.self,
+    name: "转为 GIF",
     description: "将视频转化为 GIF",
-    viewControllerClassSupplier: nil,
-    openStyle: .push
+    action: { (currentViewController) in
+        let vc = CommonUtils.loadNib(ofViewControllerType: VideoConversionViewController.self)
+        currentViewController.navigationController?.pushViewController(vc, animated: true)
+    }
 )
 
 fileprivate let localStorageManagerViewInfo = RowInfo(
     name: "Local Storage Manager",
-    viewControllerClass: LocalStorageManagerViewController.self,
-    description: "此软件本地存储大小",
-    viewControllerClassSupplier: nil,
-    openStyle: .push
+    description: "此软件本地存储大小，谨慎操作",
+    action: { (currentViewController) in
+        let vc = CommonUtils.loadNib(ofViewControllerType: VideoConversionViewController.self)
+        currentViewController.navigationController?.pushViewController(vc, animated: true)
+    }
 )
 
 fileprivate let developerWebsiteViewInfo = RowInfo(
     name: "Developer Website",
-    viewControllerClass: DeveloperWebsiteViewController.self,
     description: "开发者个人网站",
-    viewControllerClassSupplier: {
-        return DeveloperWebsiteViewController(url: URL(string: "https://caoyunhao.com")!)
-},
-    openStyle: .pop
+    action: { (currentViewController) in
+        let url = URL(string: "https://caoyunhao.com")!
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//        let vc = DeveloperWebsiteViewController(url: url)
+//        currentViewController.present(vc, animated: true)
+    }
 )
 
 fileprivate let deviceInformationViewInfo = RowInfo(
     name: "Device Information",
-    viewControllerClass: DeviceInformationViewController.self,
     description: "这台设备的一些基本信息",
-    viewControllerClassSupplier: nil,
-    openStyle: .push
+    action: { (currentViewController) in
+        let vc = CommonUtils.loadNib(ofViewControllerType: DeviceInformationViewController.self)
+        currentViewController.navigationController?.pushViewController(vc, animated: true)
+    }
 )
 
 class ToolsViewController: UITableViewController {
@@ -145,10 +152,6 @@ class ToolsViewController: UITableViewController {
     
     fileprivate func getRowInfo(_ section: Int, _ row: Int) -> RowInfo {
         return self.getToolViewInfoItems(section)[row]
-    }
-    
-    fileprivate func getViewControllerClass(_ section: Int, _ row: Int) -> AnyClass {
-        return self.getToolViewInfoItems(section)[row].viewControllerClass
     }
     
     override func viewDidLoad() {
@@ -205,21 +208,9 @@ class ToolsViewController: UITableViewController {
         //        let vc = (self.getStoryBoardName(indexPath.section, indexPath.row) as! UIViewController.Type)
         //            .init(nibName: self.getStoryBoardTypeName(indexPath.section, indexPath.row), bundle: Bundle.main)
         let rowInfo = getRowInfo(indexPath.section, indexPath.row)
-        let vc: UIViewController
-        if let supplier = rowInfo.viewControllerClassSupplier {
-            vc = supplier()
-        } else {
-            vc = CommonUtils.loadNib(ofViewControllerType: rowInfo.viewControllerClass )
-        }
         //        vc.title =
         
-        switch rowInfo.openStyle {
-        case .pop:
-            self.present(vc, animated: true)
-        default:
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
-        
+        rowInfo.action(self);
         
         //        self.present(vc!, animated: true)
         //        self.present(alertController,animated: true,completion: nil)
