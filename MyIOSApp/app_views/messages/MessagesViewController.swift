@@ -70,11 +70,11 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "History"
+        self.title = LocalizedStrings.PASTEBOARD_HISTORY
         self.tableView.alwaysBounceVertical = true
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.searchController = UISearchController(searchResultsController: UIViewController())
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Scan", style: .plain, target: self, action: #selector(self.left))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: LocalizedStrings.SCAN, style: .plain, target: self, action: #selector(self.left))
         
         //        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         

@@ -17,6 +17,8 @@
 		A21299742199718B007E4129 /* system.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21299732199718B007E4129 /* system.swift */; };
 		A21DE1BD212C731C00FCD407 /* MessagesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A21DE1BB212C731C00FCD407 /* MessagesViewCell.swift */; };
 		A21DE1BE212C731C00FCD407 /* MessagesViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A21DE1BC212C731C00FCD407 /* MessagesViewCell.xib */; };
+		A220917822CF0FF9001F2E75 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A220917A22CF0FF9001F2E75 /* Localizable.strings */; };
+		A220918222CF17C0001F2E75 /* LocalizedStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = A220918122CF17C0001F2E75 /* LocalizedStrings.swift */; };
 		A22435EC21D8EAF30065927E /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22435EB21D8EAF30065927E /* UIDevice+.swift */; };
 		A2249255223FB397009ACD15 /* TextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2249253223FB397009ACD15 /* TextFieldViewController.swift */; };
 		A2249256223FB397009ACD15 /* TextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2249254223FB397009ACD15 /* TextFieldViewController.xib */; };
@@ -62,6 +64,7 @@
 		A28D3CF222B75BFB00092F85 /* TodoListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A28D3CF022B75BFB00092F85 /* TodoListViewController.xib */; };
 		A28D3CF522B75C3200092F85 /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28D3CF322B75C3200092F85 /* TodoListCell.swift */; };
 		A28D3CF622B75C3200092F85 /* TodoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A28D3CF422B75C3200092F85 /* TodoListCell.xib */; };
+		A2951B2722CE6F8200FFD75E /* func-utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2951B2622CE6F8200FFD75E /* func-utils.swift */; };
 		A299D57920D5015000804371 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A299D57820D5015000804371 /* QRCodeViewController.swift */; };
 		A2A733BD21271C060030EF27 /* ResizingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A733BB21271C060030EF27 /* ResizingViewController.swift */; };
 		A2A733BE21271C060030EF27 /* ResizingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2A733BC21271C060030EF27 /* ResizingViewController.xib */; };
@@ -145,6 +148,9 @@
 		A21299732199718B007E4129 /* system.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = system.swift; sourceTree = "<group>"; };
 		A21DE1BB212C731C00FCD407 /* MessagesViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewCell.swift; sourceTree = "<group>"; };
 		A21DE1BC212C731C00FCD407 /* MessagesViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessagesViewCell.xib; sourceTree = "<group>"; };
+		A220917922CF0FF9001F2E75 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A220917B22CF10A1001F2E75 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A220918122CF17C0001F2E75 /* LocalizedStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedStrings.swift; sourceTree = "<group>"; };
 		A22435EB21D8EAF30065927E /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
 		A2249253223FB397009ACD15 /* TextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewController.swift; sourceTree = "<group>"; };
 		A2249254223FB397009ACD15 /* TextFieldViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldViewController.xib; sourceTree = "<group>"; };
@@ -190,6 +196,7 @@
 		A28D3CF022B75BFB00092F85 /* TodoListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoListViewController.xib; sourceTree = "<group>"; };
 		A28D3CF322B75C3200092F85 /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
 		A28D3CF422B75C3200092F85 /* TodoListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoListCell.xib; sourceTree = "<group>"; };
+		A2951B2622CE6F8200FFD75E /* func-utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "func-utils.swift"; sourceTree = "<group>"; };
 		A299D57820D5015000804371 /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		A2A733BB21271C060030EF27 /* ResizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizingViewController.swift; sourceTree = "<group>"; };
 		A2A733BC21271C060030EF27 /* ResizingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResizingViewController.xib; sourceTree = "<group>"; };
@@ -286,6 +293,15 @@
 				A2C29A4C22254E6A003772AD /* view-utils.swift */,
 			);
 			path = Layout;
+			sourceTree = "<group>";
+		};
+		A220918022CF176A001F2E75 /* multi-languages */ = {
+			isa = PBXGroup;
+			children = (
+				A220917A22CF0FF9001F2E75 /* Localizable.strings */,
+				A220918122CF17C0001F2E75 /* LocalizedStrings.swift */,
+			);
+			path = "multi-languages";
 			sourceTree = "<group>";
 		};
 		A2249252223FB36B009ACD15 /* text-field-view */ = {
@@ -599,6 +615,7 @@
 				A2B79C9F2035733800C50054 /* LaunchScreen.storyboard */,
 				A2B79CA22035733800C50054 /* Info.plist */,
 				A2B79C9D2035733800C50054 /* Assets.xcassets */,
+				A220918022CF176A001F2E75 /* multi-languages */,
 			);
 			path = MyIOSApp;
 			sourceTree = "<group>";
@@ -697,6 +714,7 @@
 				A201FF7920E64DA4007116A0 /* Layout */,
 				A2D50AF02102D88E009EF79C /* notification */,
 				A264E83822CDEFC9002998AA /* notice-HUD.swift */,
+				A2951B2622CE6F8200FFD75E /* func-utils.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -852,6 +870,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = A2B79C882035733800C50054;
 			productRefGroup = A2B79C922035733800C50054 /* Products */;
@@ -883,6 +902,7 @@
 				A272BF2C22BA3E5D0068CE84 /* TodoCollectionViewController.xib in Resources */,
 				A28D3CF622B75C3200092F85 /* TodoListCell.xib in Resources */,
 				A2080B632129DB78001C039A /* ImagesViewCell.xib in Resources */,
+				A220917822CF0FF9001F2E75 /* Localizable.strings in Resources */,
 				A2249256223FB397009ACD15 /* TextFieldViewController.xib in Resources */,
 				A2FE93B222AE90A900C5821D /* task_list@2x.png in Resources */,
 				A279CD9D213AC2D300C5EE51 /* DeveloperWebsiteViewController.xib in Resources */,
@@ -973,10 +993,12 @@
 				A2E062992140380E00E488CA /* String+.swift in Sources */,
 				A279A85120E22F5B0058985C /* ContactsHelper.swift in Sources */,
 				A2CAE1CC2127C1890076C2F5 /* CYHImageModel.swift in Sources */,
+				A2951B2722CE6F8200FFD75E /* func-utils.swift in Sources */,
 				A2CA237F20E78F42002DA0DD /* Image.swift in Sources */,
 				A201FF8120E68DFB007116A0 /* LayoutUtil.swift in Sources */,
 				A2A733C0212722020030EF27 /* common-utils.swift in Sources */,
 				A279CD96213AB95D00C5EE51 /* LocalStorageManagerViewController.swift in Sources */,
+				A220918222CF17C0001F2E75 /* LocalizedStrings.swift in Sources */,
 				A2249255223FB397009ACD15 /* TextFieldViewController.swift in Sources */,
 				A2417AE321D89C870034EFF2 /* view-controller.swift in Sources */,
 				A264E83922CDEFC9002998AA /* notice-HUD.swift in Sources */,
@@ -1035,6 +1057,15 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		A220917A22CF0FF9001F2E75 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A220917922CF0FF9001F2E75 /* en */,
+				A220917B22CF10A1001F2E75 /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		A2B79C9A2035733800C50054 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -1058,6 +1089,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -1117,6 +1149,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

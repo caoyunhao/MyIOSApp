@@ -11,11 +11,11 @@ import UIKit
 class AlertUtils: NSObject {
     static func simple(vc: UIViewController, message: String) {
         let alertController = UIAlertController(
-            title: "Notice",
+            title: "提示",
             message: message,
             preferredStyle: .alert)
         let okAction = UIAlertAction(
-            title: "OK",
+            title: "知道了",
             style: .default,
             handler: {
                 (action: UIAlertAction!) -> Void in
@@ -35,7 +35,7 @@ class AlertUtils: NSObject {
         rightAction: (()->Void)?
         ) {
         let alertController = UIAlertController(
-            title: "Notice",
+            title: "提示",
             message: message,
             preferredStyle: .alert)
         let leftAction = UIAlertAction(

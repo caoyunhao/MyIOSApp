@@ -78,7 +78,7 @@ fileprivate let localStorageManagerViewInfo = RowInfo(
     name: "Local Storage Manager",
     description: "此软件本地存储大小，谨慎操作",
     action: { (currentViewController) in
-        let vc = CommonUtils.loadNib(ofViewControllerType: VideoConversionViewController.self)
+        let vc = CommonUtils.loadNib(ofViewControllerType: LocalStorageManagerViewController.self)
         currentViewController.navigationController?.pushViewController(vc, animated: true)
     }
 )
@@ -87,8 +87,10 @@ fileprivate let developerWebsiteViewInfo = RowInfo(
     name: "Developer Website",
     description: "开发者个人网站",
     action: { (currentViewController) in
-        let url = URL(string: "https://caoyunhao.com")!
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        AlertUtils.biAction(vc: currentViewController, message: "将跳转至 Safari", leftTitle: "取消", rightTitle: "跳转", leftAction: nil, rightAction: {
+            let url = URL(string: "https://caoyunhao.com")!
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        })
 //        let vc = DeveloperWebsiteViewController(url: url)
 //        currentViewController.present(vc, animated: true)
     }
@@ -107,13 +109,13 @@ class ToolsViewController: UITableViewController {
     
     fileprivate var titleConfig: [[String: Any]] = [
         [
-            "title": "Contract",
+            "title": LocalizedStrings.CONTACT,
             "items": [
                 phoneticViewInfo,
             ]
         ],
         [
-            "title": "Image",
+            "title": LocalizedStrings.IMAGE,
             "items": [
                 ResizeViewInfo,
                 moveAssetsViewInfo,
@@ -122,19 +124,19 @@ class ToolsViewController: UITableViewController {
             ]
         ],
         [
-            "title": "Video",
+            "title": LocalizedStrings.VIDEO,
             "items": [
                 convertVideoViewInfo,
             ]
         ],
         [
-            "title": "Local Storage",
+            "title": LocalizedStrings.LOCAL_STORAGE,
             "items": [
                 localStorageManagerViewInfo,
             ]
         ],
         [
-            "title": "About",
+            "title": LocalizedStrings.ABOUT,
             "items": [
                 deviceInformationViewInfo,
                 developerWebsiteViewInfo,
@@ -158,7 +160,7 @@ class ToolsViewController: UITableViewController {
         super.viewDidLoad()
         DLog(message: "viewDidLoad")
         
-        self.title = "Utilities"
+        self.title = LocalizedStrings.UTILITIES
         self.navigationItem.largeTitleDisplayMode = .automatic
         self.tableView = UITableView(frame: view.frame, style: .grouped)
         self.tableView.alwaysBounceVertical = true
@@ -211,6 +213,8 @@ class ToolsViewController: UITableViewController {
         //        vc.title =
         
         rowInfo.action(self);
+        
+        tableView.deselectRow(at: indexPath, animated: true)
         
         //        self.present(vc!, animated: true)
         //        self.present(alertController,animated: true,completion: nil)

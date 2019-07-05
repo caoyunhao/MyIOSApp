@@ -50,7 +50,7 @@ class TodoListViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.title = "Todo List"
+        self.title = LocalizedStrings.TODO_LIST
         self.tableView.alwaysBounceVertical = true
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.searchController = UISearchController(searchResultsController: UIViewController())

@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
 //        self.m_monitor.load()
 //        NotificationAuthorization.request();
+//        LocalizationHelper.shared.checkLanguage()
         return true
     }
 
