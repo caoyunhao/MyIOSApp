@@ -32,7 +32,7 @@ class MainTabBarController: UITabBarController {
         moreVC.tabBarItem = UITabBarItem(tabBarSystemItem: .more, tag: 0)
         
         self.viewControllers = [
-            todoesVC,
+//            todoesVC,
             todoListVC,
             tasksVC,
             moreVC

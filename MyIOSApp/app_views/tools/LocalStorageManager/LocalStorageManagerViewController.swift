@@ -44,11 +44,11 @@ class LocalStorageManagerViewController: UIViewController {
     */
     @IBAction
     func clearAllAction() {
-        UserDefaultsStorageUtil.cleanAll()
+        UserDefaultsUtils.cleanAll()
     }
     
     @IBAction
     func clearMessagesAction() {
-        MessagesStorageUtil.clean()
+        PastboardHistory.shared.clean()
     }
 }

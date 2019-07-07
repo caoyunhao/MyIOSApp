@@ -1,20 +1,15 @@
-/* 
-  Localizable.strings
-  MyIOSApp
-
-  Created by Yunhao on 2019/7/5.
-  Copyright © 2019 Yunhao. All rights reserved.
-*/
-"NOTICE" = "提醒";
-"UTILITIES" = "工具";
-"IMAGE" = "图片";
-"VIDEO" = "视频";
-"CONTACT" = "联系人";
-"LOCAL_STORAGE" = "本地存储";
-"ABOUT" = "关于";
-"PASTEBOARD_HISTORY" = "粘贴板历史";
-"SCAN" = "扫描";
-"TODO_LIST" = "待办清单";
 "CANCEL" = "取消";
 "OK" = "好的";
+"CLOSE" = "关闭";
+"NOTICE" = "提示";
 "JUMP" = "跳转";
+"SCAN" = "扫描";
+"ABLUM" = "相册";
+"TODO_LIST" = "待办清单";
+"PASTEBOARD_HISTORY" = "粘贴板历史";
+"UTILITIES" = "工具";
+"CONTACT" = "联系人";
+"IMAGE" = "图片";
+"VIDEO" = "视频";
+"LOCAL_STORAGE" = "本地存储";
+"ABOUT" = "关于";

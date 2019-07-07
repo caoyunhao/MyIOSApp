@@ -48,7 +48,7 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
     
     let keyOfStorage = "messages"
     
-    var messgaes:[MessageItem] = []
+    var histories:[MessageItem] = []
     
     @objc
     func handleRefresh(sender: NSNotification) {
@@ -57,7 +57,7 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
     }
     
     func refreshingData() {
-        messgaes = MessagesStorageUtil.data()
+        histories = PastboardHistory.shared.data.reversed()
         tableView.reloadData()
     }
     
@@ -80,11 +80,10 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
         
         self.tableView.register(UINib(nibName: cellIdentifier, bundle: Bundle.main), forCellReuseIdentifier: cellIdentifier)
         
+        refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(self.handleRefresh), for: UIControlEvents.valueChanged)
-        
-        
-        
-        messgaes = MessagesStorageUtil.data()
+
+        histories = PastboardHistory.shared.data.reversed()
         
         DLog(message: "frame=\(view.frame)")
         
@@ -118,14 +117,14 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return messgaes.count
+        return histories.count
     }
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! MessagesViewCell
         
-        cell.message = messgaes[indexPath.row] as MessageItem
+        cell.message = histories[indexPath.row] as MessageItem
         
         //注册3D Touch
         registerForPreviewing(with: self, sourceView: cell.contentView)
@@ -209,7 +208,7 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
         let action = UIContextualAction(style: .destructive, title: "Delete") { (action, view, handler) in
             //            self.removeItem(at: indexPath)
             handler(true)
-            MessagesStorageUtil.remove(message: (tableView.cellForRow(at: indexPath) as! MessagesViewCell).message)
+            PastboardHistory.shared.remove(message: (tableView.cellForRow(at: indexPath) as! MessagesViewCell).message)
         }
         
         let configuration = UISwipeActionsConfiguration(actions: [action])

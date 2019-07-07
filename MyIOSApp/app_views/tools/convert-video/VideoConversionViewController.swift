@@ -46,7 +46,7 @@ class VideoConversionViewController: ScrollViewController {
     @IBAction
     func toGifAction() {
         
-        let vc = PhotosPickerUtils.albumsViewController {
+        let vc = PhotosPicker.albumsViewController {
             (assets) in
             self.handler(assets: assets)
         }

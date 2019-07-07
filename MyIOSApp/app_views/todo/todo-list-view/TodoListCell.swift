@@ -22,10 +22,10 @@ class TodoListCell: UITableViewCell {
     override var frame: CGRect {
         set {
             var frame = newValue
-            frame.origin.x += margin;
+//            frame.origin.x += margin;
             frame.origin.y += margin;
             frame.size.height -= margin;
-            frame.size.width -= margin * 2;
+//            frame.size.width -= margin * 2;
             super.frame = frame
         }
         get {

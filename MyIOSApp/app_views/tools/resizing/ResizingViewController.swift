@@ -56,7 +56,7 @@ class ResizingViewController: ScrollViewController {
     
     fileprivate var rotateRate: Int = 0
     
-    private var photosHelper: PhotosPickerUtils!
+    private var photosHelper: PhotosPicker!
     
     private var targetSize: CGSize? {
         return CGSize(width: Int(targetWidthTextField.text!)!, height: Int(targetHeightTextField.text!)!)
@@ -87,7 +87,7 @@ class ResizingViewController: ScrollViewController {
         ConstraintUtil.alignCompletely(self.contentView, child: containerView)
         
         
-        photosHelper = PhotosPickerUtils(vc: self)
+        photosHelper = PhotosPicker(vc: self)
     }
     
     override func viewDidLayoutSubviews() {

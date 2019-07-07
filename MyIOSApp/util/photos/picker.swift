@@ -10,8 +10,8 @@ import UIKit
 import Photos
 import MobileCoreServices
 
-class PhotosPickerUtils: NSObject {
-    var pickCallback: ((_ image: CYHImage) -> Void)?
+class PhotosPicker: NSObject {
+    var callback: ((_ image: CYHImage) -> Void)?
     
     var vc: UIViewController
     
@@ -30,7 +30,7 @@ class PhotosPickerUtils: NSObject {
         PHPhotoLibrary.requestAuthorization({(status) in
             
         })
-        self.pickCallback = completion
+        self.callback = completion
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
  
             let picker = UIImagePickerController()
@@ -46,7 +46,7 @@ class PhotosPickerUtils: NSObject {
     }
 }
 
-extension PhotosPickerUtils: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension PhotosPicker: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     //选择图片成功后代理
     @objc internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         //查看info对象
@@ -77,7 +77,7 @@ extension PhotosPickerUtils: UIImagePickerControllerDelegate, UINavigationContro
             DLog(message: "imageAsset size: \(data.count)")
             if let image = CYHImage(data: data) {
                 image.asset = asset
-                self.pickCallback?(image)
+                self.callback?(image)
             }
         }
     }

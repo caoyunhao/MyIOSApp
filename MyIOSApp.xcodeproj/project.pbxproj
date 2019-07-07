@@ -22,7 +22,7 @@
 		A22435EC21D8EAF30065927E /* UIDevice+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A22435EB21D8EAF30065927E /* UIDevice+.swift */; };
 		A2249255223FB397009ACD15 /* TextFieldViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2249253223FB397009ACD15 /* TextFieldViewController.swift */; };
 		A2249256223FB397009ACD15 /* TextFieldViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2249254223FB397009ACD15 /* TextFieldViewController.xib */; };
-		A2288830212DC32A0099F1CF /* MessagesStorageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A228882F212DC32A0099F1CF /* MessagesStorageUtil.swift */; };
+		A2288830212DC32A0099F1CF /* messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = A228882F212DC32A0099F1CF /* messages.swift */; };
 		A2417AD921D7A4730034EFF2 /* GifPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2417AD721D7A4730034EFF2 /* GifPickerViewController.swift */; };
 		A2417ADA21D7A4730034EFF2 /* GifPickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2417AD821D7A4730034EFF2 /* GifPickerViewController.xib */; };
 		A2417ADC21D7A50B0034EFF2 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2417ADB21D7A50B0034EFF2 /* ScrollViewController.swift */; };
@@ -65,6 +65,10 @@
 		A28D3CF522B75C3200092F85 /* TodoListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A28D3CF322B75C3200092F85 /* TodoListCell.swift */; };
 		A28D3CF622B75C3200092F85 /* TodoListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A28D3CF422B75C3200092F85 /* TodoListCell.xib */; };
 		A2951B2722CE6F8200FFD75E /* func-utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2951B2622CE6F8200FFD75E /* func-utils.swift */; };
+		A298960222D215D800081AC6 /* qr-utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = A298960122D215D800081AC6 /* qr-utils.swift */; };
+		A298960422D21BA400081AC6 /* multi-languages.py in Resources */ = {isa = PBXBuildFile; fileRef = A298960322D21BA400081AC6 /* multi-languages.py */; };
+		A298960622D2206600081AC6 /* multi-languages.csv in Resources */ = {isa = PBXBuildFile; fileRef = A298960522D2206600081AC6 /* multi-languages.csv */; };
+		A298960822D221DB00081AC6 /* localization-helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A298960722D221DB00081AC6 /* localization-helper.swift */; };
 		A299D57920D5015000804371 /* QRCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A299D57820D5015000804371 /* QRCodeViewController.swift */; };
 		A2A733BD21271C060030EF27 /* ResizingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2A733BB21271C060030EF27 /* ResizingViewController.swift */; };
 		A2A733BE21271C060030EF27 /* ResizingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2A733BC21271C060030EF27 /* ResizingViewController.xib */; };
@@ -109,7 +113,7 @@
 		A2E06297214036C900E488CA /* SwiftCommonCrypto.m in Sources */ = {isa = PBXBuildFile; fileRef = A2E06296214036C900E488CA /* SwiftCommonCrypto.m */; };
 		A2E062992140380E00E488CA /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E062982140380E00E488CA /* String+.swift */; };
 		A2E7EE9620CECACE005D2C6A /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E7EE9520CECACE005D2C6A /* ContactsViewController.swift */; };
-		A2E8F9E7212F1605009CA6D0 /* UserDefaultsStorageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E8F9E6212F1605009CA6D0 /* UserDefaultsStorageUtil.swift */; };
+		A2E8F9E7212F1605009CA6D0 /* user-default-utilsl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E8F9E6212F1605009CA6D0 /* user-default-utilsl.swift */; };
 		A2F3402F219716020013A76D /* SimpleGroupTableConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F3402E219716020013A76D /* SimpleGroupTableConfig.swift */; };
 		A2F547942197F52B00182A9F /* PhotoMultiSelectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F547932197F52B00182A9F /* PhotoMultiSelectionItem.swift */; };
 		A2FE93A522AE639700C5821D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE93A422AE639700C5821D /* MainTabBarController.swift */; };
@@ -154,7 +158,7 @@
 		A22435EB21D8EAF30065927E /* UIDevice+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+.swift"; sourceTree = "<group>"; };
 		A2249253223FB397009ACD15 /* TextFieldViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldViewController.swift; sourceTree = "<group>"; };
 		A2249254223FB397009ACD15 /* TextFieldViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextFieldViewController.xib; sourceTree = "<group>"; };
-		A228882F212DC32A0099F1CF /* MessagesStorageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesStorageUtil.swift; sourceTree = "<group>"; };
+		A228882F212DC32A0099F1CF /* messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = messages.swift; sourceTree = "<group>"; };
 		A2417AD721D7A4730034EFF2 /* GifPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifPickerViewController.swift; sourceTree = "<group>"; };
 		A2417AD821D7A4730034EFF2 /* GifPickerViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GifPickerViewController.xib; sourceTree = "<group>"; };
 		A2417ADB21D7A50B0034EFF2 /* ScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +201,10 @@
 		A28D3CF322B75C3200092F85 /* TodoListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListCell.swift; sourceTree = "<group>"; };
 		A28D3CF422B75C3200092F85 /* TodoListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TodoListCell.xib; sourceTree = "<group>"; };
 		A2951B2622CE6F8200FFD75E /* func-utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "func-utils.swift"; sourceTree = "<group>"; };
+		A298960122D215D800081AC6 /* qr-utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "qr-utils.swift"; sourceTree = "<group>"; };
+		A298960322D21BA400081AC6 /* multi-languages.py */ = {isa = PBXFileReference; lastKnownFileType = text.script.python; path = "multi-languages.py"; sourceTree = "<group>"; };
+		A298960522D2206600081AC6 /* multi-languages.csv */ = {isa = PBXFileReference; lastKnownFileType = text; path = "multi-languages.csv"; sourceTree = "<group>"; };
+		A298960722D221DB00081AC6 /* localization-helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "localization-helper.swift"; sourceTree = "<group>"; };
 		A299D57820D5015000804371 /* QRCodeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRCodeViewController.swift; sourceTree = "<group>"; };
 		A2A733BB21271C060030EF27 /* ResizingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResizingViewController.swift; sourceTree = "<group>"; };
 		A2A733BC21271C060030EF27 /* ResizingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ResizingViewController.xib; sourceTree = "<group>"; };
@@ -248,7 +256,7 @@
 		A2E06296214036C900E488CA /* SwiftCommonCrypto.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SwiftCommonCrypto.m; sourceTree = "<group>"; };
 		A2E062982140380E00E488CA /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		A2E7EE9520CECACE005D2C6A /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
-		A2E8F9E6212F1605009CA6D0 /* UserDefaultsStorageUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStorageUtil.swift; sourceTree = "<group>"; };
+		A2E8F9E6212F1605009CA6D0 /* user-default-utilsl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "user-default-utilsl.swift"; sourceTree = "<group>"; };
 		A2F3402E219716020013A76D /* SimpleGroupTableConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleGroupTableConfig.swift; sourceTree = "<group>"; };
 		A2F547932197F52B00182A9F /* PhotoMultiSelectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMultiSelectionItem.swift; sourceTree = "<group>"; };
 		A2FE93A422AE639700C5821D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -300,6 +308,9 @@
 			children = (
 				A220917A22CF0FF9001F2E75 /* Localizable.strings */,
 				A220918122CF17C0001F2E75 /* LocalizedStrings.swift */,
+				A298960322D21BA400081AC6 /* multi-languages.py */,
+				A298960522D2206600081AC6 /* multi-languages.csv */,
+				A298960722D221DB00081AC6 /* localization-helper.swift */,
 			);
 			path = "multi-languages";
 			sourceTree = "<group>";
@@ -316,8 +327,8 @@
 		A228882E212DC3110099F1CF /* storage */ = {
 			isa = PBXGroup;
 			children = (
-				A228882F212DC32A0099F1CF /* MessagesStorageUtil.swift */,
-				A2E8F9E6212F1605009CA6D0 /* UserDefaultsStorageUtil.swift */,
+				A228882F212DC32A0099F1CF /* messages.swift */,
+				A2E8F9E6212F1605009CA6D0 /* user-default-utilsl.swift */,
 			);
 			path = storage;
 			sourceTree = "<group>";
@@ -715,6 +726,7 @@
 				A2D50AF02102D88E009EF79C /* notification */,
 				A264E83822CDEFC9002998AA /* notice-HUD.swift */,
 				A2951B2622CE6F8200FFD75E /* func-utils.swift */,
+				A298960122D215D800081AC6 /* qr-utils.swift */,
 			);
 			path = util;
 			sourceTree = "<group>";
@@ -898,6 +910,7 @@
 				A2B689E922C386A500BFF3C7 /* TodoCollectionViewCell.xib in Resources */,
 				A2CAE1E221287CB30076C2F5 /* AlbumsViewController.xib in Resources */,
 				A2A733BE21271C060030EF27 /* ResizingViewController.xib in Resources */,
+				A298960622D2206600081AC6 /* multi-languages.csv in Resources */,
 				A24E7F4120D283A0004CE308 /* qrcode_border@2x.png in Resources */,
 				A272BF2C22BA3E5D0068CE84 /* TodoCollectionViewController.xib in Resources */,
 				A28D3CF622B75C3200092F85 /* TodoListCell.xib in Resources */,
@@ -905,6 +918,7 @@
 				A220917822CF0FF9001F2E75 /* Localizable.strings in Resources */,
 				A2249256223FB397009ACD15 /* TextFieldViewController.xib in Resources */,
 				A2FE93B222AE90A900C5821D /* task_list@2x.png in Resources */,
+				A298960422D21BA400081AC6 /* multi-languages.py in Resources */,
 				A279CD9D213AC2D300C5EE51 /* DeveloperWebsiteViewController.xib in Resources */,
 				A2B689EF22C3A98B00BFF3C7 /* QuickActions_Confirmation.png in Resources */,
 				A2A733C421272A3C0030EF27 /* AssetsMovementViewController.xib in Resources */,
@@ -953,8 +967,8 @@
 				A2A733C8212734C50030EF27 /* PhoneticAdditionViewController.swift in Sources */,
 				A2417ADC21D7A50B0034EFF2 /* ScrollViewController.swift in Sources */,
 				A2B54DF6211EAC8000FFD2ED /* AlbumsViewCell.swift in Sources */,
-				A2288830212DC32A0099F1CF /* MessagesStorageUtil.swift in Sources */,
-				A2E8F9E7212F1605009CA6D0 /* UserDefaultsStorageUtil.swift in Sources */,
+				A2288830212DC32A0099F1CF /* messages.swift in Sources */,
+				A2E8F9E7212F1605009CA6D0 /* user-default-utilsl.swift in Sources */,
 				A28B883720CD65460012BC19 /* AutoPhoto.swift in Sources */,
 				A2FE93A522AE639700C5821D /* MainTabBarController.swift in Sources */,
 				A21196A820E4C88300B4D40D /* NSRange.swift in Sources */,
@@ -1003,6 +1017,7 @@
 				A2417AE321D89C870034EFF2 /* view-controller.swift in Sources */,
 				A264E83922CDEFC9002998AA /* notice-HUD.swift in Sources */,
 				A2B54E01211EBCAC00FFD2ED /* AssetsUtils.swift in Sources */,
+				A298960222D215D800081AC6 /* qr-utils.swift in Sources */,
 				A2CAE1D021280BC90076C2F5 /* LivePhotoUtil.swift in Sources */,
 				A27C0E4C22C4A9AB0065F00A /* CYHImageHolderView.swift in Sources */,
 				A2B689EC22C38BB500BFF3C7 /* TodoesViewController.swift in Sources */,
@@ -1017,6 +1032,7 @@
 				A2D50AF22102D8C5009EF79C /* authorizaion.swift in Sources */,
 				A2FE93A922AE75C600C5821D /* MessagesViewController.swift in Sources */,
 				A2E7EE9620CECACE005D2C6A /* ContactsViewController.swift in Sources */,
+				A298960822D221DB00081AC6 /* localization-helper.swift in Sources */,
 				A272BF2B22BA3E5D0068CE84 /* TodoCollectionViewController.swift in Sources */,
 				A2F547942197F52B00182A9F /* PhotoMultiSelectionItem.swift in Sources */,
 				A27C0E4E22C5D4510065F00A /* phasset+.swift in Sources */,

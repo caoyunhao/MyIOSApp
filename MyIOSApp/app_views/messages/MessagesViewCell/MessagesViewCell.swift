@@ -28,7 +28,7 @@ class MessagesViewCell: UITableViewCell {
     }
 
     func changeFlagState() {
-        message = MessagesStorageUtil.changeStatus(of: message)
+        message = PastboardHistory.shared.changeStatus(of: message)
     }
     
     override func awakeFromNib() {

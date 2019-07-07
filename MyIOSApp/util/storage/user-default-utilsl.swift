@@ -8,7 +8,7 @@
 
 import Foundation
 
-class UserDefaultsStorageUtil {
+class UserDefaultsUtils {
     
     static func put(dictionaryName name: String, key: String, object: BaseStorage) {
         let uuid = save(object: object)

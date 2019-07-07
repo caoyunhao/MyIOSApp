@@ -32,7 +32,7 @@ class GifPickerViewController: ScrollViewController {
     @IBAction
     func selectAction() {
         
-        let vc = PhotosPickerUtils.albumsViewController {
+        let vc = PhotosPicker.albumsViewController {
             (assets) in
             self.handler(assets: assets)
         }

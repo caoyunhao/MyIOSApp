@@ -48,7 +48,7 @@ class LivePhotosConverterViewController: UIViewController {
     @IBAction
     func action() {
 //        let vc = UIStoryboard(name: "AlbumsView", bundle: nil).instantiateInitialViewController() as? AlbumsViewController
-        let vc = PhotosPickerUtils.albumsViewController {
+        let vc = PhotosPicker.albumsViewController {
             (assets) in
             self.handler(assets: assets)
         }
@@ -79,7 +79,7 @@ class LivePhotosConverterViewController: UIViewController {
     
     @IBAction
     func toLivePhotoAction() {
-        let vc = PhotosPickerUtils.albumsViewController {
+        let vc = PhotosPicker.albumsViewController {
             (assets) in
             self.toLivePhotoHandler(assets: assets)
         }

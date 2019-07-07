@@ -30,7 +30,7 @@ class SwipeItemConfig {
 }
 
 class TodoListViewController: UITableViewController {
-    var margin: CGFloat = 10.0
+    var margin: CGFloat = 10
     var cornerRadius: CGFloat! = 20
     
     var config = SwipeConfig()
@@ -97,12 +97,12 @@ class TodoListViewController: UITableViewController {
             }) {
                 DLog(message: "subView frame: \(swipeView.frame)")
                 
-                switch swipeContext.direction {
-                case .fromLeft:
-                    swipeView.frame.origin.x -= margin
-                case .fromRight:
-                    swipeView.frame.origin.x += margin
-                }
+//                switch swipeContext.direction {
+//                case .fromLeft:
+//                    swipeView.frame.origin.x -= margin
+//                case .fromRight:
+//                    swipeView.frame.origin.x += margin
+//                }
                 DLog(message: "subView final frame: \(swipeView.frame)")
 //                swipeView.backgroundColor = .clear
                 swipeView.layer.masksToBounds = true
@@ -141,7 +141,7 @@ class TodoListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return 10
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

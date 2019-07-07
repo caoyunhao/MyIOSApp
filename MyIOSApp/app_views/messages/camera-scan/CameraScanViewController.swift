@@ -23,6 +23,8 @@ class CameraScanViewController: UIViewController {
     private lazy var input : AVCaptureDeviceInput? = nil
     private lazy var session : AVCaptureSession = AVCaptureSession()
     
+    private var photosPicker: PhotosPicker!;
+    
     var callback: ((String) -> Void)?
     //  展示界面
     //    var previewLayer: AVCaptureVideoPreviewLayer!
@@ -65,7 +67,8 @@ class CameraScanViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Scan"
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Close", style: .plain, target: self, action: #selector(self.close(sender:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: LocalizedStrings.CLOSE, style: .plain, target: self, action: #selector(self.close(sender:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: LocalizedStrings.ABLUM, style: .plain, target: self, action: #selector(self.openAblum(sender:)))
         
 //        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor : UIColor.white]
 //        self.navigationController?.navigationBar.tintColor = UIColor.white
@@ -75,7 +78,16 @@ class CameraScanViewController: UIViewController {
         self.navigationController?.navigationBar.shadowImage = UIImage()
 //        let statusBar = UIApplication.shared.value(forKey: "statusBar") as! UIView
 //        statusBar.backgroundColor = UIColor(displayP3Red: 0, green: 0, blue: 0, alpha: 0.5)
+        photosPicker = PhotosPicker(vc: self)
+        
         scanQRCode()
+    }
+
+    @IBAction private func openAblum(sender: AnyObject) {
+        photosPicker.pick(completion: { image in
+            let text = FindFirstQRCode(cyhImage: image)
+            self.infomationTextView.text = text ?? "nil"
+        })
     }
     
     override func viewDidAppear(_ animated: Bool) {
