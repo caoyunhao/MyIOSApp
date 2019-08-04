@@ -47,20 +47,20 @@ class ViewController: UIViewController {
             let image = UIImage.init(cgImage: cgImage!)
             
             cmTimeCurrent += Float64(1)
-            print(tmpTime) //帧图片存入到destination
+            DLog(tmpTime) //帧图片存入到destination
             CGImageDestinationAddImage(destination!, image.cgImage! , frameProperties)
             CGImageDestinationSetProperties(destination!, gifProperties) //保存gif图像
             let flag = CGImageDestinationFinalize(destination!)
             destination = nil
-            print(path)
-            print(flag)
+            DLog(path)
+            DLog(flag)
         }
     }
         
         /* func saveToFile(image:UIImage,index:Int){
          let myDirectory:String = NSHomeDirectory() + "/Documents" l
          et path:String = myDirectory + "//(index).png"
-         print(path)
+         DLog(path)
          let data = UIImagePNGRepresentation(image) as NSData?
          data?.write(toFile: path, atomically: true) }
          
@@ -79,7 +79,7 @@ class ViewController: UIViewController {
          CGImageDestinationSetProperties(destination!, gifProperties)
          let flag = CGImageDestinationFinalize(destination!)
          destination = nil
-         print(path)
-         print(flag) }
+         DLog(path)
+         DLog(flag) }
          */
 }

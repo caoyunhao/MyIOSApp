@@ -46,29 +46,26 @@ class AssetsMovementViewController: UIViewController {
     @IBAction
     func action() {
 //        let vc = UIStoryboard(name: "AlbumsView", bundle: nil).instantiateInitialViewController() as? AlbumsViewController
-//        let vc = PhotosPickerUtils.albumsViewController {
-//            (assets) in
-//            self.handler(assets: assets)
-//        }
-//        vc?.completeHandler = self.handler;
+        let vc = PhotosPicker.albumsViewController {
+            (assets) in
+            self.handler(assets: assets)
+        }
+        vc.completeHandler = self.handler;
         
-//        let navVC = UINavigationController(rootViewController: vc)
+        let navVC = UINavigationController(rootViewController: vc)
         
-//        self.present(navVC, animated: true)
-        let options = NoticeHUD.Options()
-        options.autoCleanTimeInterval = 0.5
-        
-        let notice = NoticeHUD(text: "123123123", options: options)
-        notice.show()
+        self.present(navVC, animated: true)
     }
     
     @objc
     func handler(assets: [PHAsset]) {
-//        DLog(message: "move \(assets.count) photos.")
+        DLog("move \(assets.count) photos.")
 //        AssetsUtils.doViaLivePhotoSource(livePhotoAsset: assets[0], imageHandler: {
 //            (image) in
 //            AssetsUtils.save(image: image)
 //        })
-        //        AssetsUtils.move(assets: assets, titleOfTargetAlbum: "ZZZ", delete: true)
+        
+        AssetsUtils.move(assets: assets, titleOfTargetAlbum: "123123123", delete: false)
+//                AssetsUtils.move(assets: assets, titleOfTargetAlbum: "ZZZ", delete: true)
     }
 }

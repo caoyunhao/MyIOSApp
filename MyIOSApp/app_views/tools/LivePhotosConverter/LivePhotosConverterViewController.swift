@@ -63,7 +63,7 @@ class LivePhotosConverterViewController: UIViewController {
     
     @objc
     func handler(assets: [PHAsset]) {
-        DLog(message: "handle \(assets.count) photos.")
+        DLog("handle \(assets.count) photos.")
         let total = assets.count
         var liveCnt: Int = 0
         
@@ -74,7 +74,7 @@ class LivePhotosConverterViewController: UIViewController {
             }
         }
 
-        AlertUtils.simple(vc: self, message: "完成 \(liveCnt)/\(total)")
+        AlertUtils.simple(vc: self, message: "\(LocalizedStrings.DONE) \(liveCnt)/\(total)")
     }
     
     @IBAction
@@ -100,12 +100,12 @@ class LivePhotosConverterViewController: UIViewController {
             
             PHImageManager.default().requestAVAsset(forVideo: asset, options: options, resultHandler: { (avAsset, audioMix, info) in
                 if let avAsset = avAsset {
-                    DLog(message: "读取视频成功")
+                    DLog("读取视频成功")
                     SaveLivePhotosToLibary(avAsset: avAsset) { (success, error) in
                         if success {
-                            AlertUtils.simple(vc: self, message: "完成")
+                            AlertUtils.simple(vc: self, message: LocalizedStrings.SUCCESS)
                         } else{
-                            AlertUtils.simple(vc: self, message: "失败：\(String(describing: error))")
+                            AlertUtils.simple(vc: self, message: "\(LocalizedStrings.FAIL)：\(String(describing: error))")
                         }
                     }
                 } else {

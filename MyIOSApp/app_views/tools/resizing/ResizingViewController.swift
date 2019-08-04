@@ -159,7 +159,7 @@ class ResizingViewController: ScrollViewController {
     }
     
     func handleNew(image: CYHImage) {
-        DLog(message: "handleNew")
+        DLog("handleNew")
         setImageView(image: image)
         
         let width = String(format: "%d", Int((image.size.width)))
@@ -177,11 +177,11 @@ class ResizingViewController: ScrollViewController {
     
     func compute() {
         if self.checkImageConvertedSize() {
-            DLog(message: "Converted Size: \(self.imageConvertedSize.debugDescription)")
+            DLog("Converted Size: \(self.imageConvertedSize.debugDescription)")
             self.convertedImage = self.selectedImage.e_resize(size: self.imageConvertedSize!)
             self.computed = true
         } else {
-            DLog(message: "checkImageConvertedSize = false")
+            DLog("checkImageConvertedSize = false")
         }
     }
     
@@ -224,7 +224,7 @@ class ResizingViewController: ScrollViewController {
     }
     
     func setImageView(image: CYHImage) {
-        DLog(message: "Set CYHImage")
+        DLog("Set CYHImage")
         self.imageHolderView.image = image
     }
     
@@ -323,7 +323,7 @@ class ResizingViewController: ScrollViewController {
 //        ConstraintUtil.alignRight(rotate90Button, to: contentView, where: contentView, offset: 20)
 //
 //        let labelWidth = (contentView.frame.size.width - imageConvertedTextLabel.frame.size.width - 120) / 2.0
-//        DLog(message: labelWidth)
+//        DLog(labelWidth)
 //
 //        // origin label
 //        ConstraintUtil.align(imageOriginTextLabel, below: selectImageButton, where: contentView, offset: 20)
@@ -381,9 +381,9 @@ class ResizingViewController: ScrollViewController {
 //        contentView.canCancelContentTouches = true
 //        contentView.delaysContentTouches = false
 //
-//        DLog(message: "scrollView.frame.size  \(contentView.frame.size)")
-//        DLog(message: "scrollView.contentSize \(contentView.contentSize)")
-//        DLog(message: "contentView.frame.size \(contentView.frame.size)")
+//        DLog("scrollView.frame.size  \(contentView.frame.size)")
+//        DLog("scrollView.contentSize \(contentView.contentSize)")
+//        DLog("contentView.frame.size \(contentView.frame.size)")
 //    }
 
     override func didReceiveMemoryWarning() {

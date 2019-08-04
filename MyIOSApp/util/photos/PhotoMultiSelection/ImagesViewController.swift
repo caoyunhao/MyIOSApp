@@ -129,7 +129,7 @@ class ImagesViewController: UIViewController {
     func finishSelect() {
         //取出已选择的图片资源
         if let indexPaths = self.collectionView?.indexPathsForSelectedItems {
-            DLog(message: "已选择的: \(indexPaths)")
+            DLog("已选择的: \(indexPaths)")
             //调用回调函数
             self.navigationController?.dismiss(animated: true, completion: {
                 self.completeHandler?(indexPaths.map({ (indexPath) -> Int in
@@ -145,10 +145,10 @@ class ImagesViewController: UIViewController {
     
     @objc
     fileprivate func handlePan(pan: UIPanGestureRecognizer) {
-        DLog(message: pan)
+        DLog(pan)
         self.collectionView.visibleCells.forEach { (cell) in
 //            let point = pan.accessibilityActivationPoint
-//            DLog(message: point)
+//            DLog(point)
         }
     }
     
@@ -220,25 +220,25 @@ extension ImagesViewController: UIViewControllerPreviewingDelegate {
         let vc = CommonUtils.loadNib(ofViewControllerType: ImagePreviewViewController.self) as! ImagePreviewViewController
         
         if let asset = assetsFetchResults?.object(at: indexPath.row) {
-            DLog(message: 3344)
+            DLog(3344)
             AssetsUtils.handleImageDataSynchronous(of: asset) { (data) in
-                DLog(message: 444)
+                DLog(444)
                 if let image = CYHImage(data: data) {
                     vc.image = image
-                    DLog(message: 555)
+                    DLog(555)
                 }
             }
         } else {
             if let image = cell.imageView.image {
-                DLog(message: 333)
+                DLog(333)
                 vc.image = CYHImage(uiImage: image)
             } else {
                 AlertUtils.simple(vc: self, message: "error")
             }
             
-            DLog(message: 666)
+            DLog(666)
         }
-        DLog(message: 100000)
+        DLog(100000)
         
         return vc
     }

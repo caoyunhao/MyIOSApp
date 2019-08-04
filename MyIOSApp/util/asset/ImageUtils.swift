@@ -33,24 +33,24 @@ extension UIImage {
 class ImageUtils {
     
 //    static func saveAsGif(_ image: CYHImage) {
-//        DLog(message: "save as gif")
+//        DLog("save as gif")
 //        flush(image: image) { (fileUrl) in
 //            if let data = try? Data(contentsOf: fileUrl) {
 //                PHPhotoLibrary.shared().performChanges({
 //                    PHAssetCreationRequest.forAsset().addResource(with: .photo, data: data, options: nil)
 //                }, completionHandler: {success, error in
-//                    DLog(message: "success: \(success), error: \(error.debugDescription)")
+//                    DLog("success: \(success), error: \(error.debugDescription)")
 //                })
 //            }
 //        }
 //    }
 //
 //    static func saveAsSimple(_ image: CYHImage) {
-//        DLog(message: "save as simple")
+//        DLog("save as simple")
 //        PHPhotoLibrary.shared().performChanges({
 //            PHAssetChangeRequest.creationRequestForAsset(from: image.first)
 //        }, completionHandler: {success, error in
-//            DLog(message: "success: \(success), error: \(error.debugDescription)")
+//            DLog("success: \(success), error: \(error.debugDescription)")
 //        })
 //    }
     
@@ -58,7 +58,7 @@ class ImageUtils {
         
         let path = AssetsUtils.generateTemporaryFile()
         
-        DLog(message: "path: \(path.debugDescription)")
+        DLog("path: \(path.debugDescription)")
         let fileProperties = [kCGImagePropertyGIFDictionary as String: [kCGImagePropertyGIFLoopCount as String: 0]]
         let gifProperties = [
             kCGImagePropertyGIFDictionary as String:

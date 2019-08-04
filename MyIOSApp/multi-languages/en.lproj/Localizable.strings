@@ -1,6 +1,10 @@
 "CANCEL" = "Cancel";
 "OK" = "OK";
+"I_GOT_IT" = "I got it";
 "CLOSE" = "Close";
+"DONE" = "Done";
+"SUCCESS" = "Success";
+"FAIL" = "Fail";
 "NOTICE" = "Notice";
 "JUMP" = "Jump";
 "SCAN" = "Scan";

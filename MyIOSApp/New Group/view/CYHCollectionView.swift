@@ -52,7 +52,7 @@ class CYHCollectionView: UICollectionView {
         //右内边距做-0.001特殊处理，否则在plus设备下可能摆不下
         let paddingRight = remainder - paddingLeft - 0.001
         
-//        DLog(message: "cellSpace=\(cellSpace), spaceNum=\(spaceNum), widthTotal=\(widthTotal), itemWidth=\(itemWidth), remainder=\(remainder), paddingLeft=\(paddingLeft), paddingRight=\(paddingRight)")
+//        DLog("cellSpace=\(cellSpace), spaceNum=\(spaceNum), widthTotal=\(widthTotal), itemWidth=\(itemWidth), remainder=\(remainder), paddingLeft=\(paddingLeft), paddingRight=\(paddingRight)")
         //设置内边距
         layout.sectionInset = UIEdgeInsets(top: paddingLeft, left: paddingLeft,
                                            bottom: paddingLeft, right: paddingRight)

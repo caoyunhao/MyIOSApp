@@ -29,17 +29,17 @@ class LocalizationHelper {
     
     func value(forKey key: String) -> String {
         if let bundle = self.bundle {
-            DLog(message: "success for key \(key)")
+//            DLog("success for key \(key)")
             return NSLocalizedString(key, tableName: nil, bundle: bundle, value: "", comment: "")
         } else {
-            DLog(message: "error for key \(key)")
+            DLog("error for key \(key)")
             return NSLocalizedString(key, comment: "")
         }
     }
     
     func set(_ language: Language) {
         if language == currentLanguage {
-            DLog(message: "same language")
+            DLog("same language")
             return
         }
         currentLanguage = language
@@ -67,10 +67,10 @@ class LocalizationHelper {
     
     private func loadBundle(languageName: String) {
         if let path = Bundle.main.path(forResource:languageName , ofType: "lproj") {
-            DLog(message: "success. languageName=\(languageName)")
+            DLog("success. languageName=\(languageName)")
             bundle = Bundle(path: path)
         } else {
-            DLog(message: "error!!! languageName=\(languageName)")
+            DLog("error!!! languageName=\(languageName)")
         }
     }
     

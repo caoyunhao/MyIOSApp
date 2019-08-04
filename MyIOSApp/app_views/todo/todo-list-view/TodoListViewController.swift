@@ -30,8 +30,8 @@ class SwipeItemConfig {
 }
 
 class TodoListViewController: UITableViewController {
-    var margin: CGFloat = 10
-    var cornerRadius: CGFloat! = 20
+    var margin: CGFloat = 6
+    var cornerRadius: CGFloat! = 6
     
     var config = SwipeConfig()
     
@@ -46,6 +46,8 @@ class TodoListViewController: UITableViewController {
         fileprivate var currentIndexPath: IndexPath?
         fileprivate var direction: Direction = .fromRight
     }
+    
+    private var tasks: [Task] = []
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +56,8 @@ class TodoListViewController: UITableViewController {
         self.tableView.alwaysBounceVertical = true
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.searchController = UISearchController(searchResultsController: UIViewController())
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(self.handleRefresh), for: UIControlEvents.valueChanged)
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -63,19 +67,35 @@ class TodoListViewController: UITableViewController {
         
         self.tableView.register(UINib(nibName: cellIdentifier, bundle: Bundle.main), forCellReuseIdentifier: cellIdentifier)
         
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.add))
+        
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionFooterHeight = 0
+        tableView.estimatedSectionHeaderHeight = 0
+        config.leftConfigs.append(SwipeItemConfig(title: "Done", style: .normal))
         
-        DLog(message: "frame=\(view.frame)")
-        DLog(message: "tableView.frame=\(tableView.frame)")
+        let deleteConfig = SwipeItemConfig(title: "Delete", style: .destructive)
+        deleteConfig.handle = { indexPath in
+            let task = self.tasks[indexPath.row]
+            if TodoDB.default.delete(taskId: task.id) {
+                DLog("delete success")
+            } else {
+                DLog("delete fail")
+            }
+        }
+
+        config.rightConfigs.append(deleteConfig)
         
-        config.leftConfigs.append(SwipeItemConfig(title: "Flag", style: .normal))
-        config.rightConfigs.append(SwipeItemConfig(title: "Delete", style: .destructive))
+        DLog("frame=\(view.frame)")
+        DLog("tableView.frame=\(tableView.frame)")
+        
+        tasks = TodoDB.default.queryTasks()
+        tableView.reloadData()
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        DLog(message: "viewWillLayoutSubviews")
         swipeProcess()
     }
     
@@ -92,42 +112,37 @@ class TodoListViewController: UITableViewController {
             let swipeStr = UIDevice.current.systemVersion >= "11" ? "UISwipeActionPullView" : "UITableViewCellDeleteConfirmationView"
             let actionStr = UIDevice.current.systemVersion >= "11" ? "UISwipeActionStandardButton" : "_UITableViewCellActionButton"
             
-            if let swipeView = (sup!.subviews.first { (view) -> Bool in
+            let buttonLabel = "UIButtonLabel"
+            
+            (sup!.subviews.filter { (view) -> Bool in
                 return String(describing: view).range(of: swipeStr) != nil
-            }) {
-                DLog(message: "subView frame: \(swipeView.frame)")
-                
-//                switch swipeContext.direction {
-//                case .fromLeft:
-//                    swipeView.frame.origin.x -= margin
-//                case .fromRight:
-//                    swipeView.frame.origin.x += margin
-//                }
-                DLog(message: "subView final frame: \(swipeView.frame)")
-//                swipeView.backgroundColor = .clear
+            }).forEach { (swipeView) in
+                DLog("subView frame: \(swipeView.frame)")
                 swipeView.layer.masksToBounds = true
                 
-                for sub in swipeView.subviews {
-                    if String(describing: sub).range(of: actionStr) != nil {
-                        if let button = sub as? UIButton {
-                            DLog(message: "button frame: \(button.frame)")
-                            swipeContext.direction = button.frame.origin.x >= 0 ? .fromRight: .fromLeft
+                (swipeView.subviews.filter { (view) in
+                    return String(describing: view).range(of: actionStr) != nil
+                }).forEach({ (button) in
+                    button.backgroundColor = .clear
+//                    button.tintColor = .red
+                    
+                    for subView in button.subviews {
+                        subView.backgroundColor = .clear
+                        if String(describing: subView).range(of: buttonLabel) != nil {
+                            subView.tintColor = .red
                             
-                            switch swipeContext.direction {
-                            case .fromLeft:
-                                button.cornersRadius(byRoundingCorners: [.topRight, .bottomRight], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
-                            case .fromRight:
-                                button.cornersRadius(byRoundingCorners: [.topLeft, .bottomLeft], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
-                            }
-                            
-                            button.layer.masksToBounds = true;
-                            
-                            DLog(message: "button final frame: \(button.frame)")
                         }
+                        
                     }
-                }
-                
-                swipeContext.isStart = false
+                    
+                    DLog("button frame: \(button.frame)")
+                    
+                    button.layer.masksToBounds = true;
+                    
+                    DLog("button final frame: \(button.frame)")
+                    
+                    swipeContext.isStart = false
+                })
             }
         }
     }
@@ -141,31 +156,25 @@ class TodoListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 10
+        return tasks.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! TodoListCell
 
         // Configure the cell...
+        let task = tasks[indexPath.row]
         
-        cell.titleTextField.text = "DMP 相关"
-        let text: String;
-        if indexPath.row % 2 == 0 {
-            
-            text = "broker 发版旧节点下掉时的报错问题发版旧节点下掉时的报错问题。broker 凌晨切换数据报错排查"
-//            cell.detailTextField.attributedText = NSAttributedString(string: "broker 发版旧节点下掉时的报错问题\nbroker 凌晨切换数据报错排查")
-        } else {
-            text = "prophet-dispatcher、luwin-api 升级 jackson。luwin 排除 rec-ups-query 依赖。Java ForkedTransactionCommand。prophet-dispatcher、luwin-api 升级 jackson。luwin 排除 rec-ups-query 依赖。Java ForkedTransactionCommand"
-//            cell.detailTextField.attributedText = NSAttributedString(string: "")
-        }
-        cell.detailTextField.text = text
+        cell.data = task
+        cell.titleTextField.text = task.title
+        cell.detailTextField.text = task.detail
+        
         cell.margin = margin
         cell.cornerRadius = cornerRadius
         
 //        cell.detailTextField.sizeToFit()
         
-        DLog(message: cell.detailTextField.preferredMaxLayoutWidth)
+//        DLog(cell.detailTextField.preferredMaxLayoutWidth)
         
 //        cell.detailTextField.sizeToFit()
 
@@ -224,12 +233,12 @@ class TodoListViewController: UITableViewController {
     }
     
 //    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-//        DLog(message: "editActionsForRowAt \(indexPath.row)")
+//        DLog("editActionsForRowAt \(indexPath.row)")
 //
 //        let delete = UITableViewRowAction(style: .destructive, title: "删11111111111111除") {
 //            action, index in
 //            //将对应条目的数据删除
-//            DLog(message: "delete \(indexPath.row)")
+//            DLog("delete \(indexPath.row)")
 //        }
 //
 //        return [delete]
@@ -242,10 +251,12 @@ class TodoListViewController: UITableViewController {
         
         for configItem in config.leftConfigs {
             let action = UIContextualAction(style: configItem.style, title: configItem.title) { (action, view, handler) in
-                DLog(message: "left \(indexPath.row)")
+                DLog("left \(indexPath.row)")
                 configItem.handle?(indexPath)
             }
-            action.backgroundColor = configItem.backgroundColor
+//            action.backgroundColor = configItem.backgroundColor
+            action.image = UIImage(named: "QuickActions_Confirmation")
+            action.backgroundColor = .clear
             actions.append(action)
         }
         return UISwipeActionsConfiguration(actions: actions)
@@ -257,12 +268,43 @@ class TodoListViewController: UITableViewController {
         
         for configItem in config.rightConfigs {
             let action = UIContextualAction(style: configItem.style, title: configItem.title) { (action, view, handler) in
-                DLog(message: "right \(indexPath.row)")
+                handler(true)
                 configItem.handle?(indexPath)
             }
-            action.backgroundColor = configItem.backgroundColor
+            action.image = UIImage(named: "QuickActions_Confirmation")
+//            action.backgroundColor = .clear
             actions.append(action)
         }
         return UISwipeActionsConfiguration(actions: actions)
+    }
+    
+    @objc
+    func handleRefresh(sender: NSNotification) {
+        self.refreshingData()
+        refreshControl?.endRefreshing()
+    }
+    
+    func refreshingData() {
+        tasks = TodoDB.default.queryTasks()
+//        let t = CATransition()
+//        t.type = kCATransitionReveal
+//        t.subtype = kCATransitionFromRight
+//        t.duration = 0.4
+//        tableView.layer.add(t, forKey: nil)
+//        tableView.endUpdates()
+        let lastScrollOffset = tableView.contentOffset
+//        tableView.isHidden = true
+        tableView.reloadData()
+//        tableView.isHidden = false
+        tableView.layoutIfNeeded()
+        tableView.setContentOffset(lastScrollOffset, animated: false)
+    }
+    
+    @objc
+    func add(_ sender: AnyObject) {
+        let addVC = CommonUtils.loadNib(ofViewControllerType: EditTodoViewController4.self)
+        let navVC = UINavigationController(rootViewController: addVC)
+        
+        self.present(navVC, animated: true)
     }
 }

@@ -33,7 +33,7 @@ class AutoPhoto: NSObject, AutoProtocol {
     func start() {
         openCamera()
         let thread:Thread = Thread {
-            print("Thread")
+            DLog("Thread")
             Thread.sleep(forTimeInterval: 1)
             self.takePhotoAction()
         }
@@ -41,7 +41,7 @@ class AutoPhoto: NSObject, AutoProtocol {
     }
     
     private func openCamera() {
-        print("open camera 1")
+        DLog("open camera 1")
         AVCaptureDevice.requestAccess(for: AVMediaType.video) { success in
             if !success {
 //                let alertVC = UIAlertController(title: "相机权限未开启", message: "请您到 设置->隐私->相机 开启访问权限", preferredStyle: .actionSheet)
@@ -50,10 +50,10 @@ class AutoPhoto: NSObject, AutoProtocol {
                 exit(0)
             }
         }
-        print("open camera 2")
+        DLog("open camera 2")
         if let _d = cameraWithPosistion(.front) {
             device = _d
-            print("open camera 3")
+            DLog("open camera 3")
         }
         //        if device.isExposureModeSupported(AVCaptureExposureModeAutoExpose){
         //            device.exposureMode = AVCaptureExposureModeAutoExpose;
@@ -72,7 +72,7 @@ class AutoPhoto: NSObject, AutoProtocol {
             session!.addOutput(output!)
         }
         session?.commitConfiguration()
-        print("session?.startRunning()")
+        DLog("session?.startRunning()")
         session?.startRunning()
     }
     
@@ -87,7 +87,7 @@ class AutoPhoto: NSObject, AutoProtocol {
     }
     
     @objc private func takePhotoAction() {
-        print("takePhotoAction")
+        DLog("takePhotoAction")
         let connection = output?.connection(with: AVMediaType.video)
         guard connection != nil else {
             return
@@ -105,7 +105,7 @@ class AutoPhoto: NSObject, AutoProtocol {
 extension AutoPhoto: AVCapturePhotoCaptureDelegate {
 //    func photoOutput(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhoto photoSampleBuffer: CMSampleBuffer?, previewPhoto previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
 //        if error != nil {
-//            print("error = \(String(describing: error?.localizedDescription))")
+//            DLog("error = \(String(describing: error?.localizedDescription))")
 //            return
 //        }
 //        if let imageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer!, previewPhotoSampleBuffer: previewPhotoSampleBuffer){
@@ -124,7 +124,7 @@ extension AutoPhoto: AVCapturePhotoCaptureDelegate {
     }
     
     fileprivate func saveImageToPhotoAlbum(_ savedImage:UIImage){
-        print("saveImageToPhotoAlbum")
+        DLog("saveImageToPhotoAlbum")
         UIImageWriteToSavedPhotosAlbum(savedImage, self, #selector(self.imageDidFinishSavingWithErrorContextInfo), nil)
     }
     

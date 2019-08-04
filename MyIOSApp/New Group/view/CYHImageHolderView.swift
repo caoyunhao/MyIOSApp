@@ -24,7 +24,7 @@ class CYHImageHolderView: UIView {
     
     var rotateRate: Int {
         set {
-            DLog(message: "oldValue=\(rotateRate_), newValue=\(newValue)")
+            DLog("oldValue=\(rotateRate_), newValue=\(newValue)")
             let times = (360 - abs(rotateRate_ - newValue)) % 90
             rotateRate_ = newValue
             for _ in 0...times {
@@ -47,8 +47,8 @@ class CYHImageHolderView: UIView {
     var image: CYHImage? {
         didSet {
             if let image = image {
-                DLog(message: "imageScale=\(String(describing: imageScale))")
-                DLog(message: "frame.size=\(frame.size)")
+                DLog("imageScale=\(String(describing: imageScale))")
+                DLog("frame.size=\(frame.size)")
                 computeSize();
                 
                 self.imageView.stopAnimating()
@@ -87,12 +87,12 @@ class CYHImageHolderView: UIView {
             imageView.frame.origin.x = (parentSize.width - imageView.frame.size.width) / 2
         }
 
-        DLog(message: "imageView.frame=\(imageView.frame)")
+        DLog("imageView.frame=\(imageView.frame)")
     }
     
     static func fitParentSize(parentMaxSize: CGSize, imageScale: CGFloat) -> CGSize {
-        DLog(message: "parentMaxSize: \(parentMaxSize)")
-        DLog(message: "imageScale: \(imageScale)")
+        DLog("parentMaxSize: \(parentMaxSize)")
+        DLog("imageScale: \(imageScale)")
 
         let maxHeight = parentMaxSize.height
         let maxWidth = parentMaxSize.width
@@ -113,7 +113,7 @@ class CYHImageHolderView: UIView {
 //            imageViewX = (maxWidth - imageViewFrame.width) / 2
         }
         
-        DLog(message: "imageViewFrame=\(imageViewFrame)")
+        DLog("imageViewFrame=\(imageViewFrame)")
         
         return imageViewFrame;
     }
@@ -123,7 +123,7 @@ class CYHImageHolderView: UIView {
     }
     
     func rotateLeft90_() {
-        DLog(message: "rotateLeft90_")
+        DLog("rotateLeft90_")
         UIView.animate(withDuration: 0.3) {
             self.imageView.transform = CGAffineTransform(rotationAngle: CGFloat(-Double.pi / 2 * Double(self.rotateRate / 90)))
             self.computeSize()

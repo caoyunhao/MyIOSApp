@@ -29,7 +29,7 @@ class NotificationHelper {
         //将通知请求添加到发送中心
         UNUserNotificationCenter.current().add(request) { error in
             if error == nil {
-                print("Time Interval (\(timeInterval) Notification scheduled: \(requestIdentifier)")
+                DLog("Time Interval (\(timeInterval) Notification scheduled: \(requestIdentifier)")
             }
         }
     }

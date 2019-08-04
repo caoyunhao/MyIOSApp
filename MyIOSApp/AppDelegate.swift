@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.m_monitor.load()
 //        NotificationAuthorization.request();
 //        LocalizationHelper.shared.checkLanguage()
+        TodoDB.default.open()
         return true
     }
 

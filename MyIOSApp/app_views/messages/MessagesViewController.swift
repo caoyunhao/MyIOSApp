@@ -85,7 +85,7 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
 
         histories = PastboardHistory.shared.data.reversed()
         
-        DLog(message: "frame=\(view.frame)")
+        DLog("frame=\(view.frame)")
         
         //tableView.addSubview(m_RefreshControl) // not required when using UITableViewController
         
@@ -95,7 +95,7 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        DLog(message: "123456 md5: \("123456".md5)")
+        DLog("123456 md5: \("123456".md5)")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -241,7 +241,7 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
         //            style: .default,
         //            handler: {
         //                (action: UIAlertAction!) -> Void in
-        //                print("按下確認後，閉包裡的動作")
+        //                DLog("按下確認後，閉包裡的動作")
         //        })
         //        alertController.addAction(okAction)
         //        self.present(alertController,animated: true,completion: nil)

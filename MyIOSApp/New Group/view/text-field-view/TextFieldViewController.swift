@@ -22,10 +22,10 @@ class TextFieldViewController: UIViewController {
         textField.text = text ?? "(nil)"
         
         if (isPop) {
-            navigationItem.leftBarButtonItems = [
-                UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.close))
-            ]
+            navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(self.close))
         }
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "复制", style: .plain, target: self, action: #selector(self.copyTo))
         // Do any additional setup after loading the view.
     }
     
@@ -43,4 +43,9 @@ class TextFieldViewController: UIViewController {
     }
     */
 
+    
+    @objc func copyTo() {
+        UIPasteboard.general.string = text
+        NoticeHUD(text: "Copied").show()
+    }
 }

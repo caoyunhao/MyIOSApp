@@ -27,13 +27,13 @@ class NoticeHUD: NSObject {
     class Options {
         var indicator = false
         var textAlingment: NSTextAlignment = .center
-        var autoCleanTimeInterval: TimeInterval = -1
+        var autoCleanTimeInterval: TimeInterval = 0.5
         var fontSize: CGFloat = 13.0
         var cancelText: String?
     }
     
     private var text: String
-    private let options: NoticeHUD.Options
+    private let options: NoticeHUD.Options?
     private let label: UILabel
     private let window: UIWindow
     private let mainView: UIView
@@ -41,7 +41,7 @@ class NoticeHUD: NSObject {
     private var shown = false
     private var closed = false
     
-    init(text: String, options: NoticeHUD.Options) {
+    init(text: String, options: NoticeHUD.Options? = nil) {
         self.text = text
         self.options = options
         
@@ -49,7 +49,7 @@ class NoticeHUD: NSObject {
         
         label.text = self.text
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: options.fontSize)
+        label.font = UIFont.systemFont(ofSize: options?.fontSize ?? 13.0)
         label.textAlignment = NSTextAlignment.center
         label.textColor = UIColor.white
         
@@ -75,17 +75,20 @@ class NoticeHUD: NSObject {
     }
     
     func show() {
-        DLog(message: "show")
+        DLog("show \(self.text)")
         layout()
         initialize()
         
-        if options.autoCleanTimeInterval > 0 {
-            self.perform(#selector(clean(_:)), with: window, afterDelay: options.autoCleanTimeInterval)
+        let delay = options?.autoCleanTimeInterval ?? 1.0
+        
+        if delay > 0 {
+            self.perform(#selector(clean(_:)), with: window, afterDelay: delay)
         }
     }
     
     func motify(text: String) {
         label.text = text
+        DLog(text)
         layout()
     }
     
@@ -107,11 +110,10 @@ class NoticeHUD: NSObject {
         }
     }
     
-    @objc
-    func clean(_ sender: AnyObject) {
+    func hide() {
         if !closed {
             closed = true
-            DLog(message: "close")
+            DLog("close")
             UIView.animate(withDuration: 0.2, animations: {
                 if self.window.tag == 1001 {
                     self.window.frame = CGRect(x: 0, y: -self.window.frame.height, width: self.window.frame.width, height: self.window.frame.height)
@@ -123,6 +125,11 @@ class NoticeHUD: NSObject {
                 })
             })
         }
+    }
+    
+    @objc
+    func clean(_ sender: AnyObject) {
+        hide()
     }
     
     private static func getRealCenter() -> CGPoint {

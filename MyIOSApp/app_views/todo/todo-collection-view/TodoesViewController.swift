@@ -19,17 +19,17 @@ class TodoesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Todoes"
-        DLog(message: view.frame)
-        DLog(message: view.safeAreaInsets)
-        DLog(message: "UIScreen.main.bounds=\(UIScreen.main.bounds)")
-        DLog(message: "view.frame=\(view.frame)")
+        DLog(view.frame)
+        DLog(view.safeAreaInsets)
+        DLog("UIScreen.main.bounds=\(UIScreen.main.bounds)")
+        DLog("view.frame=\(view.frame)")
         
         
 //        let collectionView = self.collectionView as! CYHCollectionView
         
 //        let collectionView = CYHCollectionView(frame: safeAreaFrame(view: view), collectionViewLayout: UICollectionViewFlowLayout())
 //        let collectionView = CYHCollectionView(frame: view.safeAreaFrame, collectionViewLayout: UICollectionViewFlowLayout())
-        DLog(message: "collectionView.frame=\(collectionView.frame)")
+        DLog("collectionView.frame=\(collectionView.frame)")
 //        collectionView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(collectionView)
 
@@ -109,7 +109,7 @@ extension TodoesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         cell.detailTextField.text = text
         cell.layer.cornerRadius = cornerRadius
         
-//        DLog(message: "cell.size=\(cell.frame.size)")
+//        DLog("cell.size=\(cell.frame.size)")
         
         // Configure the cell
         
@@ -117,23 +117,23 @@ extension TodoesViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        DLog(message: "scrollViewDidScroll")
+//        DLog("scrollViewDidScroll")
     }
     
     func scrollViewDidChangeAdjustedContentInset(_ scrollView: UIScrollView) {
-//        DLog(message: "scrollViewDidChangeAdjustedContentInset")
+//        DLog("scrollViewDidChangeAdjustedContentInset")
     }
     
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-//        DLog(message: "scrollViewDidEndDragging")
+//        DLog("scrollViewDidEndDragging")
     }
     
     func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-//        DLog(message: "scrollViewWillBeginDecelerating")
+//        DLog("scrollViewWillBeginDecelerating")
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-//        DLog(message: velocity)
+//        DLog(velocity)
     }
 }
 

@@ -48,9 +48,9 @@ func SaveLivePhotosToLibary(avAsset: AVAsset, completionHandler: ((Bool, Error?)
             
             //                _ = DispatchQueue.main.sync {
             //                    PHLivePhoto.request(withResourceFileURLs: [URL(fileURLWithPath: movUrl), URL(fileURLWithPath: imageUrl)], placeholderImage: nil, targetSize: self.view.bounds.size, contentMode: .aspectFit) { (livePhoto, info) in
-            //                        DLog(message: "PHLivePhoto.request.resultHandler.start ")
+            //                        DLog("PHLivePhoto.request.resultHandler.start ")
             //
-            //                        DLog(message: "PHLivePhoto.request.resultHandler.end")
+            //                        DLog("PHLivePhoto.request.resultHandler.end")
             //                    }
             //                }
         }
@@ -65,13 +65,13 @@ class LivePhotosUtil {
     
     static func doViaLivePhotoSource(livePhotoAsset asset: PHAsset, imageHandler: ((UIImage) -> Void)?) {
         guard asset.mediaSubtypes.contains(.photoLive) else {
-            DLog(message: "\(asset) 不是Live Photo")
+            DLog("\(asset) 不是Live Photo")
             return
         }
         
         let arr = PHAssetResource.assetResources(for: asset)
         
-        DLog(message: arr)
+        DLog(arr)
         
         PHAssetResourceManager.default().requestData(for: arr[0], options: nil, dataReceivedHandler: { (data) in
             let _image = UIImage(data: data)
@@ -80,7 +80,7 @@ class LivePhotosUtil {
             }
             imageHandler?(image)
         }) { (error) in
-            DLog(message: error?.localizedDescription ?? "no errer")
+            DLog(error?.localizedDescription ?? "no errer")
         }
         
         AssetsUtils.saveAssetResource(resource: arr[1], inDirectory: AssetsUtils.generateTemporaryDirectory(), buffer: nil, maybeError: nil) { (url) in

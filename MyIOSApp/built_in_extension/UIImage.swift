@@ -54,13 +54,13 @@ extension UIImage {
     }
     
     func optimizeStoreSize() {
-        DLog(message: "原大小：\(self.dataSize()) KB")
+        DLog("原大小：\(self.dataSize()) KB")
         var rate: Float = 0.9
         while (rate > 0) {
             UIImageJPEGRepresentation(self, CGFloat(rate))
             rate -= 0.1
         }
-        DLog(message: "新大小：\(self.dataSize()) KB")
+        DLog("新大小：\(self.dataSize()) KB")
     }
     
     func fixOrientation() -> UIImage {
@@ -149,7 +149,7 @@ extension UIImage {
 
         let drawImage = UIGraphicsGetImageFromCurrentImageContext();//获得图片
         UIGraphicsEndImageContext()
-        DLog(message: image.imageOrientation.rawValue)
+        DLog(image.imageOrientation.rawValue)
         let flipImage = UIImage(cgImage:drawImage!.cgImage!, scale: 1, orientation: .up)
         
         return flipImage

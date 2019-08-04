@@ -157,7 +157,7 @@ class QuickTimeMov {
 //                                        DTLog("Audio writer finish")
                                         writer.finishWriting() {
                                             if let e = writer.error {
-                                                DLog(message: "cannot write: \(e)")
+                                                DLog("cannot write: \(e)")
                                             }
                                         }
                                     }
@@ -168,7 +168,7 @@ class QuickTimeMov {
 //                            DTLog("Video Reader not completed")
                             writer.finishWriting() {
                                 if let e = writer.error {
-                                    DLog(message: "cannot write: \(e)")
+                                    DLog("cannot write: \(e)")
                                 }
                             }
                         }
@@ -179,7 +179,7 @@ class QuickTimeMov {
                 RunLoop.current.run(until: Date(timeIntervalSinceNow: 0.5))
             }
             if let e = writer.error {
-                DLog(message: "cannot write: \(e)")
+                DLog("cannot write: \(e)")
             }
         } catch {
 //            DTLog("error")

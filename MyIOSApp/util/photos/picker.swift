@@ -41,7 +41,7 @@ class PhotosPicker: NSObject {
 
             self.vc.present(picker, animated: true, completion: nil)
         }else{
-            DLog(message: "读取相册错误")
+            DLog("读取相册错误")
         }
     }
 }
@@ -50,8 +50,8 @@ extension PhotosPicker: UIImagePickerControllerDelegate, UINavigationControllerD
     //选择图片成功后代理
     @objc internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         //查看info对象
-        DLog(message: "info: \(info)")
-        DLog(message: "info.metadata: \(info[UIImagePickerControllerMediaMetadata])")
+        DLog("info: \(info)")
+        DLog("info.metadata: \(info[UIImagePickerControllerMediaMetadata])")
 //        if self.canEdit {
 //            //获取编辑后的图片
 //            pickedSelectedImage = info[UIImagePickerControllerEditedImage] as! UIImage
@@ -74,7 +74,7 @@ extension PhotosPicker: UIImagePickerControllerDelegate, UINavigationControllerD
         picker.dismiss(animated: true, completion: nil)
         
         AssetsUtils.handleImageData(of: asset) { (data) in
-            DLog(message: "imageAsset size: \(data.count)")
+            DLog("imageAsset size: \(data.count)")
             if let image = CYHImage(data: data) {
                 image.asset = asset
                 self.callback?(image)

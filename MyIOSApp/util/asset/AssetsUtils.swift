@@ -15,20 +15,23 @@ class AssetsUtils {
         
         doInAlbum(title: albumTitle) { album in
             PHPhotoLibrary.shared().performChanges({
-                let addRequest = PHAssetCollectionChangeRequest.init(for: album)
-                addRequest?.addAssets(assets as NSFastEnumeration)
+//                let addRequest = PHAssetCollectionChangeRequest.init(for: album)
+                assets.forEach({ (asset) in
+                    let re = PHAssetChangeRequest(for: asset)
+                    re.creationDate = nil
+                })
+//                addRequest?.addAssets(assets as NSFastEnumeration)
             }, completionHandler: { (success, error) in
-                DLog(message: "Callback success: \(success)")
+                DLog("Callback success: \(success)")
+                if delete {
+                    DLog("delete")
+                    PHPhotoLibrary.shared().performChanges({
+                        PHAssetChangeRequest.deleteAssets(assets as NSFastEnumeration)
+                    }) { (success, error) in
+                        DLog("delete Callback success: \(success)")
+                    }
+                }
             })
-        }
-        
-        if delete {
-            DLog(message: "delete")
-            PHPhotoLibrary.shared().performChanges({
-                PHAssetChangeRequest.deleteAssets(assets as NSFastEnumeration)
-            }) { (success, error) in
-                DLog(message: "delete Callback success: \(success)")
-            }
         }
     }
     
@@ -45,7 +48,7 @@ class AssetsUtils {
                 albumChangeRequest?.addAssets([assetPlaceholder!] as NSArray)
                 
             }) { (success, error) in
-                DLog(message: "Save image success: \(success)")
+                DLog("Save image success: \(success)")
             }
         }
     }
@@ -58,7 +61,7 @@ class AssetsUtils {
             localIdentifier = request.placeholderForCreatedAsset?.localIdentifier
         }) { (success: Bool, error: Error?) in
             if success, let localIdentifier = localIdentifier {
-                DLog(message: "保存成功! (\(localIdentifier)")
+                DLog("保存成功! (\(localIdentifier)")
                 completion(localIdentifier)
             }
         }
@@ -70,26 +73,48 @@ class AssetsUtils {
             request?.creationDate = Date()
         }) { (success, error) in
             if success {
-                DLog(message: "save asset success.")
+                DLog("save asset success.")
                 completion(success, error)
             } else {
-                DLog(message: "save asset failure.")
+                DLog("save asset failure.")
                 completion(success, error)
             }
         }
     }
     
     static func saveVideo(atFileURL fileURL: URL) {
-        PHPhotoLibrary.shared().performChanges({
-            let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
-            request?.creationDate = Date()
-        }) { (success, error) in
-            if success {
-                DLog(message: "save asset success.")
-            } else {
-                DLog(message: "save asset failure.")
+//        PHPhotoLibrary.shared().performChanges({
+//            let request = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
+//            request?.creationDate = Date()
+//        }) { (success, error) in
+//            if success {
+//                DLog("save asset success. (\(fileURL))")
+//            } else {
+//                DLog("save asset failure. (\(fileURL)), \(error?.localizedDescription)")
+//            }
+//        }
+        
+        do {
+            try PHPhotoLibrary.shared().performChangesAndWait {
+//                let options = PHAssetResourceCreationOptions()
+//                options.shouldMoveFile = true
+//                let request = PHAssetCreationRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
+//                request?.addResource(with: .video, fileURL: fileURL, options: options)
+                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
             }
+            DLog("save asset success. (\(fileURL))")
+        } catch (let error) {
+            DLog("save asset failure. (\(fileURL)), \(error.localizedDescription)")
         }
+        
+            
+//        }) { (success, error) in
+//            if success {
+//                DLog("save asset success. (\(fileURL))")
+//            } else {
+//                DLog("save asset failure. (\(fileURL)), \(error?.localizedDescription)")
+//            }
+//        }
     }
     
     static func generateTemporaryDirectory() -> NSURL {
@@ -123,10 +148,10 @@ class AssetsUtils {
         callback: ((URL) -> Void)?
         ) -> Void {
         
-        DLog(message: "start")
+        DLog("start")
         
         guard maybeError == nil else {
-            DLog(message: "Could not request data for resource: \(resource), error: \(String(describing: maybeError))")
+            DLog("Could not request data for resource: \(resource), error: \(String(describing: maybeError))")
             return
         }
         
@@ -140,31 +165,31 @@ class AssetsUtils {
         }
         
         guard var fileUrl = inDirectory.appendingPathComponent(NSUUID().uuidString) else {
-            DLog(message: "file url error")
+            DLog("file url error")
             return
         }
         
         fileUrl = fileUrl.appendingPathExtension(ext as String)
         
         if let buffer = buffer, buffer.write(to: fileUrl, atomically: true) {
-            DLog(message: "Saved resource form buffer \(resource) to filepath \(String(describing: fileUrl))")
+            DLog("Saved resource form buffer \(resource) to filepath \(String(describing: fileUrl))")
             callback?(fileUrl)
         } else {
             PHAssetResourceManager.default().writeData(for: resource, toFile: fileUrl, options: nil) { (error) in
-                DLog(message: "Saved resource directly \(resource) to filepath \(String(describing: fileUrl))")
+                DLog("Saved resource directly \(resource) to filepath \(String(describing: fileUrl))")
                 callback?(fileUrl)
             }
         }
-        DLog(message: "end")
+        DLog("end")
     }
     
     fileprivate static func imageFrom(asset: PHAsset) -> UIImage {
         PHImageManager.default().requestImageData(for: asset, options: nil, resultHandler: {
             (data, string, imageOrientation, map) in
-            DLog(message: data)
-            DLog(message: string)
-            DLog(message: imageOrientation)
-            DLog(message: map)
+            DLog(data)
+            DLog(string)
+            DLog(imageOrientation)
+            DLog(map)
         })
         
         var image: UIImage!
@@ -187,13 +212,13 @@ class AssetsUtils {
     }
     
     fileprivate static func doInAlbum(title: String, callback:@escaping (PHAssetCollection)->Void) {
-        DLog(message: "title: \(title)")
+        DLog("title: \(title)")
         
         let fetchOptions = PHFetchOptions()
         fetchOptions.predicate = NSPredicate.init(format: "title=%@", title)
         let collection: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
         
-        DLog(message: collection)
+        DLog(collection)
         
         if let ret = collection.firstObject{
             callback(ret)
@@ -203,7 +228,7 @@ class AssetsUtils {
                 let creatAlbumRequest:PHAssetCollectionChangeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: title)
                 assetCollectionPlaceholder = creatAlbumRequest.placeholderForCreatedAssetCollection
             }) { (success, error) in
-                DLog(message: "getAlbum success: \(success)")
+                DLog("getAlbum success: \(success)")
                 if success {
                     let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [assetCollectionPlaceholder.localIdentifier], options: nil)
                     callback(collectionFetchResult.firstObject!)
@@ -215,11 +240,11 @@ class AssetsUtils {
     static func handleImageData(of asset: PHAsset, handler: @escaping (_ data: Data) -> Void) {
         let options = PHImageRequestOptions()
         options.version = .current
-        DLog(message: "asset: \(asset.cyhDescriptionFormatted)")
+        DLog("asset: \(asset.cyhDescriptionFormatted)")
         PHImageManager.default().requestImageData(for: asset, options: options) {
             data, uti, orientation, info in
-            DLog(message: info)
-            DLog(message: "asset.location \(String(describing: asset.location))")
+            DLog(info)
+            DLog("asset.location \(String(describing: asset.location))")
             guard let data = data else {
                 return
             }
@@ -231,11 +256,11 @@ class AssetsUtils {
         let options = PHImageRequestOptions()
         options.isSynchronous = true
         options.version = .current
-        DLog(message: "asset: \(asset.cyhDescriptionFormatted)")
+        DLog("asset: \(asset.cyhDescriptionFormatted)")
         PHImageManager.default().requestImageData(for: asset, options: options) {
             data, uti, orientation, info in
-            DLog(message: info)
-            DLog(message: "asset.location \(String(describing: asset.location))")
+            DLog(info)
+            DLog("asset.location \(String(describing: asset.location))")
             guard let data = data else {
                 return
             }
@@ -251,7 +276,7 @@ class AssetsUtils {
         
         PHImageManager.default().requestAVAsset(forVideo: asset, options: option) { (avAsset, audio, map) in
             guard let avAsset = avAsset else {
-                DLog(message: "avAsset == nil")
+                DLog("avAsset == nil")
                 return
             }
             

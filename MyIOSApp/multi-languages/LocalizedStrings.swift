@@ -13,8 +13,24 @@ class LocalizedStrings {
         return LocalizationHelper.shared.value(forKey: "OK")
     }
 
+    static var I_GOT_IT: String {
+        return LocalizationHelper.shared.value(forKey: "I_GOT_IT")
+    }
+
     static var CLOSE: String {
         return LocalizationHelper.shared.value(forKey: "CLOSE")
+    }
+
+    static var DONE: String {
+        return LocalizationHelper.shared.value(forKey: "DONE")
+    }
+
+    static var SUCCESS: String {
+        return LocalizationHelper.shared.value(forKey: "SUCCESS")
+    }
+
+    static var FAIL: String {
+        return LocalizationHelper.shared.value(forKey: "FAIL")
     }
 
     static var NOTICE: String {

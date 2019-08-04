@@ -9,11 +9,13 @@
 import UIKit
 
 class TodoListCell: UITableViewCell {
-    
+    @IBOutlet weak var box: UIView!
     var margin: CGFloat! = 10
     var cornerRadius: CGFloat! = 20
     
     var isFixed = false
+    
+    var data: Task?
     
     @IBOutlet weak var flagImage: UIImageView!;
     @IBOutlet weak var titleTextField: UILabel!;
@@ -25,6 +27,7 @@ class TodoListCell: UITableViewCell {
 //            frame.origin.x += margin;
             frame.origin.y += margin;
             frame.size.height -= margin;
+
 //            frame.size.width -= margin * 2;
             super.frame = frame
         }
@@ -35,15 +38,19 @@ class TodoListCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+
+//        box.frame.origin.x = margin
+//        box.frame.size.width = box.frame.size.width - margin * 2
+        
         // Initialization code
-        layer.shadowOffset = CGSize(width: 10, height: 10)
-        layer.shadowColor = UIColor.gray.cgColor
-        layer.masksToBounds = false
-        layer.cornerRadius = 20
-        clipsToBounds = true
-//        contentView.clipsToBounds = true
-//        contentView.layer.cornerRadius = 20
-//        contentView.clipsToBounds = true
+        backgroundColor = .clear
+        
+        box.layer.shadowOffset = CGSize(width: 10, height: 10)
+        box.layer.shadowColor = UIColor.gray.cgColor
+        box.layer.masksToBounds = false
+        box.layer.cornerRadius = 6
+        box.clipsToBounds = true
+
 //        titleTextField.preferredMaxLayoutWidth = titleTextField.frame.size.width
         detailTextField.preferredMaxLayoutWidth = detailTextField.frame.size.width
         

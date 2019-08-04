@@ -32,7 +32,7 @@ class AlbumsViewController: UIViewController {
     var subTypes: [PHAssetMediaSubtype] = []
     
     override func awakeFromNib() {
-        DLog(message: "11111111")
+        DLog("11111111")
         super.awakeFromNib()
     
     }
@@ -85,7 +85,7 @@ class AlbumsViewController: UIViewController {
             
             //异步加载表格数据,需要在主线程中调用reloadData() 方法
             DispatchQueue.main.async{
-                DLog(message: self.albums.count)
+                DLog(self.albums.count)
                 self.tableView.reloadData()
                 
                 //                //首次进来后直接进入第一个相册图片展示页面（相机胶卷）
@@ -181,7 +181,7 @@ class AlbumsViewController: UIViewController {
             //没有图片的空相簿不显示
             if assetsFetchResult.count > 0 {
                 let title = titleOfAlbumForChinse(title: photoAlbum.localizedTitle)
-                DLog(message: title)
+                DLog(title)
                 albums.append(ImageAlbumItem(title: title, fetchResult: assetsFetchResult))
             }
         }
@@ -230,7 +230,7 @@ class AlbumsViewController: UIViewController {
 //            ret = NSPredicate(format: strList.joined(separator: "||"))
         }
         
-        DLog(message: ret)
+        DLog(ret)
         
         return ret;
     }
@@ -261,7 +261,7 @@ extension AlbumsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! AlbumsViewCell
         
-        DLog(message: cell.nameLabel.text)
+        DLog(cell.nameLabel.text)
         
         let album = self.albums[indexPath.row]
         

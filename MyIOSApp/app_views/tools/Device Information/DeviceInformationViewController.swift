@@ -25,9 +25,9 @@ class DeviceInformationViewController: UITableViewController {
         
         tableConfig.data.append(SimpleGroupTableConfigGroupConfig(header: "System", content: [
             (label: "iOS Version", detailLabel: UIDevice.current.systemVersion, style: .value1),
-            (label: "Model", detailLabel: UIDevice.current.model, style: .value1),
-            (label: "Localized Model", detailLabel: UIDevice.current.model, style: .value1),
-            (label: "Wi-Fi", detailLabel: UIDevice.current.model, style: .value1),
+//            (label: "Model", detailLabel: UIDevice.current.model, style: .value1),
+//            (label: "Localized Model", detailLabel: UIDevice.current.model, style: .value1),
+//            (label: "Wi-Fi", detailLabel: UIDevice.current.model, style: .value1),
             ], footer: nil))
         
         tableConfig.data.append(SimpleGroupTableConfigGroupConfig(header: "Storage", content: [

@@ -5,7 +5,11 @@ headers = ["key", "en", "zh-Hans"]
 rows = [
     ["CANCEL", "Cancel", "取消"],
     ["OK", "OK", "好的"],
+    ["I_GOT_IT", "I got it", "我知道了"],
     ["CLOSE", "Close", "关闭"],
+    ["DONE", "Done", "完成"],
+    ["SUCCESS", "Success", "成功"],
+    ["FAIL", "Fail", "失败"],
     ["NOTICE", "Notice", "提示"],
     ["JUMP", "Jump", "跳转"],
     ["SCAN", "Scan", "扫描"],

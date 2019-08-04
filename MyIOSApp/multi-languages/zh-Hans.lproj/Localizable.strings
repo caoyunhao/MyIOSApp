@@ -1,6 +1,10 @@
 "CANCEL" = "取消";
 "OK" = "好的";
+"I_GOT_IT" = "我知道了";
 "CLOSE" = "关闭";
+"DONE" = "完成";
+"SUCCESS" = "成功";
+"FAIL" = "失败";
 "NOTICE" = "提示";
 "JUMP" = "跳转";
 "SCAN" = "扫描";

@@ -88,7 +88,7 @@ class CYHImage: NSObject {
         let frameCount = CGImageSourceGetCount(source)
         var images: [CGImage] = []
         var duration = frameCount > 1 ? 0 : Double.infinity
-        DLog(message: frameCount)
+        DLog(frameCount)
         for i in 0 ..< frameCount {
             guard let imageRef = CGImageSourceCreateImageAtIndex(source, i, nil) else {
                 continue
@@ -108,8 +108,8 @@ class CYHImage: NSObject {
             }
             images.append(imageRef)
         }
-        DLog(message: images.count)
-        DLog(message: duration)
+        DLog(images.count)
+        DLog(duration)
         
         self.init(cgImages: images, duration: duration)
         
@@ -164,24 +164,24 @@ class CYHImage: NSObject {
     }
     
     func saveAsGif() {
-        DLog(message: "save as gif")
+        DLog("save as gif")
         flushAsTemporaryFile() { (fileUrl) in
             if let data = try? Data(contentsOf: fileUrl) {
                 PHPhotoLibrary.shared().performChanges({
                     PHAssetCreationRequest.forAsset().addResource(with: .photo, data: data, options: nil)
                 }, completionHandler: {success, error in
-                    DLog(message: "success: \(success), error: \(error.debugDescription)")
+                    DLog("success: \(success), error: \(error.debugDescription)")
                 })
             }
         }
     }
     
     func saveAsSimple() {
-        DLog(message: "save as simple")
+        DLog("save as simple")
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAsset(from: self.first)
         }, completionHandler: {success, error in
-            DLog(message: "success: \(success), error: \(error.debugDescription)")
+            DLog("success: \(success), error: \(error.debugDescription)")
         })
     }
     

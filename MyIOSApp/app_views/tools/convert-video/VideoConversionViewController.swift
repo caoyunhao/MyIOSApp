@@ -60,7 +60,7 @@ class VideoConversionViewController: ScrollViewController {
     
     @objc
     func handler(assets: [PHAsset]) {
-        DLog(message: "handle \(assets.count) video(es).")
+        DLog("handle \(assets.count) video(es).")
         let total = assets.count
         var count = 0
         

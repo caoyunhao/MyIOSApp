@@ -58,9 +58,9 @@ class GifPickerViewController: ScrollViewController {
         vc.completeHandler = self.handler;
         
         AssetsUtils.handleImageData(of: assets.first!) { (data) in
-            DLog(message: data)
+            DLog(data)
             if let image = CYHImage(cfData: data as CFData) {
-                DLog(message: image.description)
+                DLog(image.description)
                 self.items.append(contentsOf: image.images.map({ (uiImage) -> PhotoMultiSelectionItem in
                     return PhotoMultiSelectionItem(image: CYHImage(uiImage: uiImage))
                 }))

@@ -31,7 +31,7 @@ class VideoUtil {
         //        let framesPreSecond = request.framesPreSecond
         //        let duration: Float = 1.0 / Float(framesPreSecond)
         
-        DLog(message: "path : \(request.savePath.absoluteString)")
+        DLog("path : \(request.savePath.absoluteString)")
         
         let assetImageGenerator = AVAssetImageGenerator(asset: request.asset)
         assetImageGenerator.requestedTimeToleranceBefore = kCMTimeZero
@@ -47,9 +47,9 @@ class VideoUtil {
         
         let frameCount = Int(cmTimeTotal / delaySecPerFrame)
         
-        DLog(message: "cmTimeTotal: \(cmTimeTotal)")
-        DLog(message: "delaySecPerFrame: \(delaySecPerFrame)")
-        DLog(message: "frameCount: \(frameCount)")
+        DLog("cmTimeTotal: \(cmTimeTotal)")
+        DLog("delaySecPerFrame: \(delaySecPerFrame)")
+        DLog("frameCount: \(frameCount)")
         
         guard let destination = CGImageDestinationCreateWithURL(request.savePath as CFURL, gifCFStr, frameCount, nil) else {
             return
@@ -68,7 +68,7 @@ class VideoUtil {
         
         CGImageDestinationSetProperties(destination, gifProperties) //保存gif图像
         
-        DLog(message: "timescale: \(cmTimeDuration.timescale)")
+        DLog("timescale: \(cmTimeDuration.timescale)")
         
         for i in 0..<frameCount {
             processRate?(Float(i) / Float(frameCount))
@@ -80,8 +80,8 @@ class VideoUtil {
             // let tmpTime = CMTimeMakeWithSeconds(cmTimeCurrent, cmTimeDuration.timescale)
             let tmpTime = CMTimeMakeWithSeconds(cmTimeCurrent, cmTimeDuration.timescale)
             
-            DLog(message: "tmpTime: \(tmpTime)")
-            DLog(message: "cmTimeCurrent: \(cmTimeCurrent)")
+            DLog("tmpTime: \(tmpTime)")
+            DLog("cmTimeCurrent: \(cmTimeCurrent)")
             
             let cgImage = try? assetImageGenerator.copyCGImage(at: tmpTime, actualTime: nil)
             
@@ -99,7 +99,7 @@ class VideoUtil {
         let flag = CGImageDestinationFinalize(destination)
         // destination = nil
         
-        DLog(message: flag)
+        DLog(flag)
         
         completion(request.savePath)
     }

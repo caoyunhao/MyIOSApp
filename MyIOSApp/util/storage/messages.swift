@@ -23,17 +23,17 @@ class PastboardHistory {
     }
     
     var data: [MessageItem] {
-        DLog(message: "get")
+        DLog("get")
         
         let array = UserDefaultsUtils.getArray(name: self.key)
         
         if let array = array {
-            DLog(message: array.count)
+            DLog(array.count)
             return array.map({ (item) in
                 return UserDefaultsUtils.getObject(forKey: item as! String) as! MessageItem
             })
         } else {
-            DLog(message: "empty")
+            DLog("empty")
             return []
         }
     }

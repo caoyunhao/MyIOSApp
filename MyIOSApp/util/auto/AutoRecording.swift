@@ -42,7 +42,7 @@ class AutoRecording: NSObject, AutoProtocol {
     
     //  MARK: - Private Methods
     func setupAVFoundationSettings() {
-        camera = cameraWithPosition(position: .front)
+        camera = GetCaptureDevice(withPosition: .front)
         
         //  设置视频清晰度，这里有很多选择
         // captureSession.sessionPreset = AVCaptureSessionPreset640x480
@@ -67,7 +67,7 @@ class AutoRecording: NSObject, AutoProtocol {
 //        previewLayer = videoLayer
         
         //  启动 Session 回话
-        print("startRunning")
+        DLog("startRunning")
         self.captureSession.startRunning()
     }
     
@@ -102,7 +102,7 @@ class AutoRecording: NSObject, AutoProtocol {
         }
         
         let t = Thread {
-            print("Thread")
+            DLog("Thread")
             Thread.sleep(forTimeInterval: 5)
             self.stop()
         }
@@ -129,7 +129,7 @@ class AutoRecording: NSObject, AutoProtocol {
 //            startButton.userInteractionEnabled = true
 //            stopButton.userInteractionEnabled = false
         }
-        print("stop")
+        DLog("stop")
     }
     
     @objc func videoRecordingTotolTime() {
@@ -168,13 +168,13 @@ class AutoRecording: NSObject, AutoProtocol {
         }
         
         if true {
-            camera = cameraWithPosition(position: .front)
+            camera = GetCaptureDevice(withPosition: .front)
             if let input = try? AVCaptureDeviceInput(device: camera!) {
                 captureSession.addInput(input)
             }
             
         } else {
-            camera = cameraWithPosition(position: .back)
+            camera = GetCaptureDevice(withPosition: .back)
             if let input = try? AVCaptureDeviceInput(device: camera!) {
                 captureSession.addInput(input)
             }
@@ -185,7 +185,7 @@ class AutoRecording: NSObject, AutoProtocol {
 @available(iOS 10.0, *)
 extension AutoRecording: AVCaptureFileOutputRecordingDelegate {
     func fileOutput(_ output: AVCaptureFileOutput, didFinishRecordingTo outputFileURL: URL, from connections: [AVCaptureConnection], error: Error?) {
-        print("fileOutput")
+        DLog("fileOutput")
         PHPhotoLibrary.shared().performChanges({
             PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: outputFileURL as URL)
         }, completionHandler: { (isSuccess: Bool, error: Error?) in
@@ -199,19 +199,6 @@ extension AutoRecording: AVCaptureFileOutputRecordingDelegate {
             }
         })
     }
-}
-
-func cameraWithPosition(position: AVCaptureDevice.Position) -> AVCaptureDevice? {
-    let deviceDescoverySession = AVCaptureDevice.DiscoverySession.init(
-        deviceTypes: [AVCaptureDevice.DeviceType.builtInWideAngleCamera],
-        mediaType: AVMediaType.video, position: position)
-    
-    for device in deviceDescoverySession.devices {
-        if device.position == position {
-            return device
-        }
-    }
-    return nil
 }
     
 //    func captureOutput(captureOutput: AVCaptureFileOutput!,

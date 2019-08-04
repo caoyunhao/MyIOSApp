@@ -105,6 +105,15 @@ fileprivate let deviceInformationViewInfo = RowInfo(
     }
 )
 
+fileprivate let WebViewInfo = RowInfo(
+    name: "Website",
+    description: "打开网页",
+    action: { (currentViewController) in
+        let vc = CommonUtils.loadNib(ofViewControllerType: WebURLViewController.self)
+        currentViewController.navigationController?.pushViewController(vc, animated: true)
+    }
+)
+
 class ToolsViewController: UITableViewController {
     
     fileprivate var titleConfig: [[String: Any]] = [
@@ -142,6 +151,12 @@ class ToolsViewController: UITableViewController {
                 developerWebsiteViewInfo,
             ]
         ],
+        [
+            "title": "Website",
+            "items": [
+                WebViewInfo,
+            ]
+        ],
     ]
     
     fileprivate func getTitle(_ section: Int) -> String {
@@ -158,12 +173,13 @@ class ToolsViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DLog(message: "viewDidLoad")
         
         self.title = LocalizedStrings.UTILITIES
         self.navigationItem.largeTitleDisplayMode = .automatic
         self.tableView = UITableView(frame: view.frame, style: .grouped)
         self.tableView.alwaysBounceVertical = true
+        
+        
 //        self.tableView.can
         
         
@@ -172,11 +188,6 @@ class ToolsViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        DLog(message: "awakeFromNib")
     }
     
     override func didReceiveMemoryWarning() {
@@ -211,9 +222,9 @@ class ToolsViewController: UITableViewController {
         //            .init(nibName: self.getStoryBoardTypeName(indexPath.section, indexPath.row), bundle: Bundle.main)
         let rowInfo = getRowInfo(indexPath.section, indexPath.row)
         //        vc.title =
-        
+        hidesBottomBarWhenPushed = true
         rowInfo.action(self);
-        
+        hidesBottomBarWhenPushed = false
         tableView.deselectRow(at: indexPath, animated: true)
         
         //        self.present(vc!, animated: true)
@@ -225,6 +236,7 @@ class ToolsViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         //        let cell = tableView.dequeueReusableCell(withIdentifier: "ToolsTableViewCell", for: indexPath) as! ToolsTableViewCell
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "default");
         // Configure the cell...
