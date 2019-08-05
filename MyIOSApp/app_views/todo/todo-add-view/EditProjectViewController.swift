@@ -1,21 +1,25 @@
 //
-//  EditKindViewController.swift
+//  EditProjectViewController.swift
 //  MyIOSApp
 //
-//  Created by Yunhao on 2019/7/25.
+//  Created by Yunhao on 2019/8/5.
 //  Copyright © 2019 Yunhao. All rights reserved.
 //
 
 import UIKit
 
-class EditKindViewController: EditTableViewController {
+class EditProjectViewController: EditTableViewController {
     
+    var currentKind: Kind?
+  
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "新增类型"
 
+        title = "新增项目"
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.close))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .done, target: self, action:  #selector(self.done))
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -24,7 +28,7 @@ class EditKindViewController: EditTableViewController {
     }
     
     override func initGroupConfig() -> GroupConfig {
-        return TodoNewKindConfig()
+        return TodoNewProjectConfig(kind: currentKind)
     }
     
     @objc
@@ -35,14 +39,18 @@ class EditKindViewController: EditTableViewController {
     
     @objc
     func done(_ sender: AnyObject) {
-        let config = groupConfig as! TodoNewKindConfig
+        let config = groupConfig as! TodoNewProjectConfig
         
-        guard let kindName = config.kindName else {
-            NoticeHUD(text: "kindName 不能为空").show()
+        guard let projectName = config.projectName else {
+            NoticeHUD(text: "projectName 不能为空").show()
+            return
+        }
+        guard let kindId = config.kindId else {
+            NoticeHUD(text: "kindId 不能为空").show()
             return
         }
         
-        if TodoDB.default.addKind(name: kindName) {
+        if TodoDB.default.addProject(name: projectName, kindId: Int32(kindId)) {
             NoticeHUD(text: "添加成功").show()
             tableView.endEditing(true)
             self.dismiss(animated: true, completion: nil)

@@ -11,6 +11,10 @@ import UIKit
 class SimpleMultiChoiseCellTableViewCell: SimpleRowTableCell {
     var data: SimpleMultiChoiseRawData!
     
+    @IBOutlet weak var nameTextLabel: UILabel!
+    @IBOutlet weak var selectedTextLabel: UILabel!
+    @IBOutlet weak var selectedImageView: UIImageView!
+    
     override func load(vc: UIViewController, rawData: SimpleRowData) {
         super.load(vc:vc, rawData: rawData)
         guard let data = rawData as? SimpleMultiChoiseRawData else {
@@ -18,8 +22,9 @@ class SimpleMultiChoiseCellTableViewCell: SimpleRowTableCell {
         }
         data.cell = self
         self.data = data
-        self.textLabel?.text = data.name
-        self.detailTextLabel?.text = data.current?.name
+        self.nameTextLabel.text = data.name
+        self.selectedTextLabel.text = data.current?.name
+        self.selectedImageView.image = data.current?.image
         self.accessoryType = .disclosureIndicator
     }
 

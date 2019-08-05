@@ -1,72 +1,49 @@
 //
-//  SimpleMutilChoiseSelectionViewController.swift
+//  PastboardHistoryListViewController.swift
 //  MyIOSApp
 //
-//  Created by Yunhao on 2019/7/19.
+//  Created by Yunhao on 2019/8/5.
 //  Copyright © 2019 Yunhao. All rights reserved.
 //
 
 import UIKit
 
-class SimpleMutilChoiseSelectionViewController: UITableViewController {
+class PastboardHistoryListViewController: UITableViewController {
     
-    let cellIdentifier = "SimpleMutilChoiseSelectionCellView"
+    let cellIdentifier = "PastboardHistroyViewCell"
     
-    var data: SimpleMultiChoiseRawData!
-    
-    private var currentCell: UITableViewCell?
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.alwaysBounceVertical = true
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-//        tableView.re
+        tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.data.items.count
+        return 0
     }
 
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! SimpleMutilChoiseSelectionCellView
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
         // Configure the cell...
-        let item = self.data.items[indexPath.row]
-        cell.nameLabel?.text = item.name
-        if self.data.current?.id == item.id {
-            cell.accessoryType = .checkmark
-            self.currentCell = cell
-        }
-        cell.imageView2?.image = item.image
+
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            if cell != currentCell {
-                let impact = UIImpactFeedbackGenerator(style: .light)
-                impact.impactOccurred()
-                
-                self.currentCell?.accessoryType = .none
-                cell.accessoryType = .checkmark
-                self.data.current = self.data.items[indexPath.row]
-            }
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
+    */
 
     /*
     // Override to support conditional editing of the table view.

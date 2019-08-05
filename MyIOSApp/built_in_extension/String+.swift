@@ -20,4 +20,12 @@ extension String {
         free(buffer)
         return md5String as String
     }
+    
+    var valid: String? {
+        let string = trimmingCharacters(in: .whitespacesAndNewlines)
+        if string != "" {
+            return string
+        }
+        return nil
+    }
 }

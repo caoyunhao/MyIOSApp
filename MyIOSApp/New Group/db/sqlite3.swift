@@ -92,7 +92,7 @@ class SQLiteDB {
         }
     }
     
-    func deleteTable(tableName: String) -> Bool {
+    func dropTable(tableName: String) -> Bool {
         let sql = """
         DROP TABLE '\(tableName)'
         """
@@ -103,7 +103,7 @@ class SQLiteDB {
         let csql = sql.cString(using: .utf8)
         let isSuccess = sqlite3_exec(db, csql, nil, nil, nil) == SQLITE_OK
         if isSuccess {
-            DLog("[SQL]执行成功\n---\n\(sql)\n\\--")
+//            DLog("[SQL]执行成功\n---\n\(sql)\n\\--")
         } else {
             DLog("[SQL]执行失败!!!\(errmsg())\n\(sql)")
         }
@@ -113,14 +113,14 @@ class SQLiteDB {
     func prepare(sql: String) -> OpaquePointer? {
         var stmt:OpaquePointer? = nil
         
-        DLog("prepare sql\n---\n\(sql)\n\\--")
+//        DLog("prepare sql\n---\n\(sql)\n\\--")
         
         if sqlite3_prepare_v2(db, sql.cString(using: .utf8), -1, &stmt, nil) != SQLITE_OK {
-            DLog("未准备好, \(String(describing: stmt))")
+            DLog("SQL 未准备好, \(String(describing: stmt))\n---\n\(sql)\n\\--")
             return nil
         }
         if stmt == nil {
-            DLog("stmt == nil")
+//            DLog("stmt == nil")
             return nil
         }
         return stmt

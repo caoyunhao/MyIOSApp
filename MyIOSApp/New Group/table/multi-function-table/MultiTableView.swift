@@ -57,6 +57,10 @@ class Group: NSObject {
     
     var items = [SimpleRowData]()
     
+    init(items: [SimpleRowData]) {
+        self.items = items
+    }
+    
     override var description: String {
         return "Group(header=\(header ?? "nil"),footer=\(footer ?? "nil"),items=\(join(separator: ",", list: items))"
     }

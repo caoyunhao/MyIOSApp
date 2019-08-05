@@ -1,88 +1,65 @@
 //
-//  EditTodoViewController2.swift
+//  EditTableViewController.swift
 //  MyIOSApp
 //
-//  Created by Yunhao on 2019/7/19.
+//  Created by Yunhao on 2019/8/5.
 //  Copyright © 2019 Yunhao. All rights reserved.
 //
 
 import UIKit
 
-class EditTodoViewController2: UITableViewController {
-    
-    var groups = [Group]()
+class EditTableViewController: UITableViewController {
+
+    var groupConfig: GroupConfig!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "新增任务"
+        self.tableView = UITableView(frame: view.frame, style: .grouped)
+        self.tableView.alwaysBounceVertical = true
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.close))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.editEnd))
+        self.tableView.addGestureRecognizer(tap)
+        tap.delegate = self
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.done))
+        groupConfig = initGroupConfig()
         
-        self.tableView = MultiTableView(frame: view.frame, style: .grouped)
+        for group in groupConfig.groups {
+            for row in group.items {
+                self.tableView.register(UINib(nibName: row.identifier, bundle: Bundle.main), forCellReuseIdentifier: row.identifier)
+            }
+        }
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        
-        
-        
-        // let view_ = tableView as! MultiTableView
-        
-        initData()
-//        DLog("reloadData")
-//        tableView.reloadData()
-        DLog("viewDidLoad done")
     }
     
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//        DLog("viewWillAppear done")
-//    }
-//
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//        DLog("viewDidAppear done")
-//    }
+    func initGroupConfig() -> GroupConfig {
+        return GroupConfig()
+    }
 
     // MARK: - Table view data source
 
-//    override func numberOfSections(in tableView: UITableView) -> Int {
-//        // #warning Incomplete implementation, return the number of sections
-//        DLog("numberOfSections=\(groups.count)")
-//        return groups.count
-//    }
-//
-//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        // #warning Incomplete implementation, return the number of rows
-//        DLog("numberOfRowsInSection=\(groups[section].items.count)")
-//        return groups[section].items.count
-//    }
-    
-    
-    func initData() {
-        
-        
-        let view_ = tableView as! MultiTableView
-        view_.vc = self
-        
-//        view_.groups = getTaskInfoTableGroups()
-        
-        view_.load()
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return groupConfig.groups.count
     }
 
-    /*
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        return groupConfig.groups[section].items.count
+    }
+
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        
+        let rowData = groupConfig.groups[indexPath.section].items[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: rowData.identifier) as! SimpleRowTableCell
+        cell.load(vc: self, rawData: rowData)
+        
         return cell
     }
-    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -128,20 +105,15 @@ class EditTodoViewController2: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
-    
     @objc
-    func close(_ sender: AnyObject) {
+    func editEnd() {
         tableView.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
     }
-    
-    @objc
-    func done(_ sender: AnyObject) {
-        tableView.endEditing(true)
-        let msg = join(separator: "\n", list: groups)
-        let notice = NoticeHUD(text: msg, options: NoticeHUD.Options())
-        notice.show()
-        self.dismiss(animated: true, completion: nil)
+}
+
+extension EditTableViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        return touch.view is UITableView
     }
 }
 
@@ -160,4 +132,14 @@ func join<T: NSObject>(separator: String, list: [T], toString: ((T) -> String)? 
         }
     }
     return msg
+}
+
+func stringTrim(string: String?) -> String? {
+    if let string = string {
+        let string = string.trimmingCharacters(in: .whitespacesAndNewlines)
+        if string != "" {
+            return string
+        }
+    }
+    return nil
 }

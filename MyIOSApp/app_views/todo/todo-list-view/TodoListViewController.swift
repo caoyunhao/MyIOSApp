@@ -67,6 +67,10 @@ class TodoListViewController: UITableViewController {
         
         self.tableView.register(UINib(nibName: cellIdentifier, bundle: Bundle.main), forCellReuseIdentifier: cellIdentifier)
         
+        self.navigationItem.leftBarButtonItems = [
+            UIBarButtonItem(title: "All", style: .plain, target: self, action: #selector(self.allKinds)),
+        ]
+        
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.add))
         
         tableView.estimatedRowHeight = 100
@@ -86,9 +90,6 @@ class TodoListViewController: UITableViewController {
         }
 
         config.rightConfigs.append(deleteConfig)
-        
-        DLog("frame=\(view.frame)")
-        DLog("tableView.frame=\(tableView.frame)")
         
         tasks = TodoDB.default.queryTasks()
         tableView.reloadData()
@@ -166,9 +167,7 @@ class TodoListViewController: UITableViewController {
         let task = tasks[indexPath.row]
         
         cell.data = task
-        cell.titleTextField.text = task.title
-        cell.detailTextField.text = task.detail
-        
+
         cell.margin = margin
         cell.cornerRadius = cornerRadius
         
@@ -286,16 +285,8 @@ class TodoListViewController: UITableViewController {
     
     func refreshingData() {
         tasks = TodoDB.default.queryTasks()
-//        let t = CATransition()
-//        t.type = kCATransitionReveal
-//        t.subtype = kCATransitionFromRight
-//        t.duration = 0.4
-//        tableView.layer.add(t, forKey: nil)
-//        tableView.endUpdates()
         let lastScrollOffset = tableView.contentOffset
-//        tableView.isHidden = true
         tableView.reloadData()
-//        tableView.isHidden = false
         tableView.layoutIfNeeded()
         tableView.setContentOffset(lastScrollOffset, animated: false)
     }
@@ -303,6 +294,14 @@ class TodoListViewController: UITableViewController {
     @objc
     func add(_ sender: AnyObject) {
         let addVC = CommonUtils.loadNib(ofViewControllerType: EditTodoViewController4.self)
+        let navVC = UINavigationController(rootViewController: addVC)
+        
+        self.present(navVC, animated: true)
+    }
+    
+    @objc
+    func allKinds(_ sender: AnyObject) {
+        let addVC = CommonUtils.loadNib(ofViewControllerType: KindListViewController.self)
         let navVC = UINavigationController(rootViewController: addVC)
         
         self.present(navVC, animated: true)

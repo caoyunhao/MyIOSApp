@@ -114,8 +114,6 @@
 		A2CC00B7213E634C00666232 /* serialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2CC00B6213E634C00666232 /* serialization.swift */; };
 		A2D07E7E22D35B360064DEFC /* device.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D07E7D22D35B360064DEFC /* device.swift */; };
 		A2D27B1B22E6E47700384CB0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A2D27B1A22E6E47700384CB0 /* Main.storyboard */; };
-		A2D2DB6022E172B90089588A /* EditTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2DB5E22E172B90089588A /* EditTodoViewController.swift */; };
-		A2D2DB6122E172B90089588A /* EditTodoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D2DB5F22E172B90089588A /* EditTodoViewController.xib */; };
 		A2D2DB6522E17F240089588A /* TextTableCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2DB6322E17F240089588A /* TextTableCellView.swift */; };
 		A2D2DB6622E17F240089588A /* TextTableCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D2DB6422E17F240089588A /* TextTableCellView.xib */; };
 		A2D2DB6922E180090089588A /* FieldTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2DB6822E180090089588A /* FieldTableView.swift */; };
@@ -123,8 +121,6 @@
 		A2D2DB7122E192060089588A /* SwitchTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2DB6F22E192060089588A /* SwitchTableCell.swift */; };
 		A2D2DB7222E192060089588A /* SwitchTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D2DB7022E192060089588A /* SwitchTableCell.xib */; };
 		A2D2DB7422E1927E0089588A /* SimpleSwitchRowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2DB7322E1927E0089588A /* SimpleSwitchRowData.swift */; };
-		A2D2DB7922E1DECC0089588A /* EditTodoViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2DB7722E1DECC0089588A /* EditTodoViewController2.swift */; };
-		A2D2DB7A22E1DECC0089588A /* EditTodoViewController2.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D2DB7822E1DECC0089588A /* EditTodoViewController2.xib */; };
 		A2D2DB7E22E1E55E0089588A /* SimpleMultiChoiseCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2DB7C22E1E55E0089588A /* SimpleMultiChoiseCellTableViewCell.swift */; };
 		A2D2DB7F22E1E55E0089588A /* SimpleMultiChoiseCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D2DB7D22E1E55E0089588A /* SimpleMultiChoiseCellTableViewCell.xib */; };
 		A2D2DB8122E1E5A90089588A /* SimpleMultiChoiseRowData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2DB8022E1E5A90089588A /* SimpleMultiChoiseRowData.swift */; };
@@ -138,8 +134,6 @@
 		A2D2DB9922E484950089588A /* SimpleInputFieldTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2DB9722E484950089588A /* SimpleInputFieldTableCell.swift */; };
 		A2D2DB9A22E484950089588A /* SimpleInputFieldTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D2DB9822E484950089588A /* SimpleInputFieldTableCell.xib */; };
 		A2D2DB9C22E485000089588A /* SimpleInputFieldTableCellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2DB9B22E485000089588A /* SimpleInputFieldTableCellData.swift */; };
-		A2D2DB9F22E4C22E0089588A /* EditTodoViewController3.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2DB9D22E4C22E0089588A /* EditTodoViewController3.swift */; };
-		A2D2DBA022E4C22E0089588A /* EditTodoViewController3.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D2DB9E22E4C22E0089588A /* EditTodoViewController3.xib */; };
 		A2D2DBA322E4C9C50089588A /* EditTodoViewController4.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D2DBA122E4C9C50089588A /* EditTodoViewController4.swift */; };
 		A2D2DBA422E4C9C50089588A /* EditTodoViewController4.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2D2DBA222E4C9C50089588A /* EditTodoViewController4.xib */; };
 		A2D50AF22102D8C5009EF79C /* authorizaion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2D50AF12102D8C5009EF79C /* authorizaion.swift */; };
@@ -148,6 +142,25 @@
 		A2E062992140380E00E488CA /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E062982140380E00E488CA /* String+.swift */; };
 		A2E7EE9620CECACE005D2C6A /* ContactsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E7EE9520CECACE005D2C6A /* ContactsViewController.swift */; };
 		A2E8F9E7212F1605009CA6D0 /* user-default-utilsl.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2E8F9E6212F1605009CA6D0 /* user-default-utilsl.swift */; };
+		A2F166A022F814D50093319D /* EditProjectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F1669E22F814D50093319D /* EditProjectViewController.swift */; };
+		A2F166A122F814D50093319D /* EditProjectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F1669F22F814D50093319D /* EditProjectViewController.xib */; };
+		A2F166A322F815280093319D /* EditTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F166A222F815280093319D /* EditTableViewController.swift */; };
+		A2F166A722F84FF00093319D /* KindListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F166A522F84FF00093319D /* KindListViewController.swift */; };
+		A2F166A822F84FF00093319D /* KindListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F166A622F84FF00093319D /* KindListViewController.xib */; };
+		A2F166AB22F8510D0093319D /* KindViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F166A922F8510D0093319D /* KindViewCell.swift */; };
+		A2F166AC22F8510D0093319D /* KindViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F166AA22F8510D0093319D /* KindViewCell.xib */; };
+		A2F166B022F853730093319D /* ProjectListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F166AE22F853730093319D /* ProjectListViewController.swift */; };
+		A2F166B122F853730093319D /* ProjectListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F166AF22F853730093319D /* ProjectListViewController.xib */; };
+		A2F166B422F853870093319D /* ProjectViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F166B222F853870093319D /* ProjectViewCell.swift */; };
+		A2F166B522F853870093319D /* ProjectViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F166B322F853870093319D /* ProjectViewCell.xib */; };
+		A2F166BA22F87BE00093319D /* PastboardHistoryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F166B822F87BE00093319D /* PastboardHistoryListViewController.swift */; };
+		A2F166BB22F87BE00093319D /* PastboardHistoryListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F166B922F87BE00093319D /* PastboardHistoryListViewController.xib */; };
+		A2F166BF22F87C0B0093319D /* PastboardHistroyViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F166BD22F87C0B0093319D /* PastboardHistroyViewCell.swift */; };
+		A2F166C022F87C0B0093319D /* PastboardHistroyViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F166BE22F87C0B0093319D /* PastboardHistroyViewCell.xib */; };
+		A2F166C222F87C6C0093319D /* PastboardHistoryDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F166C122F87C6C0093319D /* PastboardHistoryDB.swift */; };
+		A2F166C422F87E510093319D /* pasteboard-history-manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F166C322F87E510093319D /* pasteboard-history-manager.swift */; };
+		A2F166C722F895FB0093319D /* SimpleMutilChoiseSelectionCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F166C522F895FB0093319D /* SimpleMutilChoiseSelectionCellView.swift */; };
+		A2F166C822F895FB0093319D /* SimpleMutilChoiseSelectionCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2F166C622F895FB0093319D /* SimpleMutilChoiseSelectionCellView.xib */; };
 		A2F3402F219716020013A76D /* SimpleGroupTableConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F3402E219716020013A76D /* SimpleGroupTableConfig.swift */; };
 		A2F547942197F52B00182A9F /* PhotoMultiSelectionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2F547932197F52B00182A9F /* PhotoMultiSelectionItem.swift */; };
 		A2FE93A522AE639700C5821D /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2FE93A422AE639700C5821D /* MainTabBarController.swift */; };
@@ -290,8 +303,6 @@
 		A2CC00B6213E634C00666232 /* serialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = serialization.swift; sourceTree = "<group>"; };
 		A2D07E7D22D35B360064DEFC /* device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = device.swift; sourceTree = "<group>"; };
 		A2D27B1A22E6E47700384CB0 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
-		A2D2DB5E22E172B90089588A /* EditTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoViewController.swift; sourceTree = "<group>"; };
-		A2D2DB5F22E172B90089588A /* EditTodoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTodoViewController.xib; sourceTree = "<group>"; };
 		A2D2DB6322E17F240089588A /* TextTableCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextTableCellView.swift; sourceTree = "<group>"; };
 		A2D2DB6422E17F240089588A /* TextTableCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TextTableCellView.xib; sourceTree = "<group>"; };
 		A2D2DB6822E180090089588A /* FieldTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FieldTableView.swift; sourceTree = "<group>"; };
@@ -299,8 +310,6 @@
 		A2D2DB6F22E192060089588A /* SwitchTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwitchTableCell.swift; sourceTree = "<group>"; };
 		A2D2DB7022E192060089588A /* SwitchTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SwitchTableCell.xib; sourceTree = "<group>"; };
 		A2D2DB7322E1927E0089588A /* SimpleSwitchRowData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleSwitchRowData.swift; sourceTree = "<group>"; };
-		A2D2DB7722E1DECC0089588A /* EditTodoViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoViewController2.swift; sourceTree = "<group>"; };
-		A2D2DB7822E1DECC0089588A /* EditTodoViewController2.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTodoViewController2.xib; sourceTree = "<group>"; };
 		A2D2DB7C22E1E55E0089588A /* SimpleMultiChoiseCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMultiChoiseCellTableViewCell.swift; sourceTree = "<group>"; };
 		A2D2DB7D22E1E55E0089588A /* SimpleMultiChoiseCellTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleMultiChoiseCellTableViewCell.xib; sourceTree = "<group>"; };
 		A2D2DB8022E1E5A90089588A /* SimpleMultiChoiseRowData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMultiChoiseRowData.swift; sourceTree = "<group>"; };
@@ -314,8 +323,6 @@
 		A2D2DB9722E484950089588A /* SimpleInputFieldTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleInputFieldTableCell.swift; sourceTree = "<group>"; };
 		A2D2DB9822E484950089588A /* SimpleInputFieldTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleInputFieldTableCell.xib; sourceTree = "<group>"; };
 		A2D2DB9B22E485000089588A /* SimpleInputFieldTableCellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleInputFieldTableCellData.swift; sourceTree = "<group>"; };
-		A2D2DB9D22E4C22E0089588A /* EditTodoViewController3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoViewController3.swift; sourceTree = "<group>"; };
-		A2D2DB9E22E4C22E0089588A /* EditTodoViewController3.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTodoViewController3.xib; sourceTree = "<group>"; };
 		A2D2DBA122E4C9C50089588A /* EditTodoViewController4.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTodoViewController4.swift; sourceTree = "<group>"; };
 		A2D2DBA222E4C9C50089588A /* EditTodoViewController4.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditTodoViewController4.xib; sourceTree = "<group>"; };
 		A2D50AF12102D8C5009EF79C /* authorizaion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authorizaion.swift; sourceTree = "<group>"; };
@@ -325,6 +332,25 @@
 		A2E062982140380E00E488CA /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		A2E7EE9520CECACE005D2C6A /* ContactsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
 		A2E8F9E6212F1605009CA6D0 /* user-default-utilsl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "user-default-utilsl.swift"; sourceTree = "<group>"; };
+		A2F1669E22F814D50093319D /* EditProjectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProjectViewController.swift; sourceTree = "<group>"; };
+		A2F1669F22F814D50093319D /* EditProjectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditProjectViewController.xib; sourceTree = "<group>"; };
+		A2F166A222F815280093319D /* EditTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTableViewController.swift; sourceTree = "<group>"; };
+		A2F166A522F84FF00093319D /* KindListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KindListViewController.swift; sourceTree = "<group>"; };
+		A2F166A622F84FF00093319D /* KindListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KindListViewController.xib; sourceTree = "<group>"; };
+		A2F166A922F8510D0093319D /* KindViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KindViewCell.swift; sourceTree = "<group>"; };
+		A2F166AA22F8510D0093319D /* KindViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KindViewCell.xib; sourceTree = "<group>"; };
+		A2F166AE22F853730093319D /* ProjectListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectListViewController.swift; sourceTree = "<group>"; };
+		A2F166AF22F853730093319D /* ProjectListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectListViewController.xib; sourceTree = "<group>"; };
+		A2F166B222F853870093319D /* ProjectViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectViewCell.swift; sourceTree = "<group>"; };
+		A2F166B322F853870093319D /* ProjectViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProjectViewCell.xib; sourceTree = "<group>"; };
+		A2F166B822F87BE00093319D /* PastboardHistoryListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastboardHistoryListViewController.swift; sourceTree = "<group>"; };
+		A2F166B922F87BE00093319D /* PastboardHistoryListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PastboardHistoryListViewController.xib; sourceTree = "<group>"; };
+		A2F166BD22F87C0B0093319D /* PastboardHistroyViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastboardHistroyViewCell.swift; sourceTree = "<group>"; };
+		A2F166BE22F87C0B0093319D /* PastboardHistroyViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PastboardHistroyViewCell.xib; sourceTree = "<group>"; };
+		A2F166C122F87C6C0093319D /* PastboardHistoryDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PastboardHistoryDB.swift; sourceTree = "<group>"; };
+		A2F166C322F87E510093319D /* pasteboard-history-manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "pasteboard-history-manager.swift"; sourceTree = "<group>"; };
+		A2F166C522F895FB0093319D /* SimpleMutilChoiseSelectionCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleMutilChoiseSelectionCellView.swift; sourceTree = "<group>"; };
+		A2F166C622F895FB0093319D /* SimpleMutilChoiseSelectionCellView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleMutilChoiseSelectionCellView.xib; sourceTree = "<group>"; };
 		A2F3402E219716020013A76D /* SimpleGroupTableConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleGroupTableConfig.swift; sourceTree = "<group>"; };
 		A2F547932197F52B00182A9F /* PhotoMultiSelectionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoMultiSelectionItem.swift; sourceTree = "<group>"; };
 		A2FE93A422AE639700C5821D /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
@@ -376,6 +402,7 @@
 			children = (
 				A2D2DB8922E4613A0089588A /* sqlite3.swift */,
 				A208FD8F22E590E20056C0F4 /* TodoDB.swift */,
+				A2F166C122F87C6C0093319D /* PastboardHistoryDB.swift */,
 			);
 			path = db;
 			sourceTree = "<group>";
@@ -471,13 +498,13 @@
 			path = auto;
 			sourceTree = "<group>";
 		};
-		A26FD3F72141877700C4D302 /* MessagesViewCell */ = {
+		A26FD3F72141877700C4D302 /* pastboard-view-cell */ = {
 			isa = PBXGroup;
 			children = (
 				A21DE1BB212C731C00FCD407 /* MessagesViewCell.swift */,
 				A21DE1BC212C731C00FCD407 /* MessagesViewCell.xib */,
 			);
-			path = MessagesViewCell;
+			path = "pastboard-view-cell";
 			sourceTree = "<group>";
 		};
 		A272BF2822BA3E310068CE84 /* todo-collection-view */ = {
@@ -505,6 +532,7 @@
 		A279A84520E21B7F0058985C /* app_views */ = {
 			isa = PBXGroup;
 			children = (
+				A2F166B622F87BA00093319D /* pasteboard-history */,
 				A28D3CEB22B75B7A00092F85 /* todo */,
 				A2FE93A322AE633F00C5821D /* nav */,
 				A279A84620E21B8E0058985C /* messages */,
@@ -517,7 +545,7 @@
 		A279A84620E21B8E0058985C /* messages */ = {
 			isa = PBXGroup;
 			children = (
-				A26FD3F72141877700C4D302 /* MessagesViewCell */,
+				A26FD3F72141877700C4D302 /* pastboard-view-cell */,
 				A2FE93A722AE75C600C5821D /* MessagesViewController.swift */,
 				A2FE93A822AE75C600C5821D /* MessagesViewController.xib */,
 			);
@@ -592,6 +620,8 @@
 		A28D3CEB22B75B7A00092F85 /* todo */ = {
 			isa = PBXGroup;
 			children = (
+				A2F166AD22F853560093319D /* project-list */,
+				A2F166A422F84FCD0093319D /* kind-list */,
 				A2D2DB5D22E172840089588A /* todo-add-view */,
 				A272BF2822BA3E310068CE84 /* todo-collection-view */,
 				A28D3CEC22B75B8C00092F85 /* todo-list-view */,
@@ -700,9 +730,9 @@
 			isa = PBXGroup;
 			children = (
 				A2E062932140365900E488CA /* oc */,
+				A246525C20E325CC008E65D9 /* built_in_extension */,
 				A279CD90213A4F7200C5EE51 /* base */,
 				A2C5C73B21905AA500EE0F75 /* components */,
-				A246525C20E325CC008E65D9 /* built_in_extension */,
 				A279A84520E21B7F0058985C /* app_views */,
 				A2D50AEF2102D881009EF79C /* util */,
 				A2CC00B8213E69B400666232 /* file */,
@@ -798,14 +828,10 @@
 		A2D2DB5D22E172840089588A /* todo-add-view */ = {
 			isa = PBXGroup;
 			children = (
-				A2D2DB5E22E172B90089588A /* EditTodoViewController.swift */,
-				A2D2DB5F22E172B90089588A /* EditTodoViewController.xib */,
-				A2D2DB7722E1DECC0089588A /* EditTodoViewController2.swift */,
-				A2D2DB7822E1DECC0089588A /* EditTodoViewController2.xib */,
-				A2D2DB9D22E4C22E0089588A /* EditTodoViewController3.swift */,
-				A2D2DB9E22E4C22E0089588A /* EditTodoViewController3.xib */,
 				A2D2DBA122E4C9C50089588A /* EditTodoViewController4.swift */,
 				A2D2DBA222E4C9C50089588A /* EditTodoViewController4.xib */,
+				A2F1669E22F814D50093319D /* EditProjectViewController.swift */,
+				A2F1669F22F814D50093319D /* EditProjectViewController.xib */,
 				A236CBB022E9D4F200C1C100 /* EditKindViewController.swift */,
 				A236CBB122E9D4F200C1C100 /* EditKindViewController.xib */,
 			);
@@ -834,6 +860,7 @@
 			children = (
 				A2D2DB6D22E191C90089588A /* cell */,
 				A2D2DB6B22E18F460089588A /* MultiTableView.swift */,
+				A2F166A222F815280093319D /* EditTableViewController.swift */,
 			);
 			path = "multi-function-table";
 			sourceTree = "<group>";
@@ -875,6 +902,8 @@
 			children = (
 				A2D2DB8322E1E7150089588A /* SimpleMutilChoiseSelectionViewController.swift */,
 				A2D2DB8422E1E7150089588A /* SimpleMutilChoiseSelectionViewController.xib */,
+				A2F166C522F895FB0093319D /* SimpleMutilChoiseSelectionCellView.swift */,
+				A2F166C622F895FB0093319D /* SimpleMutilChoiseSelectionCellView.xib */,
 			);
 			path = SimpleMutilChoiseSelectionTableView;
 			sourceTree = "<group>";
@@ -959,6 +988,56 @@
 				A2E06295214036C800E488CA /* MyIOSApp-Bridging-Header.h */,
 			);
 			path = oc;
+			sourceTree = "<group>";
+		};
+		A2F166A422F84FCD0093319D /* kind-list */ = {
+			isa = PBXGroup;
+			children = (
+				A2F166A522F84FF00093319D /* KindListViewController.swift */,
+				A2F166A622F84FF00093319D /* KindListViewController.xib */,
+				A2F166A922F8510D0093319D /* KindViewCell.swift */,
+				A2F166AA22F8510D0093319D /* KindViewCell.xib */,
+			);
+			path = "kind-list";
+			sourceTree = "<group>";
+		};
+		A2F166AD22F853560093319D /* project-list */ = {
+			isa = PBXGroup;
+			children = (
+				A2F166AE22F853730093319D /* ProjectListViewController.swift */,
+				A2F166AF22F853730093319D /* ProjectListViewController.xib */,
+				A2F166B222F853870093319D /* ProjectViewCell.swift */,
+				A2F166B322F853870093319D /* ProjectViewCell.xib */,
+			);
+			path = "project-list";
+			sourceTree = "<group>";
+		};
+		A2F166B622F87BA00093319D /* pasteboard-history */ = {
+			isa = PBXGroup;
+			children = (
+				A2F166BC22F87BF10093319D /* cell-view */,
+				A2F166B722F87BB10093319D /* list-view */,
+				A2F166C322F87E510093319D /* pasteboard-history-manager.swift */,
+			);
+			path = "pasteboard-history";
+			sourceTree = "<group>";
+		};
+		A2F166B722F87BB10093319D /* list-view */ = {
+			isa = PBXGroup;
+			children = (
+				A2F166B822F87BE00093319D /* PastboardHistoryListViewController.swift */,
+				A2F166B922F87BE00093319D /* PastboardHistoryListViewController.xib */,
+			);
+			path = "list-view";
+			sourceTree = "<group>";
+		};
+		A2F166BC22F87BF10093319D /* cell-view */ = {
+			isa = PBXGroup;
+			children = (
+				A2F166BD22F87C0B0093319D /* PastboardHistroyViewCell.swift */,
+				A2F166BE22F87C0B0093319D /* PastboardHistroyViewCell.xib */,
+			);
+			path = "cell-view";
 			sourceTree = "<group>";
 		};
 		A2F3402B219715CE0013A76D /* table */ = {
@@ -1109,18 +1188,20 @@
 				A2D2DB9322E475DE0089588A /* SimpleInputTableCell.xib in Resources */,
 				A26FD3FB21418AE500C4D302 /* CameraScanViewController.xib in Resources */,
 				A2B689E922C386A500BFF3C7 /* TodoCollectionViewCell.xib in Resources */,
-				A2D2DBA022E4C22E0089588A /* EditTodoViewController3.xib in Resources */,
 				A2CAE1E221287CB30076C2F5 /* AlbumsViewController.xib in Resources */,
 				A2A733BE21271C060030EF27 /* ResizingViewController.xib in Resources */,
 				A2D2DB7F22E1E55E0089588A /* SimpleMultiChoiseCellTableViewCell.xib in Resources */,
+				A2F166BB22F87BE00093319D /* PastboardHistoryListViewController.xib in Resources */,
 				A236CBB322E9D4F200C1C100 /* EditKindViewController.xib in Resources */,
 				A298960622D2206600081AC6 /* multi-languages.csv in Resources */,
 				A24E7F4120D283A0004CE308 /* qrcode_border@2x.png in Resources */,
 				A272BF2C22BA3E5D0068CE84 /* TodoCollectionViewController.xib in Resources */,
 				A28D3CF622B75C3200092F85 /* TodoListCell.xib in Resources */,
+				A2F166A122F814D50093319D /* EditProjectViewController.xib in Resources */,
 				A2080B632129DB78001C039A /* ImagesViewCell.xib in Resources */,
 				A220917822CF0FF9001F2E75 /* Localizable.strings in Resources */,
 				A2249256223FB397009ACD15 /* TextFieldViewController.xib in Resources */,
+				A2F166B122F853730093319D /* ProjectListViewController.xib in Resources */,
 				A2FE93B222AE90A900C5821D /* task_list@2x.png in Resources */,
 				A298960422D21BA400081AC6 /* multi-languages.py in Resources */,
 				A279CD9D213AC2D300C5EE51 /* DeveloperWebsiteViewController.xib in Resources */,
@@ -1133,19 +1214,22 @@
 				A2A733C9212734C50030EF27 /* PhoneticAdditionViewController.xib in Resources */,
 				A2CAA52E2125DDE400342F36 /* LivePhotosConverterViewController.xib in Resources */,
 				A2D2DB9A22E484950089588A /* SimpleInputFieldTableCell.xib in Resources */,
+				A2F166AC22F8510D0093319D /* KindViewCell.xib in Resources */,
 				A2FE93AA22AE75C600C5821D /* MessagesViewController.xib in Resources */,
 				A2D27B1B22E6E47700384CB0 /* Main.storyboard in Resources */,
+				A2F166C822F895FB0093319D /* SimpleMutilChoiseSelectionCellView.xib in Resources */,
 				A2B79CA12035733800C50054 /* LaunchScreen.storyboard in Resources */,
 				A2B79C9E2035733800C50054 /* Assets.xcassets in Resources */,
 				A2B54DF7211EAC8000FFD2ED /* AlbumsViewCell.xib in Resources */,
+				A2F166C022F87C0B0093319D /* PastboardHistroyViewCell.xib in Resources */,
 				A2417ADA21D7A4730034EFF2 /* GifPickerViewController.xib in Resources */,
 				A2C5C73A21903EFC00EE0F75 /* DeviceInformationViewController.xib in Resources */,
+				A2F166A822F84FF00093319D /* KindListViewController.xib in Resources */,
+				A2F166B522F853870093319D /* ProjectViewCell.xib in Resources */,
 				A23E4C3022F44117004A8B26 /* WebURLViewController.xib in Resources */,
 				A279CD97213AB95D00C5EE51 /* LocalStorageManagerViewController.xib in Resources */,
-				A2D2DB6122E172B90089588A /* EditTodoViewController.xib in Resources */,
 				A2080B612129D495001C039A /* ImagesViewController.xib in Resources */,
 				A2D2DB6622E17F240089588A /* TextTableCellView.xib in Resources */,
-				A2D2DB7A22E1DECC0089588A /* EditTodoViewController2.xib in Resources */,
 				A23E4C2922F408CC004A8B26 /* DouyinViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1176,6 +1260,9 @@
 				A246526020E32FE7008E65D9 /* CGSize.swift in Sources */,
 				A21DE1BD212C731C00FCD407 /* MessagesViewCell.swift in Sources */,
 				A208FD9022E590E20056C0F4 /* TodoDB.swift in Sources */,
+				A2F166A322F815280093319D /* EditTableViewController.swift in Sources */,
+				A2F166BF22F87C0B0093319D /* PastboardHistroyViewCell.swift in Sources */,
+				A2F166B422F853870093319D /* ProjectViewCell.swift in Sources */,
 				A2D2DB9522E476BA0089588A /* SimpleInputTableCellData.swift in Sources */,
 				A201FF7B20E64DBC007116A0 /* ConstraintUtil.swift in Sources */,
 				A2A733C8212734C50030EF27 /* PhoneticAdditionViewController.swift in Sources */,
@@ -1184,6 +1271,7 @@
 				A2288830212DC32A0099F1CF /* messages.swift in Sources */,
 				A2E8F9E7212F1605009CA6D0 /* user-default-utilsl.swift in Sources */,
 				A28B883720CD65460012BC19 /* AutoPhoto.swift in Sources */,
+				A2F166AB22F8510D0093319D /* KindViewCell.swift in Sources */,
 				A2D2DB7122E192060089588A /* SwitchTableCell.swift in Sources */,
 				A2FE93A522AE639700C5821D /* MainTabBarController.swift in Sources */,
 				A2D07E7E22D35B360064DEFC /* device.swift in Sources */,
@@ -1197,6 +1285,7 @@
 				A26FD3FA21418AE500C4D302 /* CameraScanViewController.swift in Sources */,
 				A2D2DB7422E1927E0089588A /* SimpleSwitchRowData.swift in Sources */,
 				A26FD3F62140D94900C4D302 /* date.swift in Sources */,
+				A2F166BA22F87BE00093319D /* PastboardHistoryListViewController.swift in Sources */,
 				A279CD92213A4F8900C5EE51 /* BaseStorage.swift in Sources */,
 				A27906A522C48BA0007C3E14 /* ImagePreviewViewController.swift in Sources */,
 				A23E4C2B22F4341D004A8B26 /* download.swift in Sources */,
@@ -1204,11 +1293,12 @@
 				A2D50AF421030640009EF79C /* NotificationHelper.swift in Sources */,
 				A2B54DF1211E0C6500FFD2ED /* ImagesViewCell.swift in Sources */,
 				A246525E20E325FE008E65D9 /* UIImage.swift in Sources */,
+				A2F166C722F895FB0093319D /* SimpleMutilChoiseSelectionCellView.swift in Sources */,
 				A2B54DE82115561800FFD2ED /* AlbumsViewController.swift in Sources */,
 				A2D2DB8122E1E5A90089588A /* SimpleMultiChoiseRowData.swift in Sources */,
 				A2B689E822C386A500BFF3C7 /* TodoCollectionViewCell.swift in Sources */,
+				A2F166A722F84FF00093319D /* KindListViewController.swift in Sources */,
 				A2417AD921D7A4730034EFF2 /* GifPickerViewController.swift in Sources */,
-				A2D2DB6022E172B90089588A /* EditTodoViewController.swift in Sources */,
 				A28B883B20CD7A720012BC19 /* AutoRecording.swift in Sources */,
 				A272BF2E22BA40DA0068CE84 /* CYHCollectionView.swift in Sources */,
 				A271C22720EB56A5003B4CEC /* alert.swift in Sources */,
@@ -1216,6 +1306,7 @@
 				A2FE93AD22AE7A1A00C5821D /* ToolsViewController.swift in Sources */,
 				A2C5C73921903EFC00EE0F75 /* DeviceInformationViewController.swift in Sources */,
 				A26F00AC22BA984E00AEF5E1 /* JPEG.swift in Sources */,
+				A2F166B022F853730093319D /* ProjectListViewController.swift in Sources */,
 				A28D3CF522B75C3200092F85 /* TodoListCell.swift in Sources */,
 				A21299742199718B007E4129 /* system.swift in Sources */,
 				A26F00AE22BA98E500AEF5E1 /* QuickTimeMov.swift in Sources */,
@@ -1225,8 +1316,8 @@
 				A259FE4120CEC2670051429C /* AutoProtocol.swift in Sources */,
 				A2D2DB6522E17F240089588A /* TextTableCellView.swift in Sources */,
 				A2CAE1CE2127F7150076C2F5 /* picker.swift in Sources */,
-				A2D2DB7922E1DECC0089588A /* EditTodoViewController2.swift in Sources */,
 				A279CD9C213AC2D300C5EE51 /* DeveloperWebsiteViewController.swift in Sources */,
+				A2F166C422F87E510093319D /* pasteboard-history-manager.swift in Sources */,
 				A2A733C321272A3C0030EF27 /* AssetsMovementViewController.swift in Sources */,
 				A2CAA52D2125DDE400342F36 /* LivePhotosConverterViewController.swift in Sources */,
 				A2D2DB8A22E4613A0089588A /* sqlite3.swift in Sources */,
@@ -1246,9 +1337,10 @@
 				A264E83922CDEFC9002998AA /* notice-HUD.swift in Sources */,
 				A2B54E01211EBCAC00FFD2ED /* AssetsUtils.swift in Sources */,
 				A298960222D215D800081AC6 /* qr-utils.swift in Sources */,
+				A2F166C222F87C6C0093319D /* PastboardHistoryDB.swift in Sources */,
 				A2CAE1D021280BC90076C2F5 /* LivePhotoUtil.swift in Sources */,
 				A27C0E4C22C4A9AB0065F00A /* CYHImageHolderView.swift in Sources */,
-				A2D2DB9F22E4C22E0089588A /* EditTodoViewController3.swift in Sources */,
+				A2F166A022F814D50093319D /* EditProjectViewController.swift in Sources */,
 				A2B689EC22C38BB500BFF3C7 /* TodoesViewController.swift in Sources */,
 				A2B79C952035733800C50054 /* AppDelegate.swift in Sources */,
 				A2D2DB9C22E485000089588A /* SimpleInputFieldTableCellData.swift in Sources */,

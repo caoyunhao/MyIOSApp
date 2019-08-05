@@ -1,30 +1,47 @@
 //
-//  SimpleMutilChoiseSelectionViewController.swift
+//  ProjectListViewController.swift
 //  MyIOSApp
 //
-//  Created by Yunhao on 2019/7/19.
+//  Created by Yunhao on 2019/8/5.
 //  Copyright © 2019 Yunhao. All rights reserved.
 //
 
 import UIKit
 
-class SimpleMutilChoiseSelectionViewController: UITableViewController {
+class ProjectListViewController: UITableViewController {
     
-    let cellIdentifier = "SimpleMutilChoiseSelectionCellView"
+    var kind: Kind?
+    var projects: [Project]!
     
-    var data: SimpleMultiChoiseRawData!
+    let reuseIdentifier = "ProjectViewCell"
     
-    private var currentCell: UITableViewCell?
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = kind?.name ?? "所有项目"
         tableView.alwaysBounceVertical = true
+        tableView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+        
+        self.navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addProject))
+        ]
+        
+
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-//        tableView.re
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let kindId = kind?.id {
+            projects = TodoDB.default.queryProjects(byKindId: kindId)
+        } else {
+            projects = TodoDB.default.queryProjects()
+        }
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -36,37 +53,22 @@ class SimpleMutilChoiseSelectionViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.data.items.count
+        return projects.count
     }
-
+    
+    @objc
+    func addProject(_ sender: AnyObject) {
+        let vc = CommonUtils.loadNib(ofViewControllerType: EditProjectViewController.self) as! EditProjectViewController
+        vc.currentKind = kind
+        self.present(UINavigationController(rootViewController: vc), animated: true)
+    }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! SimpleMutilChoiseSelectionCellView
-        // Configure the cell...
-        let item = self.data.items[indexPath.row]
-        cell.nameLabel?.text = item.name
-        if self.data.current?.id == item.id {
-            cell.accessoryType = .checkmark
-            self.currentCell = cell
-        }
-        cell.imageView2?.image = item.image
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier, for: indexPath) as! ProjectViewCell
+        cell.project = projects[indexPath.row]
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            if cell != currentCell {
-                let impact = UIImpactFeedbackGenerator(style: .light)
-                impact.impactOccurred()
-                
-                self.currentCell?.accessoryType = .none
-                cell.accessoryType = .checkmark
-                self.data.current = self.data.items[indexPath.row]
-            }
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-    
+ 
 
     /*
     // Override to support conditional editing of the table view.

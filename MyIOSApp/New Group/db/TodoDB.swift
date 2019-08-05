@@ -111,7 +111,7 @@ class TodoDB {
     }
     
     func deleteTaskTable() -> Bool {
-        return db.deleteTable(tableName: T_Task)
+        return db.dropTable(tableName: T_Task)
     }
     
     func creatKindTable() -> Bool {
@@ -128,7 +128,7 @@ class TodoDB {
     }
     
     func deleteKindTable() -> Bool {
-        return db.deleteTable(tableName: T_Kind)
+        return db.dropTable(tableName: T_Kind)
     }
     
     func creatProjectTable() -> Bool {
@@ -145,7 +145,7 @@ class TodoDB {
     }
     
     func deleteProjectTable() -> Bool {
-        return db.deleteTable(tableName: T_Project)
+        return db.dropTable(tableName: T_Project)
     }
     
     // 关联表
@@ -165,7 +165,7 @@ class TodoDB {
     }
     
     func deleteProjectKindTable() -> Bool {
-        return db.deleteTable(tableName: TR_ProjectKind)
+        return db.dropTable(tableName: TR_ProjectKind)
     }
     
     func creatTaskProjectTable() -> Bool {
@@ -183,14 +183,12 @@ class TodoDB {
     }
     
     func deleteTaskProjectTable() -> Bool {
-        return db.deleteTable(tableName: TR_TaskProject)
+        return db.dropTable(tableName: TR_TaskProject)
     }
     
     // query
     
     func queryTasks() -> [Task] {
-        DLog("query tasks")
-        
         let sql = """
         SELECT \(T_Task).id,\(T_Task).title,\(T_Task).detail,\(T_Task).importent,\(T_Task).emergency,
         \(T_Project).`id`,\(T_Project).`name`,
@@ -212,8 +210,6 @@ class TodoDB {
             return []
         }
         
-        DLog("query start")
-        
         var ret = [Task]()
         
         while sqlite3_step(stmt) == SQLITE_ROW {
@@ -232,6 +228,8 @@ class TodoDB {
             ret.append(task)
         }
         
+        DLog("Query all tasks. Count \(ret.count)")
+        
         return ret
     }
     
@@ -240,7 +238,8 @@ class TodoDB {
                  importent: Int32,
                  emergency: Int32,
                  projectId: Int32) -> Bool {
-        return db.transaction(exec: { () -> Bool in
+        DLog("Add tasks. title: \(title), detail: \(detail)")
+        return db.transaction {
             let sql = """
             INSERT INTO \(T_Task) (`title`, `detail`,`importent`,`emergency`)
             VALUES (?1,?2,?3,?4);
@@ -270,12 +269,12 @@ class TodoDB {
             }
             
             return false
-        })
+        }
     }
     
     // project
     
-    func queryProjectKinds() {
+    private func queryProjectKinds() {
         let sql = """
         SELECT COUNT(*) FROM \(TR_ProjectKind);
         """
@@ -293,8 +292,6 @@ class TodoDB {
     }
     
     func queryProjects() -> [Project] {
-        queryProjectKinds()
-        
         let sql = """
         SELECT \(T_Project).`id`,\(T_Project).`name`,\(T_Kind).id,\(T_Kind).`name`
         FROM \(T_Project)
@@ -310,10 +307,13 @@ class TodoDB {
             return []
         }
         
-        return parseProjectRows(stmt: stmt)
+        let r = parseProjectRows(stmt: stmt)
+        DLog("Query projects. Count \(r.count)")
+        return r
     }
 
     func queryProjects(byKindId kindId: Int32) -> [Project] {
+        DLog("Query projects by kind id \(kindId)")
         let sql = """
         SELECT \(T_Project).`id`,\(T_Project).`name`,\(T_Kind).id,\(T_Kind).`name`
         FROM \(T_Project)
@@ -331,7 +331,9 @@ class TodoDB {
         
         sqlite3_bind_int(stmt, 1, kindId)
         
-        return parseProjectRows(stmt: stmt)
+        let r = parseProjectRows(stmt: stmt)
+        DLog("Query projects by kind id \(kindId). Count \(r.count)")
+        return r
     }
     
     private func parseProjectRows(stmt: OpaquePointer) -> [Project] {
@@ -347,15 +349,14 @@ class TodoDB {
             ret.append(model)
         }
         
-        DLog("projects count: \(ret.count)")
-        
         sqlite3_finalize(stmt)
         
         return ret
     }
     
     func addProject(name: String, kindId: Int32) -> Bool {
-        return db.transaction(exec: { () -> Bool in
+        DLog("Adding project. name: \(name), kindId: \(kindId)")
+        return db.transaction {
             let sql = """
             INSERT INTO \(T_Project) (`name`)
             VALUES (?1);
@@ -378,16 +379,18 @@ class TodoDB {
                 guard let stmt2 = db.prepare(sql: sql) else {
                     return false
                 }
-                sqlite3_bind_int(stmt2, 1, 1)
+                sqlite3_bind_int(stmt2, 1, kindId)
                 
                 return db.stepAndFinalize(stmt: stmt2)
             }
             
             return false
-        })
+        }
     }
     
     func addKind(name: String) -> Bool {
+        DLog("Adding kind. name=\(name)")
+        
         let sql = """
         INSERT INTO c_kind (name) VALUES (?);
         """
@@ -431,7 +434,8 @@ class TodoDB {
     }
     
     func delete(taskId: Int32) -> Bool {
-        return db.transaction(exec: {
+        DLog("Delete task by id \(taskId)")
+        return db.transaction {
             let sql = """
             UPDATE \(T_Task) SET deleted=1 where id=?;
             """
@@ -453,6 +457,6 @@ class TodoDB {
                 return db.stepAndFinalize(stmt: stmt)
             }
             return false
-        })
+        }
     }
 }

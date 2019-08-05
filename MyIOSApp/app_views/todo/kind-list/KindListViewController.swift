@@ -1,30 +1,55 @@
 //
-//  SimpleMutilChoiseSelectionViewController.swift
+//  KindListViewController.swift
 //  MyIOSApp
 //
-//  Created by Yunhao on 2019/7/19.
+//  Created by Yunhao on 2019/8/5.
 //  Copyright © 2019 Yunhao. All rights reserved.
 //
 
 import UIKit
 
-class SimpleMutilChoiseSelectionViewController: UITableViewController {
+class KindListViewController: UITableViewController {
     
-    let cellIdentifier = "SimpleMutilChoiseSelectionCellView"
+    let reuseIdentifier = "KindViewCell"
+    var kinds: [Kind]!
     
-    var data: SimpleMultiChoiseRawData!
-    
-    private var currentCell: UITableViewCell?
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "所有类型"
         tableView.alwaysBounceVertical = true
+        
+        tableView.register(UINib(nibName: reuseIdentifier, bundle: nil), forCellReuseIdentifier: reuseIdentifier)
+        
+        self.navigationItem.leftBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.close))
+        ]
+
+        self.navigationItem.rightBarButtonItems = [
+            UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addKind))
+        ]
+    
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-        tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
+
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-//        tableView.re
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        kinds = TodoDB.default.queryKinds()
+        tableView.reloadData()
+    }
+    
+    @objc
+    func addKind(_ sender: AnyObject) {
+        let vc = CommonUtils.loadNib(ofViewControllerType: EditKindViewController.self)
+        self.present(UINavigationController(rootViewController: vc), animated: true)
+    }
+    
+    @objc
+    func close(_ sender: AnyObject) {
+        self.dismiss(animated: true)
     }
 
     // MARK: - Table view data source
@@ -36,37 +61,23 @@ class SimpleMutilChoiseSelectionViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return self.data.items.count
+        return kinds.count
     }
 
-    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as! SimpleMutilChoiseSelectionCellView
-        // Configure the cell...
-        let item = self.data.items[indexPath.row]
-        cell.nameLabel?.text = item.name
-        if self.data.current?.id == item.id {
-            cell.accessoryType = .checkmark
-            self.currentCell = cell
-        }
-        cell.imageView2?.image = item.image
+        let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifier) as! KindViewCell
+        cell.kind = kinds[indexPath.row]
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) {
-            if cell != currentCell {
-                let impact = UIImpactFeedbackGenerator(style: .light)
-                impact.impactOccurred()
-                
-                self.currentCell?.accessoryType = .none
-                cell.accessoryType = .checkmark
-                self.data.current = self.data.items[indexPath.row]
-            }
-            self.navigationController?.popViewController(animated: true)
-        }
+        let cell = tableView.cellForRow(at: indexPath) as! KindViewCell
+        
+        let vc = CommonUtils.loadNib(ofViewControllerType: ProjectListViewController.self) as! ProjectListViewController
+        vc.kind = cell.kind
+        navigationController?.pushViewController(vc, animated: true)
+        cell.setSelected(false, animated: true)
     }
-    
 
     /*
     // Override to support conditional editing of the table view.

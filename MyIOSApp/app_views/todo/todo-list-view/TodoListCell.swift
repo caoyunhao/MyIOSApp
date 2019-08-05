@@ -15,11 +15,20 @@ class TodoListCell: UITableViewCell {
     
     var isFixed = false
     
-    var data: Task?
+    var data: Task? {
+        didSet {
+            titleTextField.text = data?.title
+            detailTextField.text = data?.detail
+            projectTextField.text = data?.projectName
+            kindTextField.text = data?.kindName
+        }
+    }
     
-    @IBOutlet weak var flagImage: UIImageView!;
-    @IBOutlet weak var titleTextField: UILabel!;
-    @IBOutlet weak var detailTextField: UILabel!;
+    @IBOutlet weak var flagImage: UIImageView!
+    @IBOutlet weak var kindTextField: UILabel!
+    @IBOutlet weak var projectTextField: UILabel!
+    @IBOutlet weak var titleTextField: UILabel!
+    @IBOutlet weak var detailTextField: UILabel!
     
     override var frame: CGRect {
         set {
