@@ -182,7 +182,7 @@ extension ImagesViewController: UICollectionViewDelegate, UICollectionViewDataSo
         if let cell = collectionView.cellForItem(at: indexPath)
             as? ImagesViewCell{
             
-            if (selectedCount() > maxSelected) {
+            if (maxSelected > 0 && selectedCount() > maxSelected) {
                 collectionView.deselectItem(at: indexPath, animated: true)
                 AlertUtils.simple(vc: self, message: "最多选择\(maxSelected)个~")
             } else {

@@ -52,9 +52,16 @@ class AssetsMovementViewController: UIViewController {
         }
         vc.completeHandler = self.handler;
         
-        let navVC = UINavigationController(rootViewController: vc)
+        let options = UINotice.Options()
+//        options.process = true
+//        options.autoCleanTimeInterval = -1
+        let notice = UINotice(text: "123321313213213213232132131313131321123321313213213213232132131313131321123321313213213213232132131313131321123321313213213213232132131313131321123321313213213213232132131313131321123321313213213213232132131313131321", options: options)
         
-        self.present(navVC, animated: true)
+        notice.show()
+        notice.progress = 0.1
+        
+        
+        // self.present(UINavigationController(rootViewController: vc), animated: true)
     }
     
     @objc

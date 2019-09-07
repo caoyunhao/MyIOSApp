@@ -49,6 +49,10 @@ extension UIImage {
         return UIImageJPEGRepresentation(self, 1.0)
     }
     
+    var pngData: Data? {
+        return UIImagePNGRepresentation(self)
+    }
+    
     func dataSize() -> Int {
         return (self.myData()?.count)!
     }

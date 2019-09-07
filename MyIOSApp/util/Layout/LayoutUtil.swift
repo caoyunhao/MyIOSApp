@@ -10,7 +10,7 @@ import UIKit
 
 class LayoutUtil: NSObject {
     static func verticalCenterView(subViews: [UIView], at contentView: UIView, offset: CGFloat) {
-        DLog("subViews: \(subViews.count)")
+//        DLog("subViews: \(subViews.count)")
         if subViews.count > 0 {
             var first = true
             var preView = subViews[0]
@@ -26,7 +26,7 @@ class LayoutUtil: NSObject {
                 preView = subView
             }
             ConstraintUtil.alignBottom(preView, to: contentView, offset: offset)
-            DLog("end")
+//            DLog("end")
         }
     }
 }

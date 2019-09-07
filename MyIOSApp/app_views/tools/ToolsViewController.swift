@@ -114,6 +114,15 @@ fileprivate let WebViewInfo = RowInfo(
     }
 )
 
+fileprivate let settingViewInfo = RowInfo(
+    name: "Setting",
+    description: "软件设置",
+    action: { (currentViewController) in
+        let vc = CommonUtils.loadNib(ofViewControllerType: SettingViewController.self)
+        currentViewController.navigationController?.pushViewController(vc, animated: true)
+    }
+)
+
 class ToolsViewController: UITableViewController {
     
     fileprivate var titleConfig: [[String: Any]] = [
@@ -157,6 +166,12 @@ class ToolsViewController: UITableViewController {
                 WebViewInfo,
             ]
         ],
+        [
+            "title": "Setting",
+            "items": [
+                settingViewInfo,
+            ]
+        ],
     ]
     
     fileprivate func getTitle(_ section: Int) -> String {
@@ -179,8 +194,7 @@ class ToolsViewController: UITableViewController {
         self.tableView = UITableView(frame: view.frame, style: .grouped)
         self.tableView.alwaysBounceVertical = true
         
-        
-//        self.tableView.can
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: LocalizedStrings.SCAN, style: .plain, target: self, action: #selector(self.left))
         
         
         // Uncomment the following line to preserve selection between presentations
@@ -295,5 +309,12 @@ class ToolsViewController: UITableViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    
+    @objc
+    func left() {
+        let vc = CommonUtils.loadNib(ofViewControllerType: CameraScanViewController.self) as! CameraScanViewController
+        let nvc = UINavigationController(rootViewController: vc)
+        self.present(nvc, animated: true, completion: nil)
+    }
     
 }

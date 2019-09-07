@@ -12,9 +12,9 @@ class EditTodoViewController4: EditTableViewController {
         
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "新增任务"
+        title = LocalizedStrings.NEW_TASK
         navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(self.close))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Add", style: .done, target: self, action:  #selector(self.done))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: LocalizedStrings.ADD, style: .done, target: self, action:  #selector(self.done))
     }
     
     override func initGroupConfig() -> GroupConfig {
@@ -32,27 +32,27 @@ class EditTodoViewController4: EditTableViewController {
         let config = groupConfig as! TodoNewTaskConfig
         
         guard let projectId = config.projectId else {
-            NoticeHUD(text: "projectId == nil").show()
+            UINotice(text: "projectId == nil").show()
             return
         }
         
         guard let title = config.taskName else {
-            NoticeHUD(text: "title == nil").show()
+            UINotice(text: "title == nil").show()
             return
         }
         
         guard let detail = config.detail else {
-            NoticeHUD(text: "detail == nil").show()
+            UINotice(text: "detail == nil").show()
             return
         }
         
         guard let im = config.imp else {
-            NoticeHUD(text: "im == nil").show()
+            UINotice(text: "im == nil").show()
             return
         }
         
         guard let em = config.emergency else {
-            NoticeHUD(text: "emergency == nil").show()
+            UINotice(text: "emergency == nil").show()
             return
         }
         
@@ -66,11 +66,11 @@ class EditTodoViewController4: EditTableViewController {
         let emInt = Int32(im ? 1: 0)
         
         if TodoDB.default.addTask(title: title as NSString, detail: detail as NSString, importent: imInt, emergency: emInt, projectId: Int32(projectId)) {
-            NoticeHUD(text: "添加成功").show()
+            UINotice(text: LocalizedStrings.SUCCESS).show()
             tableView.endEditing(true)
             self.dismiss(animated: true, completion: nil)
         } else {
-            NoticeHUD(text: "添加失败").show()
+            UINotice(text: LocalizedStrings.FAIL).show()
         }
     }
 }

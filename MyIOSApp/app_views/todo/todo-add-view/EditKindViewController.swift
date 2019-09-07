@@ -38,16 +38,16 @@ class EditKindViewController: EditTableViewController {
         let config = groupConfig as! TodoNewKindConfig
         
         guard let kindName = config.kindName else {
-            NoticeHUD(text: "kindName 不能为空").show()
+            UINotice(text: "kindName 不能为空").show()
             return
         }
         
         if TodoDB.default.addKind(name: kindName) {
-            NoticeHUD(text: "添加成功").show()
+            UINotice(text: "添加成功").show()
             tableView.endEditing(true)
             self.dismiss(animated: true, completion: nil)
         } else {
-            NoticeHUD(text: "添加失败，请重试").show()
+            UINotice(text: "添加失败，请重试").show()
         }
     }
 }

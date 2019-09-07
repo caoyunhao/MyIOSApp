@@ -11,7 +11,7 @@ import Foundation
 extension String {
     var md5: String {
         let cStr = cString(using: String.Encoding.utf8);
-        let buffer = Swift.UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
+        let buffer = UnsafeMutablePointer<UInt8>.allocate(capacity: 16)
         CC_MD5(cStr!,(CC_LONG)(strlen(cStr!)), buffer)
         let md5String = NSMutableString();
         for i in 0 ..< 16{

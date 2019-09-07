@@ -32,7 +32,7 @@ class WebURLViewController: UIViewController {
             navigationController?.pushViewController(vc, animated: true)
             hidesBottomBarWhenPushed = false
         } else {
-            NoticeHUD(text: "no url").show()
+            UINotice(text: "no url").show()
         }
     }
 

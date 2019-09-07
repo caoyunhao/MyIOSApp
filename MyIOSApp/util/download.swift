@@ -11,16 +11,18 @@ import Foundation
 class Downloader: NSObject {
     private var task: URLSessionDownloadTask!
     private var session: URLSession!
-    private var notice: NoticeHUD
+    private var notice: UINotice
     private var queue: DispatchQueue
     
     init(url: URL, session: URLSession? = nil) {
         self.session = nil
         self.task = nil
         self.queue = DispatchQueue(label: "Downloader", qos: .unspecified, attributes: .concurrent, autoreleaseFrequency: .workItem, target: nil)
-        let op = NoticeHUD.Options()
+        let op = UINotice.Options()
+        op.hasProgress = true
+        op.autoLayout = false
         op.autoCleanTimeInterval = -1
-        notice = NoticeHUD(text: "Start downloading", options: op)
+        notice = UINotice(text: "Start downloading", options: op)
         super.init()
         self.session = session ?? {
             let configuration = URLSessionConfiguration.default
@@ -56,7 +58,9 @@ extension Downloader: URLSessionDownloadDelegate {
     
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
         DispatchQueue.main.async {
-            self.notice.motify(text: "\(totalBytesWritten)/\(totalBytesExpectedToWrite)")
+            self.notice.progress = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
+            self.notice.text = "\(totalBytesWritten)/\(totalBytesExpectedToWrite)"
+            self.notice.layout()
         }
     }
     

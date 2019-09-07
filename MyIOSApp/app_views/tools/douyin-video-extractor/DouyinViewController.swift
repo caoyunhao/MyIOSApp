@@ -49,6 +49,12 @@ class DouyinViewController: UIViewController {
         c.addAction(UIAlertAction(title: "Save Video", style: .default, handler: { (action) in
             self.saveVideo()
         }))
+        c.addAction(UIAlertAction(title: "Copy Link", style: .default) { (action) in
+            if let url = self.webView.url?.absoluteString {
+                UINotice(text: url).show()
+                UIPasteboard.general.string = url
+            }
+        })
         c.addAction(UIAlertAction(title: LocalizedStrings.CANCEL, style: .cancel, handler: { (action) in
             
         }))
@@ -66,7 +72,7 @@ class DouyinViewController: UIViewController {
                 self.navigationController?.pushViewController(vc, animated: true)
                 self.hidesBottomBarWhenPushed = false
             } else {
-                NoticeHUD(text: "no video url").show()
+                UINotice(text: "no video url").show()
             }
         })
     }
@@ -75,7 +81,7 @@ class DouyinViewController: UIViewController {
         if let url = webView.url {
             self.downloadVideo(url: url)
         } else {
-            NoticeHUD(text: "no video").show()
+            UINotice(text: "no video").show()
         }
     }
     
@@ -125,9 +131,11 @@ class DouyinViewController: UIViewController {
         """
         DLog("html: \(html)")
         self.webView.evaluateJavaScript(html, completionHandler: { (result, error) in
-            if result != nil {
-                DLog("yes has");
-                DLog(result);
+            if let element = result as? String {
+                DLog("yes has \(element)  \(type(of: element))");
+                if element.contains("<iframe")  {
+//                    let parser = HTMLPar
+                }
             } else {
                 DLog("no hasnot");
             }

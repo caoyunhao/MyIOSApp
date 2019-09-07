@@ -1,58 +1,48 @@
 //
-//  PastboardHistoryListViewController.swift
+//  SettingViewController.swift
 //  MyIOSApp
 //
-//  Created by Yunhao on 2019/8/5.
+//  Created by Yunhao on 2019/8/7.
 //  Copyright © 2019 Yunhao. All rights reserved.
 //
 
 import UIKit
 
-class PastboardHistoryListViewController: UITableViewController {
-    
-    var items: [PasteboardHistoryItem] = []
-    
-    let cellIdentifier = "PastboardHistroyViewCell"
-    
+class SettingViewController: UITableViewController {
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Pastboard History"
-        navigationItem.largeTitleDisplayMode = .always
-
+        title = "Setting"
+        navigationItem.largeTitleDisplayMode = .never
+        tableView.alwaysBounceVertical = true
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
-        tableView.register(UINib(nibName: cellIdentifier, bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        
-        items = PasteboardHistoryManager.default.getAll()
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return items.count
+        return 0
     }
 
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! PastboardHistroyViewCell
-        
-        cell.item = items[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
 
         return cell
     }
- 
+    */
 
     /*
     // Override to support conditional editing of the table view.

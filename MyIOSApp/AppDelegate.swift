@@ -22,6 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        NotificationAuthorization.request();
 //        LocalizationHelper.shared.checkLanguage()
         TodoDB.default.open()
+        PastboardHistoryDB.default.open()
+        NotificationHelper.default.register()
         return true
     }
 
@@ -46,6 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if let s = UIPasteboard.general.string {
             PastboardHistory.shared.add(text: s)
         }
+        PasteboardHistoryManager.default.insertCurrent()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

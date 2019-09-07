@@ -181,7 +181,7 @@ class AlbumsViewController: UIViewController {
             //没有图片的空相簿不显示
             if assetsFetchResult.count > 0 {
                 let title = titleOfAlbumForChinse(title: photoAlbum.localizedTitle)
-                DLog(title)
+//                DLog(title)
                 albums.append(ImageAlbumItem(title: title, fetchResult: assetsFetchResult))
             }
         }
@@ -230,7 +230,7 @@ class AlbumsViewController: UIViewController {
 //            ret = NSPredicate(format: strList.joined(separator: "||"))
         }
         
-        DLog(ret)
+//        DLog(ret)
         
         return ret;
     }

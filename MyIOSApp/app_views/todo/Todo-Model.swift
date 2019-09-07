@@ -126,9 +126,9 @@ class TodoNewTaskConfig: GroupConfig {
         let kinds = TodoDB.default.queryKinds().map { (kind) -> SimpleMultiChoiseRawData.Item in
             return SimpleMultiChoiseRawData.Item(id: Int(kind.id), name: kind.name, image: createCircularImage(rate: 0.3, color: .red))
         }
-        let projectRow = SimpleMultiChoiseRawData(key: "project", name: "所属项目", items: [], current: nil)
+        let projectRow = SimpleMultiChoiseRawData(key: "project", name: LocalizedStrings.PROJECT, items: [], current: nil)
         
-        let kindRow = SimpleMultiChoiseRawData(key: "kind", name: "类型", items: kinds, current: kinds.first) { item in
+        let kindRow = SimpleMultiChoiseRawData(key: "kind", name: LocalizedStrings.KIND, items: kinds, current: kinds.first) { item in
             DLog("callback")
             projectRow.items = TodoDB.default.queryProjects(byKindId: Int32(item.id)).map({ (project) -> SimpleMultiChoiseRawData.Item in
                 return SimpleMultiChoiseRawData.Item(id: Int(project.id), name: project.name)
@@ -143,15 +143,15 @@ class TodoNewTaskConfig: GroupConfig {
         
         groups.append(group1)
         
-        let titleRow = SimpleInputTableCellData(key: "title", name: "标题")
+        let titleRow = SimpleInputTableCellData(key: "title", name: LocalizedStrings.TITLE)
         titleRow.isFirstResponder = true
         groups.append(Group(items: [titleRow,]))
         groups.append(Group(items: [
-            SimpleSwitchRowData(key: "imp", name: "重要"),
-            SimpleSwitchRowData(key: "emergency", name: "紧急"),
+            SimpleSwitchRowData(key: "imp", name: LocalizedStrings.IMPORTENT),
+            SimpleSwitchRowData(key: "emergency", name: LocalizedStrings.EMERGENCY),
             ]))
-        groups.append(Group(items: [SimpleSwitchRowData(key: "notice", name: "提醒")]))
-        groups.append(Group(items: [SimpleInputFieldTableCellData(key: "detail", name: "详情")]))
+        groups.append(Group(items: [SimpleSwitchRowData(key: "notice", name: LocalizedStrings.REMIND)]))
+        groups.append(Group(items: [SimpleInputFieldTableCellData(key: "detail", name: LocalizedStrings.DETAIL)]))
     }
     
     var projectId: Int? {

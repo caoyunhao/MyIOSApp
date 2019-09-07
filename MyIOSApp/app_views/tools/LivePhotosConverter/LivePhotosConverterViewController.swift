@@ -63,7 +63,6 @@ class LivePhotosConverterViewController: UIViewController {
     
     @objc
     func handler(assets: [PHAsset]) {
-        DLog("handle \(assets.count) photos.")
         let total = assets.count
         var liveCnt: Int = 0
         
@@ -85,7 +84,7 @@ class LivePhotosConverterViewController: UIViewController {
         }
         
         vc.type = .video
-        vc.maxSelected = 1
+        vc.maxSelected = -1
         
         let navVC = UINavigationController(rootViewController: vc)
         
@@ -93,25 +92,45 @@ class LivePhotosConverterViewController: UIViewController {
     }
     
     func toLivePhotoHandler(assets: [PHAsset]) {
-        assets.forEach { (asset) in
-            let options = PHVideoRequestOptions()
-            
-            options.version = .current
-            
-            PHImageManager.default().requestAVAsset(forVideo: asset, options: options, resultHandler: { (avAsset, audioMix, info) in
-                if let avAsset = avAsset {
-                    DLog("读取视频成功")
-                    SaveLivePhotosToLibary(avAsset: avAsset) { (success, error) in
-                        if success {
-                            AlertUtils.simple(vc: self, message: LocalizedStrings.SUCCESS)
-                        } else{
-                            AlertUtils.simple(vc: self, message: "\(LocalizedStrings.FAIL)：\(String(describing: error))")
+        let uiOptions = UINotice.Options()
+        uiOptions.hasProgress = true
+        uiOptions.autoCleanTimeInterval = -1
+        
+        let notice = UINotice(text: "开始转换", options: uiOptions)
+        notice.show()
+        
+        DispatchQueue.global().async {
+            let s = DispatchSemaphore(value: 0)
+            var successCount = 0
+            assets.forEach { (asset) in
+                DLog("enter")
+                //            group.enter()
+                let options = PHVideoRequestOptions()
+                options.version = .current
+                PHImageManager.default().requestAVAsset(forVideo: asset, options: options, resultHandler: { (avAsset, audioMix, info) in
+                    if let avAsset = avAsset {
+                        SaveLivePhotosToLibary(avAsset: avAsset) { (success, error) in
+                            if success {
+                                successCount += 1
+                            } else {
+                                AlertUtils.simple(vc: self, message: "\(LocalizedStrings.FAIL)：\(String(describing: error))")
+                            }
+                            s.signal()
+                            DispatchQueue.main.async {
+                                notice.text = "已完成(\(successCount)/\(assets.count))"
+                            }
                         }
+                    } else {
+                        AlertUtils.simple(vc: self, message: "读取视频失败")
+                        s.signal()
                     }
-                } else {
-                    AlertUtils.simple(vc: self, message: "读取视频失败")
-                }
-            })
+                })
+                s.wait()
+            }
+            DispatchQueue.main.async {
+                notice.text = "转换完成"
+                notice.hide(afterDelay: 1)
+            }
         }
     }
 }

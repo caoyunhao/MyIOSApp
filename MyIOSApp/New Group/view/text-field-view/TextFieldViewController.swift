@@ -46,6 +46,6 @@ class TextFieldViewController: UIViewController {
     
     @objc func copyTo() {
         UIPasteboard.general.string = text
-        NoticeHUD(text: "Copied").show()
+        UINotice(text: "Copied").show()
     }
 }

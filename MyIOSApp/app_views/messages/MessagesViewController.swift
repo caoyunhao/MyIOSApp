@@ -61,10 +61,10 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
         tableView.reloadData()
     }
     
-    @objc func left() {
-        let vc = CommonUtils.loadNib(ofViewControllerType: CameraScanViewController.self) as! CameraScanViewController
-        let nvc = UINavigationController(rootViewController: vc)
-        self.present(nvc, animated: true, completion: nil)
+    @objc
+    func left() {
+        UIPasteboard.general.clear();
+        UINotice(text: "Clear successfully").show()
     }
     
     override func viewDidLoad() {
@@ -74,7 +74,7 @@ class MessagesViewController: UITableViewController, UIViewControllerPreviewingD
         self.tableView.alwaysBounceVertical = true
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationItem.searchController = UISearchController(searchResultsController: UIViewController())
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: LocalizedStrings.SCAN, style: .plain, target: self, action: #selector(self.left))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: LocalizedStrings.CLEAR_CURRENT, style: .plain, target: self, action: #selector(self.left))
         
         //        self.tableView.tableFooterView = UIView(frame: CGRect.zero)
         

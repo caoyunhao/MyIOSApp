@@ -35,33 +35,27 @@ class PhoneticAdditionViewController: UIViewController {
     
     @IBAction
     func phoneticAction() {
-        let options = NoticeHUD.Options()
-        let notice = NoticeHUD(text: "init...", options: options)
+        let options = UINotice.Options()
+        let notice = UINotice(text: "init...", options: options)
         notice.show()
         ContactsHelper.shared.enumerateContacts(processing: { (cnMutableContact, index, count) in
             ContactsHelper.shared.addCallerlocAndSave(cnMutableContact)
-            DispatchQueue.main.async {
-                let msg = "正在处理: \n\(cnMutableContact.familyName)  \(cnMutableContact.givenName) \n(\(index + 1)/\(count))"
-                notice.motify(text: msg)
-            }
+            notice.text = "正在处理: \n\(cnMutableContact.familyName)  \(cnMutableContact.givenName) \n(\(index + 1)/\(count))"
         }) {
-            notice.motify(text: "完成~")
+            notice.text = "完成~"
             notice.clean(self)
         }
     }
     
     @IBAction
     func callerlocAction() {
-        let option = NoticeHUD.Options()
-        let notice = NoticeHUD(text: "init...", options: option)
+        let option = UINotice.Options()
+        let notice = UINotice(text: "init...", options: option)
         notice.show()
         ContactsHelper.shared.enumerateContacts(processing: { (cnMutableContact, index, count) in
-            DispatchQueue.main.async {
-                let msg = "正在处理: \n\(cnMutableContact.familyName)  \(cnMutableContact.givenName) \n(\(index + 1)/\(count))"
-                notice.motify(text: msg)
-            }
+            notice.text = "正在处理: \n\(cnMutableContact.familyName)  \(cnMutableContact.givenName) \n(\(index + 1)/\(count))"
         }) {
-            notice.motify(text: "完成~")
+            notice.text = "完成~"
             notice.clean(self)
         }
     }

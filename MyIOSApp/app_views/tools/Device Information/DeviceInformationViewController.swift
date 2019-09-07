@@ -20,7 +20,7 @@ class DeviceInformationViewController: UITableViewController {
         
         tableConfig.data.append(SimpleGroupTableConfigGroupConfig(header: "Some ID", content: [
             (label: "IDFA", detailLabel: ASIdentifierManager.shared().advertisingIdentifier.uuidString, style: .value1),
-            (label: "UDID", detailLabel: UIDevice.current.identifierForVendor?.uuidString ?? "nil", style: .value1),
+            (label: "IDFV", detailLabel: UIDevice.current.identifierForVendor?.uuidString ?? "nil", style: .value1),
             ], footer: nil))
         
         tableConfig.data.append(SimpleGroupTableConfigGroupConfig(header: "System", content: [

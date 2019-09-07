@@ -37,7 +37,6 @@ func SaveLivePhotosToLibary(avAsset: AVAsset, completionHandler: ((Bool, Error?)
             
             JPEG(path: imagePath).write(imageUrl, assetIdentifier: assetIdentifier)
             QuickTimeMov(avAsset: avAsset).write(movUrl, assetIdentifier: assetIdentifier)
-            
             PHPhotoLibrary.shared().performChanges({
                 let creationRequest = PHAssetCreationRequest.forAsset()
                 

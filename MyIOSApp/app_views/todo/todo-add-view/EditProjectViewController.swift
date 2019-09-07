@@ -42,20 +42,20 @@ class EditProjectViewController: EditTableViewController {
         let config = groupConfig as! TodoNewProjectConfig
         
         guard let projectName = config.projectName else {
-            NoticeHUD(text: "projectName 不能为空").show()
+            UINotice(text: "projectName 不能为空").show()
             return
         }
         guard let kindId = config.kindId else {
-            NoticeHUD(text: "kindId 不能为空").show()
+            UINotice(text: "kindId 不能为空").show()
             return
         }
         
         if TodoDB.default.addProject(name: projectName, kindId: Int32(kindId)) {
-            NoticeHUD(text: "添加成功").show()
+            UINotice(text: "添加成功").show()
             tableView.endEditing(true)
             self.dismiss(animated: true, completion: nil)
         } else {
-            NoticeHUD(text: "添加失败，请重试").show()
+            UINotice(text: "添加失败，请重试").show()
         }
     }
 }
