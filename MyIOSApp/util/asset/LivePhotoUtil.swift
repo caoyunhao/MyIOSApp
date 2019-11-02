@@ -6,7 +6,7 @@
 //  Copyright © 2018 Yunhao. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Photos
 import MobileCoreServices
 

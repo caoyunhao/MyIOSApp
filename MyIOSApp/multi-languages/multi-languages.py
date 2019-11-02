@@ -3,7 +3,7 @@
 headers = ["key", "en", "zh-Hans"]
 
 info_plist_rows = [
-    ["CFBundleDisplayName", "My Helper", "我的助手"],
+    ["CFBundleDisplayName", "Sona", "Sona"],
 ]
 
 rows = [

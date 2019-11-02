@@ -29,10 +29,10 @@ class NotificationHelper {
                 DLog("注册成功")
             }
         }
-        var date = DateComponents()
-        date.hour = 10
-        date.minute = 36
-        addCalendar(content: "content", date: date)
+//        var date = DateComponents()
+//        date.hour = 10
+//        date.minute = 36
+//        addCalendar(content: "content", date: date)
     }
     
     func addCalendar(content: String, date: DateComponents) {

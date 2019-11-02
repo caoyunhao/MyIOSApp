@@ -32,10 +32,16 @@ class DeviceInformationViewController: UITableViewController {
         
         tableConfig.data.append(SimpleGroupTableConfigGroupConfig(header: "Storage", content: [
             (label: "RAM Total Size", detailLabel: UIDevice.fileSizeString(fileSize: UIDevice.current.totalRAM) , style: .value1),
-            
+            (label: "RAM Used Size", detailLabel: UIDevice.fileSizeString(fileSize: UIDevice.current.usedRAM) , style: .value1),
             (label: "Disk Available Size", detailLabel: UIDevice.fileSizeString(fileSize: UIDevice.current.availableDisk) , style: .value1),
             (label: "Disk Total Size", detailLabel: UIDevice.fileSizeString(fileSize: UIDevice.current.totalDisk) , style: .value1),
             ], footer: nil))
+        
+        tableConfig.data.append(SimpleGroupTableConfigGroupConfig(header: "Battery", content: [
+            (label: "Total", detailLabel: UIDevice.fileSizeString(fileSize: UIDevice.current.totalRAM) , style: .value1),
+            ], footer: nil))
+        
+        UIDevice.current.batteryMax()
     }
     
     override func viewDidLoad() {

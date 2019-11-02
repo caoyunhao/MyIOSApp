@@ -35,6 +35,27 @@ extension UIDevice{
         return -1
     }
     
+    var usedRAM: Int64 {
+        var info = mach_task_basic_info()
+        var count = mach_msg_type_number_t(MemoryLayout<mach_task_basic_info>.size)/4
+        
+        let kerr: kern_return_t = withUnsafeMutablePointer(to: &info) {
+            $0.withMemoryRebound(to: integer_t.self, capacity: 1) {
+                task_info(mach_host_self(),
+                          task_flavor_t(MACH_TASK_BASIC_INFO),
+                          $0,
+                          &count)
+            }
+        }
+        
+        if kerr == KERN_SUCCESS {
+            return Int64(info.resident_size)
+        } else {
+            DLog("error")
+            return 0
+        }
+    }
+    
     var totalRAM: Int64 {
         return Int64(ProcessInfo.processInfo.physicalMemory)
     }
@@ -110,5 +131,29 @@ extension UIDevice{
         } else {
             return String(format: "%.1f GB", CGFloat(fileSize1)/GB)
         }
+    }
+
+    
+    
+    func batteryMax() {
+//        typealias IORegistryEntryCreateCFProperties = (mach_port_t, CFMutableDictionary!, CFAllocator!, UInt32) -> (kern_return_t)
+//        typealias IOServiceGetMatchingService = (mach_port_t, CFDictionary?) -> (mach_port_t)
+//        typealias IOServiceMatching = (String) -> (CFMutableDictionary)
+//        let handle = dlopen("/System/Library/Frameworks/IOKit.framework/Versions/A/IOKit", RTLD_LAZY)
+//        DLog(1)
+//        let s_IORegistryEntryCreateCFProperties = unsafeBitCast(dlsym(handle, "IORegistryEntryCreateCFProperties"), to: IORegistryEntryCreateCFProperties.self)
+//        DLog(2)
+//        let s_kIOMasterPortDefault = unsafeBitCast(dlsym(handle, "kIOMasterPortDefault"), to: mach_port_t.self)
+//        DLog(3)
+//        let s_IOServiceMatching = unsafeBitCast(dlsym(handle, "IOServiceMatching"), to: IOServiceMatching.self)
+//        DLog(4)
+//        let s_IOServiceGetMatchingService = unsafeBitCast(dlsym(handle, "IOServiceGetMatchingService"), to: IOServiceGetMatchingService.self)
+//        DLog(5)
+//        let g_powerSourceService = s_IOServiceMatching("IOPMPowerSource")
+//        let g_platformExpertDevice = s_IOServiceGetMatchingService(s_kIOMasterPortDefault, g_powerSourceService)
+//        let prop: CFMutableDictionary? = nil
+//        s_IORegistryEntryCreateCFProperties(g_platformExpertDevice, prop, nil, 0)
+//
+//        DLog(prop)
     }
 }
