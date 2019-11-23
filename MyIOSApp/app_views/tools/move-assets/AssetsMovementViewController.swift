@@ -50,28 +50,13 @@ class AssetsMovementViewController: UIViewController {
             (assets) in
             self.handler(assets: assets)
         }
-        vc.completeHandler = self.handler;
-        
-        let options = UINotice.Options()
-//        options.process = true
-//        options.autoCleanTimeInterval = -1
-        let notice = UINotice(text: "123321313213213213232132131313131321123321313213213213232132131313131321123321313213213213232132131313131321123321313213213213232132131313131321123321313213213213232132131313131321123321313213213213232132131313131321", options: options)
-        
-        notice.show()
-        notice.progress = 0.1
-        
-        
-        // self.present(UINavigationController(rootViewController: vc), animated: true)
+//        vc.completeHandler = self.handler;
+         self.present(UINavigationController(rootViewController: vc), animated: true)
     }
     
     @objc
     func handler(assets: [PHAsset]) {
         DLog("move \(assets.count) photos.")
-//        AssetsUtils.doViaLivePhotoSource(livePhotoAsset: assets[0], imageHandler: {
-//            (image) in
-//            AssetsUtils.save(image: image)
-//        })
-        
         AssetsUtils.move(assets: assets, titleOfTargetAlbum: "123123123", delete: false)
 //                AssetsUtils.move(assets: assets, titleOfTargetAlbum: "ZZZ", delete: true)
     }

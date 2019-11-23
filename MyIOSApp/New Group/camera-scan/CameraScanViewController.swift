@@ -83,12 +83,33 @@ class CameraScanViewController: UIViewController {
         
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
-        (UIApplication.shared.value(forKey: "statusBar") as! UIView).tintColor = .white
+        self.getStatusBarView()?.tintColor = .white
+        
         
         view.addSubview(ScanView(frame: UIScreen.main.bounds))
         view.bringSubview(toFront: self.infomationTextView)
         self.infomationTextView.backgroundColor = UIColor(white: 0, alpha: 0.5)
         self.infomationTextView.textColor = UIColor(white: 0.7, alpha: 1.0)
+    }
+    
+    private func getStatusBarView() -> UIView? {
+        if #available(iOS 13.0, *) {
+            if let keyWindow = (UIApplication.shared.windows.filter    {$0.isKeyWindow}).first {
+                if let statusBar = keyWindow.viewWithTag(38782) {
+                    return statusBar
+                } else {
+                    if let statusBarFrame =                          keyWindow.windowScene?.statusBarManager?.statusBarFrame {
+                        let view = UIView(frame: statusBarFrame)
+                        view.tag = 38482
+                        keyWindow.addSubview(view)
+                        return view
+                    }
+                }
+            }
+            return nil
+        } else {
+            return UIApplication.shared.value(forKey: "statusBar") as? UIView
+        }
     }
     
     //    扫描二维码
@@ -164,8 +185,7 @@ class CameraScanViewController: UIViewController {
     }
     
     @IBAction private func close(sender: AnyObject) {
-        let statusBar = UIApplication.shared.value(forKey: "statusBar") as! UIView
-        statusBar.backgroundColor = UIColor.clear
+        getStatusBarView()?.backgroundColor = UIColor.clear
         self.dismiss(animated: true, completion:nil)
     }
 }

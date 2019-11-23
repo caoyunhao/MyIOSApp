@@ -52,7 +52,7 @@ class LivePhotosConverterViewController: UIViewController {
             (assets) in
             self.handler(assets: assets)
         }
-        
+        vc.maxSelected = -1
         vc.type = .image
         vc.subTypes.append(.photoLive)
         
@@ -65,15 +65,28 @@ class LivePhotosConverterViewController: UIViewController {
     func handler(assets: [PHAsset]) {
         let total = assets.count
         var liveCnt: Int = 0
-        
-        assets.forEach {(asset) in
-            if asset.mediaSubtypes.contains(.photoLive) {
-                liveCnt += 1;
-                LivePhotosUtil.save(livePhotoAsset: asset)
+        let options = UINotice.Options()
+        options.autoCleanTimeInterval = -1
+        options.hasProgress = true
+        options.autoLayout = true
+        let notice = UINotice(text: "已转换", options: options)
+        notice.show()
+        DispatchQueue.global().async {
+            for asset in assets {
+                if asset.mediaSubtypes.contains(.photoLive) {
+                    liveCnt += 1;
+                    let paths = LivePhotosUtil.saveLivePhotoToLibray(livePhotoAsset: asset, mediaTypes: [.video], toAlbum: "Live Photos Convert")
+                    DispatchQueue.main.async {
+                        notice.progress = Double(liveCnt) / Double(total)
+                        notice.text = "\(liveCnt)/\(total)"
+                    }
+                }
+            }
+            DispatchQueue.main.async {
+                notice.text = "转换完成"
+                notice.hide(afterDelay: 1)
             }
         }
-
-        AlertUtils.simple(vc: self, message: "\(LocalizedStrings.DONE) \(liveCnt)/\(total)")
     }
     
     @IBAction

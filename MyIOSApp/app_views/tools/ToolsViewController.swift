@@ -314,6 +314,7 @@ class ToolsViewController: UITableViewController {
     func left() {
         let vc = CommonUtils.loadNib(ofViewControllerType: CameraScanViewController.self) as! CameraScanViewController
         let nvc = UINavigationController(rootViewController: vc)
+        nvc.modalPresentationStyle = .fullScreen
         self.present(nvc, animated: true, completion: nil)
     }
     

@@ -52,7 +52,7 @@ extension Downloader: URLSessionDownloadDelegate {
         let url = URL(fileURLWithPath: path)
         try! FileManager.default.moveItem(at: location, to: url)
         DispatchQueue.main.async {
-            AssetsUtils.saveVideo(atFileURL: url)
+            _ = AssetsUtils.saveToLibraySync(fromFileURL: url, mediaType: .video)
         }
     }
     

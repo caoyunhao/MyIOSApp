@@ -11,45 +11,74 @@ import MobileCoreServices
 
 class AssetsUtils {
     
+    static func move(placeholders: [PHObjectPlaceholder], titleOfTargetAlbum albumTitle: String, delete: Bool) {
+        let localIdentifiers = placeholders.map({ (holder) -> String in
+            return holder.localIdentifier
+        })
+        move(localIdentifiers: localIdentifiers, titleOfTargetAlbum: albumTitle, delete: delete)
+    }
+    
+    static func move(localIdentifiers: [String], titleOfTargetAlbum albumTitle: String, delete: Bool) {
+        let assetsResult = PHAsset.fetchAssets(withLocalIdentifiers: localIdentifiers, options: nil)
+        var assets = [PHAsset]()
+        assetsResult.enumerateObjects { (asset, index, _) in
+            assets.append(asset)
+        }
+        move(assets: assets, titleOfTargetAlbum: albumTitle, delete: delete)
+    }
+    
     static func move(assets: [PHAsset], titleOfTargetAlbum albumTitle: String, delete: Bool) {
-        
-        doInAlbum(title: albumTitle) { album in
+        guard let album = getAlbumCreatingIfNotExist(title: albumTitle) else {
+            return
+        }
+        let signal = DispatchSemaphore(value: 0)
+        DispatchQueue.main.async {
             PHPhotoLibrary.shared().performChanges({
-//                let addRequest = PHAssetCollectionChangeRequest.init(for: album)
-                assets.forEach({ (asset) in
-                    let re = PHAssetChangeRequest(for: asset)
-                    re.creationDate = nil
-                })
-//                addRequest?.addAssets(assets as NSFastEnumeration)
+                if let addRequest = PHAssetCollectionChangeRequest(for: album) {
+                    assets.forEach({ (asset) in
+                        let re = PHAssetChangeRequest(for: asset)
+                        re.creationDate = nil
+                    })
+                    addRequest.addAssets(assets as NSFastEnumeration)
+                } else {
+                    DLog("PHAssetCollectionChangeRequest fail")
+                }
             }, completionHandler: { (success, error) in
-                DLog("Callback success: \(success)")
+                DLog("move callback success: \(success)")
                 if delete {
                     DLog("delete")
                     PHPhotoLibrary.shared().performChanges({
                         PHAssetChangeRequest.deleteAssets(assets as NSFastEnumeration)
                     }) { (success, error) in
                         DLog("delete Callback success: \(success)")
+                        signal.signal()
                     }
+                } else {
+                    signal.signal()
                 }
             })
         }
+        
+        signal.wait()
     }
+    
+
     
     static func save(image: UIImage) {
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
     
     static func save(image: UIImage, titleOfToAblum title: String) {
-        doInAlbum(title: title) { (ablum) in
-            PHPhotoLibrary.shared().performChanges({
-                let assetRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
-                let assetPlaceholder = assetRequest.placeholderForCreatedAsset
-                let albumChangeRequest = PHAssetCollectionChangeRequest.init(for: ablum)
-                albumChangeRequest?.addAssets([assetPlaceholder!] as NSArray)
-                
-            }) { (success, error) in
-                DLog("Save image success: \(success)")
-            }
+        guard let ablum = getAlbumCreatingIfNotExist(title: title) else {
+            return
+        }
+        PHPhotoLibrary.shared().performChanges({
+            let assetRequest = PHAssetChangeRequest.creationRequestForAsset(from: image)
+            let assetPlaceholder = assetRequest.placeholderForCreatedAsset
+            let albumChangeRequest = PHAssetCollectionChangeRequest(for: ablum)
+            albumChangeRequest?.addAssets([assetPlaceholder!] as NSArray)
+        }) { (success, error) in
+            DLog("Save image success: \(success)")
         }
     }
     
@@ -93,94 +122,101 @@ class AssetsUtils {
 //                DLog("save asset failure. (\(fileURL)), \(error?.localizedDescription)")
 //            }
 //        }
-        
-        do {
-            try PHPhotoLibrary.shared().performChangesAndWait {
+        PHPhotoLibrary.shared().performChanges( {
 //                let options = PHAssetResourceCreationOptions()
 //                options.shouldMoveFile = true
 //                let request = PHAssetCreationRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
 //                request?.addResource(with: .video, fileURL: fileURL, options: options)
-                PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
+            PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)
+        }) { success, error in
+            if success {
+                DLog("save asset success. (\(fileURL))")
+            } else {
+                DLog("save asset failure. (\(fileURL)), \(error?.localizedDescription)")
             }
-            DLog("save asset success. (\(fileURL))")
-        } catch (let error) {
-            DLog("save asset failure. (\(fileURL)), \(error.localizedDescription)")
         }
-        
-            
-//        }) { (success, error) in
-//            if success {
-//                DLog("save asset success. (\(fileURL))")
-//            } else {
-//                DLog("save asset failure. (\(fileURL)), \(error?.localizedDescription)")
-//            }
+    }
+    
+    static func saveToLibraySync(fromFileURL fileURL: URL, mediaType: PHAssetMediaType, toAlbum: String? = nil) -> PHObjectPlaceholder? {
+//        guard FileManager.default.fileExists(atPath: fileURL.absoluteString) else {
+//            DLog("No file at \(fileURL)")
+//            return nil
 //        }
-    }
-    
-    static func generateTemporaryDirectory() -> NSURL {
-        let dir = NSURL(
-            // NB: Files in NSTemporaryDirectory() are automatically cleaned up by the OS
-            fileURLWithPath: NSTemporaryDirectory(),
-            isDirectory: true
-            ).appendingPathComponent(UUID().uuidString, isDirectory: true)
         
-        let fileManager = FileManager()
-        // we need to specify type as ()? as otherwise the compiler generates a warning
-        let _ : ()? = try? fileManager.createDirectory(
-            at: dir!,
-            withIntermediateDirectories: true,
-            attributes: nil
-        )
+        let signal = DispatchSemaphore(value: 0)
+        var holder: PHObjectPlaceholder?
         
-//        return success != nil ? photoDir! as NSURL : nil
-        return dir! as NSURL
-    }
-    
-    static func generateTemporaryFile() -> NSURL {
-        return generateTemporaryDirectory().appendingPathComponent(UUID().uuidString, isDirectory: false)! as NSURL
-    }
-    
-    static func saveAssetResource(
-        resource: PHAssetResource,
-        inDirectory: NSURL,
-        buffer: NSMutableData?,
-        maybeError: Error?,
-        callback: ((URL) -> Void)?
-        ) -> Void {
-        
-        DLog("start")
-        
-        guard maybeError == nil else {
-            DLog("Could not request data for resource: \(resource), error: \(String(describing: maybeError))")
-            return
-        }
-        
-        let maybeExt = UTTypeCopyPreferredTagWithClass(
-            resource.uniformTypeIdentifier as CFString,
-            kUTTagClassFilenameExtension
-            )?.takeRetainedValue()
-        
-        guard let ext = maybeExt else {
-            return
-        }
-        
-        guard var fileUrl = inDirectory.appendingPathComponent(NSUUID().uuidString) else {
-            DLog("file url error")
-            return
-        }
-        
-        fileUrl = fileUrl.appendingPathExtension(ext as String)
-        
-        if let buffer = buffer, buffer.write(to: fileUrl, atomically: true) {
-            DLog("Saved resource form buffer \(resource) to filepath \(String(describing: fileUrl))")
-            callback?(fileUrl)
-        } else {
-            PHAssetResourceManager.default().writeData(for: resource, toFile: fileUrl, options: nil) { (error) in
-                DLog("Saved resource directly \(resource) to filepath \(String(describing: fileUrl))")
-                callback?(fileUrl)
+        PHPhotoLibrary.shared().performChanges( {
+            if mediaType == .image {
+                holder = PHAssetChangeRequest.creationRequestForAssetFromImage(atFileURL: fileURL)?.placeholderForCreatedAsset
             }
+            if mediaType == .video {
+                holder = PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: fileURL)?.placeholderForCreatedAsset
+            }
+            if let holder = holder, let title = toAlbum, let album = getAlbumCreatingIfNotExist(title: title) {
+                let req = PHAssetCollectionChangeRequest(for: album)
+                req?.addAssets([holder] as NSFastEnumeration)
+            }
+        }) { success, error in
+            if success {
+                DLog("save asset success. (\(fileURL))")
+            } else {
+                DLog("save asset failed. \(error)")
+            }
+            signal.signal()
         }
-        DLog("end")
+        signal.wait()
+        
+        return holder
+    }
+    
+    static func generateTemporaryDirectory() -> URL {
+        let dir = URL(fileURLWithPath: NSTemporaryDirectory(), isDirectory: true)
+            .appendingPathComponent(UUID().uuidString, isDirectory: true)
+        if let _ = try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true, attributes: nil) {
+//            DLog("generateTemporaryDirectory success \(dir)")
+        } else {
+            DLog("generateTemporaryDirectory failed \(dir)")
+        }
+        return dir
+    }
+    
+    static func generateTemporaryFile() -> URL {
+        return generateTemporaryDirectory().appendingPathComponent(UUID().uuidString, isDirectory: false)
+    }
+    
+    static func saveAssetResourceToFileSync(resource: PHAssetResource, fileUrl: URL) -> URL? {        
+        DLog("saveAssetResourceToFileSync start \(resource.type)")
+    
+        guard let ext = UTTypeCopyPreferredTagWithClass(
+                    resource.uniformTypeIdentifier as CFString,
+                    kUTTagClassFilenameExtension
+                    )?.takeRetainedValue() else {
+            return nil
+        }
+        
+        let file = fileUrl.appendingPathExtension(ext as String)
+        
+        
+        let signal = DispatchSemaphore(value: 0)
+    
+        var hasError = false
+        PHAssetResourceManager.default().writeData(for: resource, toFile: file, options: nil) { (error) in
+            if let error = error {
+                DLog("Save resource \(resource.originalFilename) to filepath \(String(describing: file)) failed \(error.localizedDescription)")
+                hasError = true
+            } else {
+                DLog("Save resource \(resource.originalFilename) to filepath \(String(describing: file)) success")
+            }
+            signal.signal()
+        }
+        
+        
+        signal.wait()
+        
+        DLog("saveAssetResourceToFileSync end")
+        
+        return hasError ? nil: file
     }
     
     fileprivate static func imageFrom(asset: PHAsset) -> UIImage {
@@ -211,29 +247,32 @@ class AssetsUtils {
         return image
     }
     
-    fileprivate static func doInAlbum(title: String, callback:@escaping (PHAssetCollection)->Void) {
-        DLog("title: \(title)")
-        
-        let fetchOptions = PHFetchOptions()
-        fetchOptions.predicate = NSPredicate.init(format: "title=%@", title)
-        let collection: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: fetchOptions)
-        
-        DLog(collection)
+    fileprivate static func getAlbumCreatingIfNotExist(title: String) -> PHAssetCollection? {
+        let options = PHFetchOptions()
+        options.predicate = NSPredicate(format: "title=%@", title)
+        let collection: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .album, subtype: .any, options: options)
         
         if let ret = collection.firstObject{
-            callback(ret)
+            return ret
         } else {
-            var assetCollectionPlaceholder:PHObjectPlaceholder!
+            DLog("\(title) is not existed. create")
+            // 创建相册
+            let signal = DispatchSemaphore(value: 0)
+            var coll: PHAssetCollection?
+            var h:PHObjectPlaceholder?
             PHPhotoLibrary.shared().performChanges({
-                let creatAlbumRequest:PHAssetCollectionChangeRequest = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: title)
-                assetCollectionPlaceholder = creatAlbumRequest.placeholderForCreatedAssetCollection
+                let request = PHAssetCollectionChangeRequest.creationRequestForAssetCollection(withTitle: title)
+                h = request.placeholderForCreatedAssetCollection
             }) { (success, error) in
-                DLog("getAlbum success: \(success)")
-                if success {
-                    let collectionFetchResult = PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [assetCollectionPlaceholder.localIdentifier], options: nil)
-                    callback(collectionFetchResult.firstObject!)
+                if success, let re =  PHAssetCollection.fetchAssetCollections(withLocalIdentifiers: [h!.localIdentifier], options: nil).firstObject {
+                    coll = re
+                } else {
+                    DLog("getAlbum failed: \(String(describing: error))")
                 }
+                signal.signal()
             }
+            signal.wait()
+            return coll
         }
     }
     

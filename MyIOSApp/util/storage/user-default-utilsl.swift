@@ -49,11 +49,15 @@ class UserDefaultsUtils {
     }
     
     static func remove(arrayName: String, key: String) {
+        DLog("remove key \(key)")
         let container = UserDefaults.standard.array(forKey: arrayName)
         if var container = container {
-            container.remove(at: container.index(where: { (item) -> Bool in
-                return item as! String == key
-            })!)
+            container.removeAll { (item) -> Bool in
+                if let k = item as? String {
+                    return k == key
+                }
+                return false
+            }
             UserDefaults.standard.set(container, forKey: arrayName)
         }
     }

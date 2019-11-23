@@ -68,7 +68,7 @@ class VideoConversionViewController: ScrollViewController {
             count += 1;
             AssetsUtils.getAVAsset(forVideo: asset, handle: { (asset) in
                 let url = AssetsUtils.generateTemporaryDirectory().appendingPathComponent("\(UUID().uuidString).gif", isDirectory: false)
-                let request = VideoUtil.Video2GifRequest(asset: asset, savePath: url!, framesPreSecond: Int(self.nFramesPerSecTextField.text ?? "10") ?? 10);
+                let request = VideoUtil.Video2GifRequest(asset: asset, savePath: url, framesPreSecond: Int(self.nFramesPerSecTextField.text ?? "10") ?? 10);
                 VideoUtil.convertToGif(request: request, processRate: { (rate) in
                     DispatchQueue.main.async {
                         self.progressBarView.setProgress(rate, animated: true)

@@ -26,7 +26,7 @@ func SaveLivePhotosToLibary(avAsset: AVAsset, completionHandler: ((Bool, Error?)
             
             let imagePath = imageURL.path
             
-            let output = AssetsUtils.generateTemporaryDirectory().path!
+            let output = AssetsUtils.generateTemporaryDirectory().path
             let imageUrl = output + "/IMG.JPG";
             let movUrl = output + "/IMG.MOV";
             let assetIdentifier = UUID().uuidString
@@ -58,33 +58,63 @@ func SaveLivePhotosToLibary(avAsset: AVAsset, completionHandler: ((Bool, Error?)
 
 class LivePhotosUtil {
     
-    static func save(livePhotoAsset asset: PHAsset) {
-        doViaLivePhotoSource(livePhotoAsset: asset, imageHandler: nil)
-    }
-    
-    static func doViaLivePhotoSource(livePhotoAsset asset: PHAsset, imageHandler: ((UIImage) -> Void)?) {
+    static func saveLivePhotoToFile(livePhotoAsset asset: PHAsset, mediaTypes: [PHAssetMediaType]) -> (URL?, URL?)? {
         guard asset.mediaSubtypes.contains(.photoLive) else {
             DLog("\(asset) 不是Live Photo")
-            return
+            return nil
         }
         
         let arr = PHAssetResource.assetResources(for: asset)
         
-        DLog(arr)
+        var fileUrl1: URL? = nil
+        var fileUrl2: URL? = nil
         
-        PHAssetResourceManager.default().requestData(for: arr[0], options: nil, dataReceivedHandler: { (data) in
-            let _image = UIImage(data: data)
-            guard let image = _image else {
-                return
+        var currentVideo: PHAssetResource? = nil
+        var originVideo: PHAssetResource? = nil
+        
+        for res in arr {
+            DLog("resource type \(res.type.rawValue)")
+            if fileUrl1 == nil, mediaTypes.contains(.image) && res.type == .photo {
+                fileUrl1 = AssetsUtils.saveAssetResourceToFileSync(resource: res, fileUrl: AssetsUtils.generateTemporaryFile() as URL)
             }
-            imageHandler?(image)
-        }) { (error) in
-            DLog(error?.localizedDescription ?? "no errer")
+            
+            if mediaTypes.contains(.video) {
+                switch res.type {
+                case .pairedVideo:
+                    originVideo = res
+                case .fullSizePairedVideo:
+                    currentVideo = res
+                default:
+                    break
+                }
+            }
         }
         
-        AssetsUtils.saveAssetResource(resource: arr[1], inDirectory: AssetsUtils.generateTemporaryDirectory(), buffer: nil, maybeError: nil) { (url) in
-            AssetsUtils.saveVideo(atFileURL: url)
+        if let currentVideo = currentVideo {
+            DLog("save current video")
+            fileUrl2 = AssetsUtils.saveAssetResourceToFileSync(resource: currentVideo, fileUrl: AssetsUtils.generateTemporaryFile())
         }
+        if let originVideo = originVideo, fileUrl2 == nil {
+            DLog("save origin video")
+            fileUrl2 = AssetsUtils.saveAssetResourceToFileSync(resource: originVideo, fileUrl: AssetsUtils.generateTemporaryFile())
+        }
+        
+        return (fileUrl1, fileUrl2)
+    }
+    
+    static func saveLivePhotoToLibray(livePhotoAsset asset: PHAsset, mediaTypes: [PHAssetMediaType], toAlbum: String? = nil) -> (PHObjectPlaceholder?, PHObjectPlaceholder?) {
+        let paths = saveLivePhotoToFile(livePhotoAsset: asset, mediaTypes: mediaTypes);
+        var h1: PHObjectPlaceholder?
+        var h2: PHObjectPlaceholder?
+        DLog(paths)
+        if let path = paths!.0 {
+            h1 = AssetsUtils.saveToLibraySync(fromFileURL: path, mediaType: .image, toAlbum: toAlbum)
+        }
+        if let path = paths!.1 {
+            h2 = AssetsUtils.saveToLibraySync(fromFileURL: path, mediaType: .video, toAlbum: toAlbum)
+        }
+        
+        return (h1, h2)
     }
     
     private static func doViaLivePhoto(livePhotoAsset asset: PHAsset, do callback: @escaping (PHLivePhoto?, [AnyHashable : Any]?) -> Swift.Void) {
